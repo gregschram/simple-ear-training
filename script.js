@@ -102,10 +102,11 @@ function loadNextRound() {
     if (currentRound < roundData.length) {
         loadRound();
     } else {
-        alert("Game over! Your score: " + score + "/" + totalRounds);
+        alert("Exercise completed! Your final score: " + score + " out of " + totalRounds);
         goHome();
     }
 }
+
 
 function goHome() {
     window.location.href = "index.html";
