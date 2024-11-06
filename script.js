@@ -9,26 +9,25 @@ const totalRounds = 10;
 const urlParams = new URLSearchParams(window.location.search);
 const category = urlParams.get('category');
 
-// Dynamically import the correct category data
+// Dynamically import the correct category data from the spoken-sentence folder
 async function loadCategoryData(category) {
     try {
         let module;
-        if (category === "grocery") {
-            module = await import('./categories/grocery.js');
-            roundData = module.groceryExercises.sentences;
-//       HAVE THIS DISABLED UNTIL READY     
-//        } else if (category === "doctor") {
-//            module = await import('./categories/doctor.js');
-//            roundData = module.doctorExercises.sentences;
+        if (category) {
+            module = await import(`./spoken-sentence/${category}.js`);
+            roundData = module[`${category}Exercises`].sentences;
         } else {
             alert("Category not found. Returning to home page.");
             goHome();
             return;
         }
+        // Shuffle and limit rounds
         roundData = roundData.sort(() => 0.5 - Math.random()).slice(0, totalRounds);
         loadRound();
     } catch (error) {
         console.error("Error loading category data:", error);
+        alert("Failed to load the selected category.");
+        goHome();
     }
 }
 
