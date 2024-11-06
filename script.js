@@ -6,7 +6,14 @@ let currentRound = 0;
 const totalRounds = 10;
 
 const audio = new Audio();
+audio.preload = "auto";
 audio.playbackRate = audioSpeed;
+
+// Play sound function
+document.getElementById("play-sound").onclick = () => {
+    audio.currentTime = 0;
+    audio.play().catch(error => console.log("Audio play error:", error));
+};
 
 // Get category from URL parameter
 const urlParams = new URLSearchParams(window.location.search);
