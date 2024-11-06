@@ -14,6 +14,7 @@ async function loadCategoryData(category) {
     try {
         let module;
         if (category) {
+            // Update the path to include ./ at the start to ensure relative pathing
             module = await import(`./spoken-sentence/${category}.js`);
             roundData = module[`${category}Exercises`].sentences;
         } else {
