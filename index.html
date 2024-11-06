@@ -9,11 +9,12 @@
 <body>
     <div class="container">
         <h1>Ear Training Exercises</h1>
-        <button onclick="startExercise()">Identify the Spoken Sentence</button>
+        <!-- Style the button by adding a class -->
+        <button class="start-exercise" onclick="startExercise()">Identify the Spoken Sentence</button>
     </div>
     <script>
         function startExercise() {
-            const categories = ["grocery"]; // List of available categories
+            const categories = ["grocery"]; // Only include available categories
             const selectedCategory = categories[Math.floor(Math.random() * categories.length)];
             window.location.href = `exercise.html?category=${selectedCategory}`;
         }
