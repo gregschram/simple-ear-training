@@ -5,19 +5,20 @@ let roundData = [];
 let currentRound = 0;
 const totalRounds = 10;
 
+const audio = new Audio();
+audio.playbackRate = audioSpeed;
+
 // Get category from URL parameter
 const urlParams = new URLSearchParams(window.location.search);
 const category = urlParams.get('category');
-
-// Dynamically import the correct category data from the spoken-sentence folder
-import { groceryExercises } from './spoken-sentence/grocery.js';
+document.getElementById("category-title").textContent = `Category: ${category.charAt(0).toUpperCase() + category.slice(1)}`;
 
 async function loadCategoryData(category) {
     try {
-        console.log("Attempting to load category:", category); // Debugging line
-
+        let module;
         if (category === "grocery") {
-            roundData = groceryExercises.sentences;
+            module = await import('./spoken-sentence/grocery.js');
+            roundData = module.groceryExercises.sentences;
         } else {
             alert("Category not found. Returning to home page.");
             goHome();
@@ -33,38 +34,20 @@ async function loadCategoryData(category) {
     }
 }
 
-
-
-// Function to return to home page
-function goHome() {
-    window.location.href = "index.html";
-}
-
-// Function to load the current round
+// Load round and reset feedback
 function loadRound() {
-    if (currentRound >= roundData.length) {
-        alert("Game over! Your score: " + score + "/" + totalRounds);
-        goHome();
-        return;
-    }
-
     const round = roundData[currentRound];
+    audio.src = round.audioPath;
+
+    document.getElementById("feedback").textContent = "";
+    document.getElementById("next-button").style.display = "none";
+
     const choicesContainer = document.getElementById("choices");
     choicesContainer.innerHTML = "";
-
-    const audio = new Audio(round.audioPath);
-    audio.playbackRate = audioSpeed;
 
     document.getElementById("play-sound").onclick = () => {
         audio.currentTime = 0;
         audio.play();
-    };
-
-    document.getElementById("toggle-speed").onclick = () => {
-        audioSpeed = audioSpeed === 1.0 ? 0.65 : 1.0;
-        audio.playbackRate = audioSpeed;
-        document.getElementById("toggle-speed").textContent = 
-            audioSpeed === 1.0 ? 'Switch to Slow Speed' : 'Switch to Normal Speed';
     };
 
     round.options.forEach((option, index) => {
@@ -76,20 +59,40 @@ function loadRound() {
     });
 }
 
-// Function to check the selected answer
 function checkAnswer(selectedIndex) {
     const round = roundData[currentRound];
     attempts++;
+
     if (round.options[selectedIndex] === round.sentence) {
         score++;
-        alert("Correct!");
+        document.getElementById("feedback").textContent = "Correct!";
     } else {
-        alert("Incorrect!");
+        document.getElementById("feedback").textContent = "Incorrect! Try listening again.";
+        audio.currentTime = 0;
+        audio.play();
     }
-    currentRound++;
+    
     document.getElementById("score").textContent = `Score: ${score}/${attempts}`;
-    loadRound();
+    document.getElementById("next-button").style.display = "inline-block";
 }
 
-// Load category data and start the first round
+document.getElementById("toggle-speed").onclick = () => {
+    audioSpeed = audioSpeed === 1.0 ? 0.65 : 1.0;
+    audio.playbackRate = audioSpeed;
+    document.getElementById("toggle-speed").textContent = audioSpeed === 1.0 ? 'Normal Speed' : 'Slow Speed';
+    document.getElementById("toggle-speed").classList.toggle("active");
+};
+
+// Load the next round and increment the counter
+function loadNextRound() {
+    currentRound++;
+    if (currentRound < roundData.length) {
+        loadRound();
+    } else {
+        alert("Game over! Your score: " + score + "/" + totalRounds);
+        goHome();
+    }
+}
+
+// Start the game
 loadCategoryData(category);
