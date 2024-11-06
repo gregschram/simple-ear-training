@@ -14,18 +14,24 @@ async function loadCategoryData(category) {
     try {
         console.log("Attempting to load category:", category); // Debugging line
 
-        if (category) {
-            // Ensure the import path is formatted correctly
-            const module = await import(`./spoken-sentence/${category}.js`);
-            console.log("Module loaded:", module); // Debugging line
-            roundData = module[`${category}Exercises`].sentences;
+        let module;
+        if (category === "grocery") {
+            // Explicitly import grocery to isolate the issue
+            module = await import('./spoken-sentence/grocery.js');
+            roundData = module.groceryExercises.sentences;
         } else {
             alert("Category not found. Returning to home page.");
             goHome();
             return;
         }
-        
-        // Shuffle and limit rounds
+
+        // If roundData is empty, handle the placeholder gracefully
+        if (roundData.length === 0) {
+            alert("Category data is not yet available. Returning to home page.");
+            goHome();
+            return;
+        }
+
         roundData = roundData.sort(() => 0.5 - Math.random()).slice(0, totalRounds);
         loadRound();
     } catch (error) {
@@ -34,6 +40,7 @@ async function loadCategoryData(category) {
         goHome();
     }
 }
+
 
 // Function to return to home page
 function goHome() {
