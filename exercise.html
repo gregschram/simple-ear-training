@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Identify the Spoken Sentence</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Home button to return to the main menu -->
+        <button onclick="goHome()">Home</button>
+
+        <!-- Score display -->
+        <div id="score">Score: 0/0</div>
+
+        <!-- Audio playback controls -->
+        <button id="play-sound">Play Sound</button>
+        <button id="toggle-speed">Switch to Slow Speed</button>
+
+        <!-- Choices for each round -->
+        <div id="choices"></div>
+    </div>
+
+    <!-- Import script.js to handle the game logic -->
+    <script type="module" src="script.js"></script>
+</body>
+</html>
