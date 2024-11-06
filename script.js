@@ -12,16 +12,19 @@ const category = urlParams.get('category');
 // Dynamically import the correct category data from the spoken-sentence folder
 async function loadCategoryData(category) {
     try {
-        let module;
+        console.log("Attempting to load category:", category); // Debugging line
+
         if (category) {
-            // Update the path to include ./ at the start to ensure relative pathing
-            module = await import(`./spoken-sentence/${category}.js`);
+            // Ensure the import path is formatted correctly
+            const module = await import(`./spoken-sentence/${category}.js`);
+            console.log("Module loaded:", module); // Debugging line
             roundData = module[`${category}Exercises`].sentences;
         } else {
             alert("Category not found. Returning to home page.");
             goHome();
             return;
         }
+        
         // Shuffle and limit rounds
         roundData = roundData.sort(() => 0.5 - Math.random()).slice(0, totalRounds);
         loadRound();
