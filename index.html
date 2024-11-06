@@ -13,9 +13,10 @@
     </div>
     <script>
         function startExercise() {
-            const categories = ["grocery"]; // Only include available categories
-            const selectedCategory = categories[Math.floor(Math.random() * categories.length)];
-            window.location.href = `exercise.html?category=${selectedCategory}`;
+        console.log("Starting exercise"); // Log for debugging
+        const categories = ["grocery"];
+        const selectedCategory = categories[Math.floor(Math.random() * categories.length)];
+        window.location.href = `exercise.html?category=${selectedCategory}`;
         }
     </script>
 </body>
