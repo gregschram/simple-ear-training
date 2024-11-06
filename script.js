@@ -45,8 +45,10 @@ function loadRound() {
     const round = roundData[currentRound];
     audio.src = round.audioPath;
 
+    // Reset feedback and next button for the new round
     document.getElementById("feedback").textContent = "";
     document.getElementById("feedback").style.color = "";
+    document.getElementById("feedback").style.fontSize = "1.5em";
     document.getElementById("next-button").style.display = "none";
     document.getElementById("round-tracker").textContent = `Round ${currentRound + 1}/${totalRounds}`;
     
@@ -63,6 +65,8 @@ function loadRound() {
         button.textContent = option;
         button.className = "choice";
         button.onclick = () => checkAnswer(button, index);
+        button.onmouseover = () => button.style.backgroundColor = "#555";  // Hover effect
+        button.onmouseout = () => button.style.backgroundColor = "#3a3a3a"; // Reset hover
         choicesContainer.appendChild(button);
     });
 }
@@ -75,18 +79,34 @@ function checkAnswer(button, selectedIndex) {
         score++;
         button.classList.add("correct");
         document.getElementById("feedback").textContent = "Correct!";
-        document.getElementById("feedback").style.color = "green";
+        document.getElementById("feedback").style.color = "#7fff7f"; // Lighter green for correct
         document.getElementById("next-button").style.display = "inline-block";
+        disableAllChoices(); // Disable choices after correct answer
     } else {
         button.classList.add("incorrect");
+        button.disabled = true; // Disable only the incorrect button
         document.getElementById("feedback").textContent = "That's not quite it. Try again.";
-        document.getElementById("feedback").style.color = "red";
+        document.getElementById("feedback").style.color = "#ff7f7f"; // Lighter red for incorrect
         audio.currentTime = 0;
         audio.play();
     }
-    document.getElementById("score").textContent = `Score: ${score}/${attempts}`;
+    updateScoreDisplay(); // Use the star-based score display
 }
 
+// Disable all choices after a correct answer is selected
+function disableAllChoices() {
+    document.querySelectorAll(".choice").forEach(button => {
+        button.disabled = true;
+    });
+}
+
+// Update the score display with stars
+function updateScoreDisplay() {
+    const stars = "⭐".repeat(score) + "☆".repeat(totalRounds - score);
+    document.getElementById("score").textContent = `Score: ${stars}`;
+}
+
+// Toggle audio speed with icons
 document.getElementById("toggle-speed").onclick = () => {
     audioSpeed = audioSpeed === 1.0 ? 0.65 : 1.0;
     audio.playbackRate = audioSpeed;
@@ -97,6 +117,7 @@ document.getElementById("toggle-speed").onclick = () => {
     document.getElementById("toggle-speed").classList.toggle("active");
 };
 
+// Load the next round
 function loadNextRound() {
     currentRound++;
     if (currentRound < roundData.length) {
@@ -107,15 +128,10 @@ function loadNextRound() {
     }
 }
 
-
+// Redirect to home page
 function goHome() {
     window.location.href = "index.html";
 }
 
-function updateScoreDisplay() {
-    const stars = "⭐".repeat(score) + "☆".repeat(totalRounds - score);
-    document.getElementById("score").textContent = `Score: ${stars}`;
-}
-
-
+// Initial call to load category data
 loadCategoryData(category);
