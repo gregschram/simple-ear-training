@@ -97,9 +97,18 @@ h2, h3 {
 }
 
 #feedback {
-    font-size: 1.1em;
+    font-size: 1.5em;
     margin: 20px 0;
     font-weight: bold;
+    color: #fff; /* Default color */
+}
+
+#feedback.correct {
+    color: #7fff7f; /* Lighter green */
+}
+
+#feedback.incorrect {
+    color: #ff7f7f; /* Lighter red */
 }
 
 #next-button {
