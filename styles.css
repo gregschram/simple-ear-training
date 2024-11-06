@@ -20,7 +20,7 @@ h2, h3 {
     margin: 5px 0;
 }
 
-#home-button {
+#home-button, #next-button {
     background-color: transparent;
     color: #ffffff;
     border: 2px solid #ffffff;
@@ -28,7 +28,13 @@ h2, h3 {
     cursor: pointer;
     font-size: 0.9em;
     border-radius: 5px;
-    margin-bottom: 20px;
+    margin: 10px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#home-button:hover, #next-button:hover {
+    background-color: #ffffff;
+    color: #1a1a2e;
 }
 
 #score, #round-tracker {
@@ -37,10 +43,93 @@ h2, h3 {
     opacity: 0.8;
 }
 
-#round-tracker {
-    margin-top: 15px; /* Added margin for separation */
-}
-
 .play-sound {
     background-color: #0d6efd;
-    color
+    color: #fff;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+    margin: 15px 0;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.play-sound:hover {
+    background-color: #084298;
+    transform: scale(1.03);
+}
+
+.toggle-speed {
+    background-color: transparent;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    margin: 10px;
+    display: inline-flex;
+    align-items: center;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.toggle-speed:hover {
+    background-color: #ffffff;
+    color: #1a1a2e;
+}
+
+.icon {
+    margin-right: 5px;
+}
+
+#choices {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.choice {
+    background-color: #3a3a3a;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
+
+.choice:hover {
+    background-color: #555;
+    transform: scale(1.02);
+}
+
+.choice.correct {
+    background-color: #4CAF50;
+}
+
+.choice.incorrect {
+    background-color: #F44336;
+}
+
+.choice:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+#feedback {
+    font-size: 1.5em;
+    margin: 20px 0;
+    font-weight: bold;
+    color: #fff;
+}
+
+#feedback.correct {
+    color: #7fff7f;
+}
+
+#feedback.incorrect {
+    color: #ff7f7f;
+}
