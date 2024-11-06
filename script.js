@@ -74,7 +74,7 @@ function checkAnswer(button, selectedIndex) {
         disableAllChoices();
     } else {
         button.classList.add("incorrect");
-        button.disabled = true; // Disable only the incorrect button
+        button.disabled = true;
         document.getElementById("feedback").textContent = "That's not quite it. Try again.";
         document.getElementById("feedback").className = "incorrect";
         audio.currentTime = 0;
@@ -90,7 +90,7 @@ function disableAllChoices() {
 }
 
 function updateScoreDisplay() {
-    const stars = "⭐".repeat(score); // Only show filled stars for correct answers
+    const stars = "⭐".repeat(score);
     document.getElementById("score").textContent = `Score: ${stars}`;
 }
 
@@ -103,13 +103,8 @@ document.getElementById("toggle-speed").onclick = () => {
     document.getElementById("toggle-speed").classList.toggle("active");
 };
 
-function goHome() {
-    console.log("Navigating to home page"); // Log when this function is called
-    window.location.href = "index.html";
-}
-
 function loadNextRound() {
-    console.log("Loading next round"); // Log each round load
+    console.log("Loading next round");
     currentRound++;
     if (currentRound < roundData.length) {
         loadRound();
@@ -117,6 +112,11 @@ function loadNextRound() {
         alert("Exercise completed! Your final score: " + score + " out of " + totalRounds);
         goHome();
     }
+}
+
+function goHome() {
+    console.log("Navigating to home page");
+    window.location.href = "index.html";
 }
 
 // Initial call to load category data
