@@ -10,24 +10,16 @@ const urlParams = new URLSearchParams(window.location.search);
 const category = urlParams.get('category');
 
 // Dynamically import the correct category data from the spoken-sentence folder
+import { groceryExercises } from './spoken-sentence/grocery.js';
+
 async function loadCategoryData(category) {
     try {
         console.log("Attempting to load category:", category); // Debugging line
 
-        let module;
         if (category === "grocery") {
-            // Explicitly import grocery to isolate the issue
-            module = await import('./spoken-sentence/grocery.js');
-            roundData = module.groceryExercises.sentences;
+            roundData = groceryExercises.sentences;
         } else {
             alert("Category not found. Returning to home page.");
-            goHome();
-            return;
-        }
-
-        // If roundData is empty, handle the placeholder gracefully
-        if (roundData.length === 0) {
-            alert("Category data is not yet available. Returning to home page.");
             goHome();
             return;
         }
@@ -40,6 +32,7 @@ async function loadCategoryData(category) {
         goHome();
     }
 }
+
 
 
 // Function to return to home page
