@@ -104,7 +104,7 @@ document.getElementById("toggle-speed").onclick = () => {
 };
 
 function loadNextRound() {
-    console.log("Loading next round");
+    console.log("Loading the next round"); // This will log to the console when the function is triggered
     currentRound++;
     if (currentRound < roundData.length) {
         loadRound();
@@ -115,7 +115,7 @@ function loadNextRound() {
 }
 
 function goHome() {
-    console.log("Navigating to home page");
+    console.log("Navigating to the home page"); // This will log to the console when the function is triggered
     window.location.href = "index.html";
 }
 
