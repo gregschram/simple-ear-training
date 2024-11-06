@@ -8,18 +8,30 @@
 </head>
 <body>
     <div class="container">
-        <!-- Home button to return to the main menu -->
-        <button onclick="goHome()">Home</button>
+        <!-- Display category and exercise type at the top -->
+        <h2 id="exercise-title">Identify the Spoken Sentence</h2>
+        <h3 id="category-title">Category: Grocery</h3>
+
+        <!-- Outline-style home button -->
+        <button id="home-button" onclick="goHome()">Home</button>
 
         <!-- Score display -->
         <div id="score">Score: 0/0</div>
 
-        <!-- Audio playback controls -->
-        <button id="play-sound">Play Sound</button>
-        <button id="toggle-speed">Switch to Slow Speed</button>
+        <!-- Large and prominent Play Sound button -->
+        <button id="play-sound" class="play-sound">Play Sound</button>
+
+        <!-- Toggle button for slow speed -->
+        <button id="toggle-speed" class="toggle-speed">Normal Speed</button>
 
         <!-- Choices for each round -->
         <div id="choices"></div>
+
+        <!-- Feedback area for correct/incorrect answer -->
+        <div id="feedback"></div>
+
+        <!-- Next button, hidden initially, appears after answering -->
+        <button id="next-button" onclick="loadNextRound()" style="display: none;">Next</button>
     </div>
 
     <!-- Import script.js to handle the game logic -->
