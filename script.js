@@ -45,79 +45,63 @@ function loadRound() {
     const round = roundData[currentRound];
     audio.src = round.audioPath;
 
-    // Reset feedback and next button for the new round
     document.getElementById("feedback").textContent = "";
-    document.getElementById("feedback").style.color = "";
-    document.getElementById("feedback").style.fontSize = "1.5em";
+    document.getElementById("feedback").className = "";
     document.getElementById("next-button").style.display = "none";
     document.getElementById("round-tracker").textContent = `Round ${currentRound + 1}/${totalRounds}`;
     
     const choicesContainer = document.getElementById("choices");
     choicesContainer.innerHTML = "";
 
-    document.getElementById("play-sound").onclick = () => {
-        audio.currentTime = 0;
-        audio.play();
-    };
-
     round.options.forEach((option, index) => {
         const button = document.createElement("button");
         button.textContent = option;
         button.className = "choice";
         button.onclick = () => checkAnswer(button, index);
-        button.onmouseover = () => button.style.backgroundColor = "#555";  // Hover effect
-        button.onmouseout = () => button.style.backgroundColor = "#3a3a3a"; // Reset hover
         choicesContainer.appendChild(button);
     });
 }
 
 function checkAnswer(button, selectedIndex) {
     const round = roundData[currentRound];
-    attempts++;
-
     if (round.options[selectedIndex] === round.sentence) {
         score++;
         button.classList.add("correct");
         document.getElementById("feedback").textContent = "Correct!";
-        document.getElementById("feedback").style.color = "#7fff7f"; // Lighter green for correct
+        document.getElementById("feedback").className = "correct";
         document.getElementById("next-button").style.display = "inline-block";
-        disableAllChoices(); // Disable choices after correct answer
+        disableAllChoices();
     } else {
         button.classList.add("incorrect");
         button.disabled = true; // Disable only the incorrect button
         document.getElementById("feedback").textContent = "That's not quite it. Try again.";
-        document.getElementById("feedback").style.color = "#ff7f7f"; // Lighter red for incorrect
+        document.getElementById("feedback").className = "incorrect";
         audio.currentTime = 0;
         audio.play();
     }
-    updateScoreDisplay(); // Use the star-based score display
+    updateScoreDisplay();
 }
 
-// Disable all choices after a correct answer is selected
 function disableAllChoices() {
     document.querySelectorAll(".choice").forEach(button => {
         button.disabled = true;
     });
 }
 
-// Update the score display with stars
 function updateScoreDisplay() {
-    const stars = "⭐".repeat(score) + "☆".repeat(totalRounds - score);
+    const stars = "⭐".repeat(score); // Only show filled stars for correct answers
     document.getElementById("score").textContent = `Score: ${stars}`;
 }
 
-// Toggle audio speed with icons
 document.getElementById("toggle-speed").onclick = () => {
     audioSpeed = audioSpeed === 1.0 ? 0.65 : 1.0;
     audio.playbackRate = audioSpeed;
     const speedText = audioSpeed === 1.0 ? 'Normal Speed' : 'Slow Speed';
     const icon = audioSpeed === 1.0 ? '⏵⏵' : '⏵';
-    document.getElementById("toggle-speed").textContent = '';
     document.getElementById("toggle-speed").innerHTML = `<span class="icon">${icon}</span> ${speedText}`;
     document.getElementById("toggle-speed").classList.toggle("active");
 };
 
-// Load the next round
 function loadNextRound() {
     currentRound++;
     if (currentRound < roundData.length) {
@@ -128,7 +112,6 @@ function loadNextRound() {
     }
 }
 
-// Redirect to home page
 function goHome() {
     window.location.href = "index.html";
 }
