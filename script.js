@@ -100,4 +100,8 @@ function loadNextRound() {
     }
 }
 
+function goHome() {
+    window.location.href = "index.html";
+}
+
 loadCategoryData(category);
