@@ -133,3 +133,20 @@ h2, h3 {
 #feedback.incorrect {
     color: #ff7f7f;
 }
+
+.start-exercise {
+    background-color: #0d6efd;
+    color: #fff;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+    margin: 20px 0;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.start-exercise:hover {
+    background-color: #084298;
+    transform: scale(1.05);
+}
