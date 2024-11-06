@@ -14,9 +14,12 @@
         <!-- Add more buttons for new categories as needed -->
     </div>
     <script>
-        function startExercise(category) {
-            window.location.href = `exercise.html?category=${category}`;
-        }
-    </script>
+    function startExercise() {
+        const categories = ["grocery", "doctor"]; // List available categories
+        const selectedCategory = categories[Math.floor(Math.random() * categories.length)];
+        window.location.href = `exercise.html?category=${selectedCategory}`;
+    }
+</script>
+
 </body>
 </html>
