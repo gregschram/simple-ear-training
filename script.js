@@ -44,6 +44,7 @@ async function loadCategoryData(category) {
 function loadRound() {
     const round = roundData[currentRound];
     audio.src = round.audioPath;
+    console.log("Audio source set to:", audio.src); // Log audio path for debugging
 
     document.getElementById("feedback").textContent = "";
     document.getElementById("feedback").className = "";
