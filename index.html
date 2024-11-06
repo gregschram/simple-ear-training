@@ -3,23 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ear Training</title>
+    <title>Ear Training Exercises</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <h1>Ear Training Exercises</h1>
-        <button onclick="startExercise('grocery')">Identify the Spoken Sentence - Grocery</button>
-        <button onclick="startExercise('doctor')">Identify the Spoken Sentence - Doctor</button>
-        <!-- Add more buttons for new categories as needed -->
+        <button onclick="startExercise()">Identify the Spoken Sentence</button>
     </div>
     <script>
-    function startExercise() {
-        const categories = ["grocery", "doctor"]; // List available categories
-        const selectedCategory = categories[Math.floor(Math.random() * categories.length)];
-        window.location.href = `exercise.html?category=${selectedCategory}`;
-    }
-</script>
-
+        function startExercise() {
+            const categories = ["grocery", "doctor"]; // List of available categories
+            const selectedCategory = categories[Math.floor(Math.random() * categories.length)];
+            window.location.href = `exercise.html?category=${selectedCategory}`;
+        }
+    </script>
 </body>
 </html>
