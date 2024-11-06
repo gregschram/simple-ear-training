@@ -8,15 +8,15 @@
 </head>
 <body>
     <div class="container">
-        <div id="score">Score: 0/0</div>
-        <button id="play-sound">Play Sound</button>
-        <button id="toggle-speed">Switch to Slow Speed</button>
-        <div id="choices">
-            <button class="choice">Cat</button>
-            <button class="choice">Dog</button>
-            <button class="choice">Bird</button>
-        </div>
+        <h1>Ear Training Exercises</h1>
+        <button onclick="startExercise('grocery')">Identify the Spoken Sentence - Grocery</button>
+        <button onclick="startExercise('doctor')">Identify the Spoken Sentence - Doctor</button>
+        <!-- Add more buttons for new categories as needed -->
     </div>
-    <script src="script.js"></script>
+    <script>
+        function startExercise(category) {
+            window.location.href = `exercise.html?category=${category}`;
+        }
+    </script>
 </body>
 </html>
