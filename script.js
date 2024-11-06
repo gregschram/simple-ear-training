@@ -113,7 +113,7 @@ function loadNextRound() {
 }
 
 function goHome() {
-    window.location.href = "index.html";
+      window.location.href = "index.html"; // Ensure index.html is the main menu file
 }
 
 // Initial call to load category data
