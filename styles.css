@@ -96,6 +96,11 @@ h2, h3 {
     background-color: red;
 }
 
+.choice:hover {
+    background-color: #555;
+    transform: scale(1.05);
+}
+
 #feedback {
     font-size: 1.5em;
     margin: 20px 0;
