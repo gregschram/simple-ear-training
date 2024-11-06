@@ -34,14 +34,15 @@ async function loadCategoryData(category) {
     }
 }
 
-// Load round and reset feedback
 function loadRound() {
     const round = roundData[currentRound];
     audio.src = round.audioPath;
 
     document.getElementById("feedback").textContent = "";
+    document.getElementById("feedback").style.color = "";
     document.getElementById("next-button").style.display = "none";
-
+    document.getElementById("round-tracker").textContent = `Round ${currentRound + 1}/${totalRounds}`;
+    
     const choicesContainer = document.getElementById("choices");
     choicesContainer.innerHTML = "";
 
@@ -54,36 +55,41 @@ function loadRound() {
         const button = document.createElement("button");
         button.textContent = option;
         button.className = "choice";
-        button.onclick = () => checkAnswer(index);
+        button.onclick = () => checkAnswer(button, index);
         choicesContainer.appendChild(button);
     });
 }
 
-function checkAnswer(selectedIndex) {
+function checkAnswer(button, selectedIndex) {
     const round = roundData[currentRound];
     attempts++;
 
     if (round.options[selectedIndex] === round.sentence) {
         score++;
+        button.classList.add("correct");
         document.getElementById("feedback").textContent = "Correct!";
+        document.getElementById("feedback").style.color = "green";
+        document.getElementById("next-button").style.display = "inline-block";
     } else {
-        document.getElementById("feedback").textContent = "Incorrect! Try listening again.";
+        button.classList.add("incorrect");
+        document.getElementById("feedback").textContent = "That's not quite it. Try again.";
+        document.getElementById("feedback").style.color = "red";
         audio.currentTime = 0;
         audio.play();
     }
-    
     document.getElementById("score").textContent = `Score: ${score}/${attempts}`;
-    document.getElementById("next-button").style.display = "inline-block";
 }
 
 document.getElementById("toggle-speed").onclick = () => {
     audioSpeed = audioSpeed === 1.0 ? 0.65 : 1.0;
     audio.playbackRate = audioSpeed;
-    document.getElementById("toggle-speed").textContent = audioSpeed === 1.0 ? 'Normal Speed' : 'Slow Speed';
+    const speedText = audioSpeed === 1.0 ? 'Normal Speed' : 'Slow Speed';
+    const icon = audioSpeed === 1.0 ? '⏵⏵' : '⏵';
+    document.getElementById("toggle-speed").textContent = '';
+    document.getElementById("toggle-speed").innerHTML = `<span class="icon">${icon}</span> ${speedText}`;
     document.getElementById("toggle-speed").classList.toggle("active");
 };
 
-// Load the next round and increment the counter
 function loadNextRound() {
     currentRound++;
     if (currentRound < roundData.length) {
@@ -94,5 +100,4 @@ function loadNextRound() {
     }
 }
 
-// Start the game
 loadCategoryData(category);
