@@ -104,4 +104,10 @@ function goHome() {
     window.location.href = "index.html";
 }
 
+function updateScoreDisplay() {
+    const stars = "⭐".repeat(score) + "☆".repeat(totalRounds - score);
+    document.getElementById("score").textContent = `Score: ${stars}`;
+}
+
+
 loadCategoryData(category);
