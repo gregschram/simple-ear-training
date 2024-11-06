@@ -12,14 +12,92 @@ body, html {
 
 .container {
     text-align: center;
+    max-width: 400px;
+    margin: auto;
+}
+
+h2, h3 {
+    margin: 5px 0;
+}
+
+#home-button {
+    background-color: transparent;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 1em;
+    border-radius: 5px;
+    margin-bottom: 20px;
 }
 
 #score {
     font-size: 1.2em;
-    margin-bottom: 20px;
+    margin: 15px 0;
 }
 
-button {
+.play-sound {
+    background-color: #0d6efd;
+    color: #fff;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+    margin: 15px 0;
+    transition: background-color 0.3s;
+}
+
+.play-sound:hover {
+    background-color: #084298;
+}
+
+.toggle-speed {
+    background-color: #4a4a4a;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    margin: 10px;
+    transition: background-color 0.3s;
+}
+
+.toggle-speed.active {
+    background-color: #ffffff;
+    color: #4a4a4a;
+}
+
+#choices {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.choice {
+    background-color: #3a3a3a;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
+
+.choice:hover {
+    background-color: #2b2b2b;
+}
+
+#feedback {
+    font-size: 1.1em;
+    margin: 20px 0;
+    font-weight: bold;
+}
+
+#next-button {
     background-color: #0d6efd;
     color: #fff;
     padding: 10px 20px;
@@ -27,16 +105,11 @@ button {
     border-radius: 5px;
     cursor: pointer;
     font-size: 1em;
-    margin: 5px;
+    margin-top: 20px;
+    display: none;
     transition: background-color 0.3s;
 }
 
-button:hover {
+#next-button:hover {
     background-color: #084298;
-}
-
-#choices {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
 }
