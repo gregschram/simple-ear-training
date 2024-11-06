@@ -103,7 +103,13 @@ document.getElementById("toggle-speed").onclick = () => {
     document.getElementById("toggle-speed").classList.toggle("active");
 };
 
+function goHome() {
+    console.log("Navigating to home page"); // Log when this function is called
+    window.location.href = "index.html";
+}
+
 function loadNextRound() {
+    console.log("Loading next round"); // Log each round load
     currentRound++;
     if (currentRound < roundData.length) {
         loadRound();
@@ -111,10 +117,6 @@ function loadNextRound() {
         alert("Exercise completed! Your final score: " + score + " out of " + totalRounds);
         goHome();
     }
-}
-
-function goHome() {
-      window.location.href = "index.html"; // Ensure index.html is the main menu file
 }
 
 // Initial call to load category data
