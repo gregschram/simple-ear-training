@@ -12,11 +12,17 @@
         <button class="start-exercise" onclick="startExercise()">Identify the Spoken Sentence</button>
     </div>
     <script>
+        // Move categories to top for easy maintenance
+        const categories = [
+            "grocery",
+            "doctor"
+            // Add new categories here
+        ];
+
         function startExercise() {
-        console.log("Starting exercise"); // Log for debugging
-        const categories = ["grocery", "doctor"];
-        const selectedCategory = categories[Math.floor(Math.random() * categories.length)];
-        window.location.href = `exercise.html?category=${selectedCategory}`;
+            console.log("Starting exercise with available categories:", categories); // Better debugging
+            const selectedCategory = categories[Math.floor(Math.random() * categories.length)];
+            window.location.href = `exercise.html?category=${selectedCategory}`;
         }
     </script>
 </body>
