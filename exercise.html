@@ -10,11 +10,20 @@
     <div class="container">
         <h2 id="exercise-title">Identify the Spoken Sentence</h2>
         <h3 id="category-title">Loading category...</h3>
-        <button id="home-button">Home</button>
+        <div class="header-controls">
+          <button id="home-button">Home</button>
+          <div id="round-tracker">Round 1/10</div>
+        </div>
         <div id="score"></div>
-        <div id="round-tracker">Round 1/10</div>
+        <p class="instruction-text">Press the sentence that matches what you hear. Press "Play Sound" to listen again.</p>
         <button id="play-sound" class="play-sound">Play Sound</button>
-        <button id="toggle-speed" class="toggle-speed"><span class="icon">⏵⏵</span> Normal Speed</button>
+        <div class="audio-controls">
+          <button id="play-sound" class="play-sound">Play Sound</button>
+          <label class="speed-checkbox">
+            <input type="checkbox" id="toggle-speed">
+            Slow audio
+          </label>
+        </div>
         <div id="choices"></div>
         <div id="feedback"></div>
         <button id="next-button" style="display: none;">Next</button>
