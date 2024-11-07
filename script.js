@@ -86,9 +86,8 @@ function loadRound() {
     });
 }
 
-function checkAnswer(button, selectedIndex) {
-    const round = roundData[currentRound];
-    if (round.options[selectedIndex] === round.sentence) {
+function checkAnswer(button, isCorrect) {
+    if (isCorrect) {
         score++;
         button.classList.add("correct");
         document.getElementById("feedback").textContent = "Correct!";
