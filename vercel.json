@@ -2,13 +2,18 @@
   "git": {
     "deploymentEnabled": false
   },
- "builds": [
+ "version": 2,
+  "builds": [
     {
       "src": "**/*",
       "use": "@vercel/static"
     }
   ],
   "routes": [
+    {
+      "src": "/audio/(.*)",
+      "dest": "/audio/$1"
+    },
     {
       "src": "/(.*)",
       "dest": "/$1"
