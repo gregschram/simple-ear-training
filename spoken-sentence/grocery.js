@@ -3,7 +3,7 @@ export const groceryExercises = {
   sentences: [
     {
         id: 1,
-        audioPath: 'audio/grocery/grocery-1.mp3',
+        audioPath: '/audio/grocery/grocery-1.mp3',
         sentence: 'Would you like some bread and eggs?',
         options: [
           'Would you like some bread and eggs?',
@@ -14,7 +14,7 @@ export const groceryExercises = {
       },
       {
         id: 2,
-        audioPath: 'audio/grocery/grocery-2.mp3',
+        audioPath: '/audio/grocery/grocery-2.mp3',
         sentence: 'The apples are on sale today.',
         options: [
           'The apples are on sale today.',
@@ -25,7 +25,7 @@ export const groceryExercises = {
       },
       {
         id: 3,
-        audioPath: 'audio/grocery/grocery-3.mp3',
+        audioPath: '/audio/grocery/grocery-3.mp3',
         sentence: 'Can you pass me the milk, please?',
         options: [
           'Can you pass me the milk, please?',
@@ -36,7 +36,7 @@ export const groceryExercises = {
       },
       {
         id: 4,
-        audioPath: 'audio/grocery/grocery-4.mp3',
+        audioPath: '/audio/grocery/grocery-4.mp3',
         sentence: "I'll take two bananas, thanks.",
         options: [
           "I'll take two bananas, thanks.",
@@ -47,7 +47,7 @@ export const groceryExercises = {
       },
       {
         id: 5,
-        audioPath: 'audio/grocery/grocery-5.mp3',
+        audioPath: '/audio/grocery/grocery-5.mp3',
         sentence: 'Would you grab the carrots?',
         options: [
           'Would you grab the carrots?',
@@ -58,7 +58,7 @@ export const groceryExercises = {
       },
       {
         id: 6,
-        audioPath: 'audio/grocery/grocery-6.mp3',
+        audioPath: '/audio/grocery/grocery-6.mp3',
         sentence: "I'll take the green peppers.",
         options: [
           "I'll take the green peppers.",
@@ -69,7 +69,7 @@ export const groceryExercises = {
       },
       {
         id: 7,
-        audioPath: 'audio/grocery/grocery-7.mp3',
+        audioPath: '/audio/grocery/grocery-7.mp3',
         sentence: "It's really crowded in here today.",
         options: [
           "It's really crowded in here today.",
@@ -80,7 +80,7 @@ export const groceryExercises = {
       },
       {
         id: 8,
-        audioPath: 'audio/grocery/grocery-8.mp3',
+        audioPath: '/audio/grocery/grocery-8.mp3',
         sentence: 'Do you know where the cereal aisle is?',
         options: [
           'Do you know where the cereal aisle is?',
@@ -91,7 +91,7 @@ export const groceryExercises = {
       },
       {
         id: 9,
-        audioPath: 'audio/grocery/grocery-9.mp3',
+        audioPath: '/audio/grocery/grocery-9.mp3',
         sentence: 'Could I have a bag of flour, please?',
         options: [
           'Could I have a bag of flour, please?',
@@ -102,7 +102,7 @@ export const groceryExercises = {
       },
       {
         id: 10,
-        audioPath: 'audio/grocery/grocery-10.mp3',
+        audioPath: '/audio/grocery/grocery-10.mp3',
         sentence: 'These tomatoes look really fresh.',
         options: [
           'These tomatoes look really fresh.',
@@ -113,7 +113,7 @@ export const groceryExercises = {
       },
       {
         id: 11,
-        audioPath: 'audio/grocery/grocery-11.mp3',
+        audioPath: '/audio/grocery/grocery-11.mp3',
         sentence: 'Do you have any canned beans?',
         options: [
           'Do you have any canned beans?',
@@ -124,7 +124,7 @@ export const groceryExercises = {
       },
       {
         id: 12,
-        audioPath: 'audio/grocery/grocery-12.mp3',
+        audioPath: '/audio/grocery/grocery-12.mp3',
         sentence: "Let's get some ice cream after this.",
         options: [
           "Let's get some ice cream after this.",
@@ -135,7 +135,7 @@ export const groceryExercises = {
       },
       {
         id: 13,
-        audioPath: 'audio/grocery/grocery-13.mp3',
+        audioPath: '/audio/grocery/grocery-13.mp3',
         sentence: 'The eggs are in the cooler.',
         options: [
           'The eggs are in the cooler.',
@@ -146,7 +146,7 @@ export const groceryExercises = {
       },
       {
         id: 14,
-        audioPath: 'audio/grocery/grocery-14.mp3',
+        audioPath: '/audio/grocery/grocery-14.mp3',
         sentence: 'This yogurt is on sale today.',
         options: [
           'This yogurt is on sale today.',
@@ -157,7 +157,7 @@ export const groceryExercises = {
       },
       {
         id: 15,
-        audioPath: 'audio/grocery/grocery-15.mp3',
+        audioPath: '/audio/grocery/grocery-15.mp3',
         sentence: "I'm looking for some fresh cheese.",
         options: [
           "I'm looking for some fresh cheese.",
@@ -168,7 +168,7 @@ export const groceryExercises = {
       },
       {
         id: 16,
-        audioPath: 'audio/grocery/grocery-16.mp3',
+        audioPath: '/audio/grocery/grocery-16.mp3',
         sentence: 'The deli counter is busy right now.',
         options: [
           'The deli counter is busy right now.',
@@ -179,7 +179,7 @@ export const groceryExercises = {
       },
       {
         id: 17,
-        audioPath: 'audio/grocery/grocery-17.mp3',
+        audioPath: '/audio/grocery/grocery-17.mp3',
         sentence: 'Do you have any gluten-free bread?',
         options: [
           'Do you have any gluten-free bread?',
@@ -190,7 +190,7 @@ export const groceryExercises = {
       },
       {
         id: 18,
-        audioPath: 'audio/grocery/grocery-18.mp3',
+        audioPath: '/audio/grocery/grocery-18.mp3',
         sentence: "I don't really like that kind of juice.",
         options: [
           "I don't really like that kind of juice.",
@@ -201,7 +201,7 @@ export const groceryExercises = {
       },
       {
         id: 19,
-        audioPath: 'audio/grocery/grocery-19.mp3',
+        audioPath: '/audio/grocery/grocery-19.mp3',
         sentence: 'These oranges are so tasty.',
         options: [
           'These oranges are so tasty.',
@@ -212,7 +212,7 @@ export const groceryExercises = {
       },
       {
         id: 20,
-        audioPath: 'audio/grocery/grocery-20.mp3',
+        audioPath: '/audio/grocery/grocery-20.mp3',
         sentence: 'The cashier was really helpful today.',
         options: [
           'The cashier was really helpful today.',
