@@ -4,6 +4,9 @@ let audioSpeed = 1.0;
 let roundData = [];
 let currentRound = 0;
 const totalRounds = 10;
+let firstTryCorrect = 0;  // Track perfect answers
+let attemptsInCurrentRound = 0;  // Track attempts per round
+
 
 const audio = new Audio();
 audio.preload = "auto";
@@ -50,6 +53,8 @@ function loadRound() {
     const round = roundData[currentRound];
     const paddedId = round.id.toString().padStart(2, '0');
     
+    attemptsInCurrentRound = 0;  // Reset attempts for new round
+    
     audio.src = `/audio/grocery/grocery-${paddedId}.mp3`;
     console.log("Attempting to load audio from:", audio.src);
     
@@ -87,8 +92,11 @@ function loadRound() {
 }
 
 function checkAnswer(button, isCorrect) {
+    attemptsInCurrentRound++;
     if (isCorrect) {
-        score++;
+        if (attemptsInCurrentRound === 1) {
+            firstTryCorrect++;
+        }
         button.classList.add("correct");
         document.getElementById("feedback").textContent = "Correct!";
         document.getElementById("feedback").className = "correct";
@@ -100,7 +108,7 @@ function checkAnswer(button, isCorrect) {
         document.getElementById("feedback").textContent = "That's not quite it. Try again.";
         document.getElementById("feedback").className = "incorrect";
         audio.currentTime = 0;
-        audio.play();
+        setTimeout(() => audio.play(), 500);
     }
     updateScoreDisplay();
 }
@@ -112,8 +120,9 @@ function disableAllChoices() {
 }
 
 function updateScoreDisplay() {
-    const stars = "⭐".repeat(score);
-    document.getElementById("score").textContent = `Score: ${stars}`;
+    const perfectStars = "⭐".repeat(firstTryCorrect);
+    const partialStars = "💫".repeat(score - firstTryCorrect);  // Empty stars for eventual correct answers
+    document.getElementById("score").textContent = `Score: ${perfectStars}${partialStars}`;
 }
 
 document.getElementById("toggle-speed").onclick = () => {
@@ -130,6 +139,11 @@ function loadNextRound() {
     currentRound++;
     if (currentRound < totalRounds) {
         loadRound();
+        // Add 0.75s delay for next round autoplay
+        setTimeout(() => {
+            audio.currentTime = 0;
+            audio.play();
+        }, 750);
     } else {
         showEndGame();
     }
@@ -140,18 +154,17 @@ function showEndGame() {
     container.innerHTML = `
         <div class="end-game">
             <h2>Exercise Complete!</h2>
-            <p>Your final score: ${score} out of ${totalRounds}</p>
+            <p>Your score: ${firstTryCorrect}/10 correct on first try</p>
+            <p>Total correct: ${score}/10</p>
             <button onclick="window.location.reload()" class="choice">New Round</button>
             <button onclick="window.location.href='/index.html'" class="choice">Home</button>
         </div>
     `;
-    // Hide all game elements
     document.getElementById("feedback").textContent = "";
     document.getElementById("next-button").style.display = "none";
     document.getElementById("play-sound").style.display = "none";
     document.getElementById("toggle-speed").style.display = "none";
 }
-
 // Connect Next button
 document.getElementById("next-button").onclick = loadNextRound;
 
