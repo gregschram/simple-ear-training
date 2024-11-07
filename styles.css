@@ -187,3 +187,68 @@ h2, h3 {
 .end-game button {
     margin: 10px;
 }
+
+/* Base container size adjustment */
+.container {
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    margin: auto;
+    min-height: 500px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* For phones */
+@media screen and (max-width: 480px) {
+    .container {
+        width: 95%;
+        min-height: 100vh;
+        padding: 10px;
+    }
+
+    .choice {
+        padding: 8px 12px;
+        font-size: 0.9em;
+    }
+
+    #feedback {
+        font-size: 1.2em;
+    }
+
+    h2 {
+        font-size: 1.4em;
+    }
+
+    h3 {
+        font-size: 1.2em;
+    }
+
+    .play-sound {
+        padding: 12px 24px;
+    }
+}
+
+/* For tablets */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .container {
+        width: 90%;
+        min-height: 90vh;
+    }
+}
+
+/* For landscape orientation on phones */
+@media screen and (max-height: 480px) and (orientation: landscape) {
+    body {
+        align-items: flex-start;
+    }
+
+    .container {
+        min-height: auto;
+        padding: 10px;
+    }
+
+    #choices {
+        min-height: 200px;
+    }
+}
