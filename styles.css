@@ -9,6 +9,15 @@ body, html {
     background-color: #1a1a2e;
     color: #fff;
     font-family: Arial, sans-serif;
+    overflow: hidden; /* Prevent scrolling */
+}
+
+/* Add specific styling for index page container */
+.container:only-child {
+    /* This targets the container when it's the only one (index page) */
+    justify-content: center;
+    min-height: auto;
+    padding: 10px;
 }
 
 /* Main container setup */
@@ -223,7 +232,13 @@ h2, h3 {
         width: 95%;
         height: 100vh;
         padding: 10px;
-        justify-content: space-between;
+        justify-content: flex-start;
+        overflow: hidden;
+    }
+
+    .container:only-child {
+        justify-content: center;
+        height: 100vh;
     }
 
     .choice {
