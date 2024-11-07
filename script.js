@@ -6,6 +6,7 @@ let currentRound = 0;
 const totalRounds = 10;
 let firstTryCorrect = 0;  // Track perfect answers
 let attemptsInCurrentRound = 0;  // Track attempts per round
+updateScoreDisplay(); // Add initial score display
 
 
 const audio = new Audio();
@@ -50,6 +51,9 @@ async function loadCategoryData(category) {
 }
 
 function loadRound() {
+    attemptsInCurrentRound = 0;  // Reset attempts for new round
+    updateScoreDisplay(); // Add this to ensure score display is updated when round loads
+    
     const round = roundData[currentRound];
     const paddedId = round.id.toString().padStart(2, '0');
     
@@ -97,6 +101,7 @@ function checkAnswer(button, isCorrect) {
         if (attemptsInCurrentRound === 1) {
             firstTryCorrect++;
         }
+        score++; // Add this line to increment total score
         button.classList.add("correct");
         document.getElementById("feedback").textContent = "Correct!";
         document.getElementById("feedback").className = "correct";
@@ -112,7 +117,6 @@ function checkAnswer(button, isCorrect) {
     }
     updateScoreDisplay();
 }
-
 function disableAllChoices() {
     document.querySelectorAll(".choice").forEach(button => {
         button.disabled = true;
