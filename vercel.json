@@ -1,9 +1,7 @@
 {
   "git": {
     "deploymentEnabled": false
-  }
-}
-{
+  },
   "builds": [
     {
       "src": "audio/*",
