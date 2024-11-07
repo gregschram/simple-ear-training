@@ -32,6 +32,9 @@ async function loadCategoryData(category) {
         if (category === "grocery") {
             module = await import('./spoken-sentence/grocery.js');
             roundData = module.groceryExercises.sentences;
+        } else if (category === "doctor") {
+            module = await import('./spoken-sentence/doctor.js');
+            roundData = module.doctorExercises.sentences;  // Make sure this matches your export name
         } else {
             alert("Category not found. Returning to home page.");
             goHome();
