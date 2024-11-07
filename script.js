@@ -4,27 +4,24 @@ let audioSpeed = 1.0;
 let roundData = [];
 let currentRound = 0;
 const totalRounds = 10;
-let firstTryCorrect = 0;  // Track perfect answers
-let attemptsInCurrentRound = 0;  // Track attempts per round
-updateScoreDisplay(); // Add initial score display
-
+let firstTryCorrect = 0;
+let attemptsInCurrentRound = 0;
+let answerHistory = [];  // Add this new array
+updateScoreDisplay();
 
 const audio = new Audio();
 audio.preload = "auto";
 audio.playbackRate = audioSpeed;
 
-// Add home button listener here
 document.getElementById("home-button").onclick = () => {
     window.location.href = "/index.html";
 };
 
-// Play sound function
 document.getElementById("play-sound").onclick = () => {
     audio.currentTime = 0;
     audio.play().catch(error => console.log("Audio play error:", error));
 };
 
-// Get category from URL parameter
 const urlParams = new URLSearchParams(window.location.search);
 const category = urlParams.get('category');
 document.getElementById("category-title").textContent = `Category: ${category.charAt(0).toUpperCase() + category.slice(1)}`;
@@ -51,13 +48,11 @@ async function loadCategoryData(category) {
 }
 
 function loadRound() {
-    attemptsInCurrentRound = 0;  // Reset attempts for new round
-    updateScoreDisplay(); // Add this to ensure score display is updated when round loads
+    attemptsInCurrentRound = 0;
+    updateScoreDisplay();
     
     const round = roundData[currentRound];
     const paddedId = round.id.toString().padStart(2, '0');
-    
-    attemptsInCurrentRound = 0;  // Reset attempts for new round
     
     audio.src = `/audio/grocery/grocery-${paddedId}.mp3`;
     console.log("Attempting to load audio from:", audio.src);
@@ -69,21 +64,17 @@ function loadRound() {
         }
     };
 
-    // Reset UI elements
     document.getElementById("feedback").textContent = "";
     document.getElementById("feedback").className = "";
     document.getElementById("next-button").style.display = "none";
     document.getElementById("round-tracker").textContent = `Round ${currentRound + 1}/${totalRounds}`;
     
-    // Set up choices with randomization
     const choicesContainer = document.getElementById("choices");
     choicesContainer.innerHTML = "";
     
-    // Randomize options
     const shuffledOptions = [...round.options]
         .sort(() => Math.random() - 0.5);
     
-    // Store correct answer index for checking
     const correctIndex = shuffledOptions.indexOf(round.sentence);
     
     shuffledOptions.forEach((option, index) => {
@@ -100,8 +91,11 @@ function checkAnswer(button, isCorrect) {
     if (isCorrect) {
         if (attemptsInCurrentRound === 1) {
             firstTryCorrect++;
+            answerHistory[currentRound] = true;  // Mark as first try correct
+        } else {
+            answerHistory[currentRound] = false;  // Mark as eventually correct
         }
-        score++; // Add this line to increment total score
+        score++;
         button.classList.add("correct");
         document.getElementById("feedback").textContent = "Correct!";
         document.getElementById("feedback").className = "correct";
@@ -117,6 +111,7 @@ function checkAnswer(button, isCorrect) {
     }
     updateScoreDisplay();
 }
+
 function disableAllChoices() {
     document.querySelectorAll(".choice").forEach(button => {
         button.disabled = true;
@@ -124,9 +119,11 @@ function disableAllChoices() {
 }
 
 function updateScoreDisplay() {
-    const perfectStars = "⭐".repeat(firstTryCorrect);
-    const partialStars = "💫".repeat(score - firstTryCorrect);  // Empty stars for eventual correct answers
-    document.getElementById("score").textContent = `Score: ${perfectStars}${partialStars}`;
+    const displayStars = answerHistory
+        .slice(0, currentRound + 1)  // Only show stars for completed rounds
+        .map(wasFirstTry => wasFirstTry ? "⭐" : "💫")
+        .join("");
+    document.getElementById("score").textContent = `Score: ${displayStars}`;
 }
 
 document.getElementById("toggle-speed").onclick = () => {
@@ -143,7 +140,6 @@ function loadNextRound() {
     currentRound++;
     if (currentRound < totalRounds) {
         loadRound();
-        // Add 0.75s delay for next round autoplay
         setTimeout(() => {
             audio.currentTime = 0;
             audio.play();
@@ -169,12 +165,11 @@ function showEndGame() {
     document.getElementById("play-sound").style.display = "none";
     document.getElementById("toggle-speed").style.display = "none";
 }
-// Connect Next button
+
 document.getElementById("next-button").onclick = loadNextRound;
 
 function goHome() {
     window.location.href = "/index.html";
 }
 
-// Initial call to load category data
 loadCategoryData(category);
