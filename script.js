@@ -42,7 +42,8 @@ async function loadCategoryData(category) {
 
 function loadRound() {
     attemptsInCurrentRound = 0;
-    updateScoreDisplay();
+    //KEEPING IN CASE WE BRING BACK SCORE DURING WHOLE THING
+    //updateScoreDisplay();
     
     const round = roundData[currentRound];
     const paddedId = round.id.toString().padStart(2, '0');
@@ -102,7 +103,7 @@ function checkAnswer(button, isCorrect) {
         audio.currentTime = 0;
         setTimeout(() => audio.play(), 500);
     }
-    updateScoreDisplay();
+    // updateScoreDisplay();
 }
 
 function disableAllChoices() {
@@ -111,6 +112,7 @@ function disableAllChoices() {
     });
 }
 
+/* KEEPING IN CASE WE BRING BACK SCORE
 function updateScoreDisplay() {
     const displayStars = answerHistory
         .slice(0, currentRound + 1)  // Only show stars for completed rounds
@@ -118,6 +120,7 @@ function updateScoreDisplay() {
         .join("");
     document.getElementById("score").textContent = `Score: ${displayStars}`;
 }
+*/
 
 document.getElementById("toggle-speed").onclick = () => {
     audioSpeed = audioSpeed === 1.0 ? 0.65 : 1.0;
@@ -148,6 +151,7 @@ function showEndGame() {
         <div class="end-game">
             <h2>Exercise Complete!</h2>
             <p>Your score: ${firstTryCorrect}/10 correct on first try</p>
+            <p>⭐ Total correct: ${score}/10 ⭐</p>
             <button onclick="window.location.reload()" class="choice">New Round</button>
             <button onclick="window.location.href='/index.html'" class="choice">Home</button>
         </div>
@@ -165,6 +169,6 @@ function goHome() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    updateScoreDisplay();
+    //updateScoreDisplay();
     loadCategoryData(category);
 });
