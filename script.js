@@ -9,6 +9,11 @@ const audio = new Audio();
 audio.preload = "auto";
 audio.playbackRate = audioSpeed;
 
+// Add home button listener here
+document.getElementById("home-button").onclick = () => {
+    window.location.href = "/index.html";
+};
+
 // Play sound function
 document.getElementById("play-sound").onclick = () => {
     audio.currentTime = 0;
@@ -43,15 +48,16 @@ async function loadCategoryData(category) {
 
 function loadRound() {
     const round = roundData[currentRound];
-    // Pad the ID to 2 digits
     const paddedId = round.id.toString().padStart(2, '0');
+    
     audio.src = `/audio/grocery/grocery-${paddedId}.mp3`;
+    console.log("Attempting to load audio from:", audio.src);
     
-    console.log("Attempting to load audio from:", audio.src); // Debug log
-    
-    // Add load event listener to verify file loading
     audio.onloadeddata = () => {
         console.log("Audio loaded successfully");
+        if (currentRound === 0) {
+            setTimeout(() => audio.play(), 1000);
+        }
     };
 
     // Reset UI elements
@@ -59,15 +65,23 @@ function loadRound() {
     document.getElementById("feedback").className = "";
     document.getElementById("next-button").style.display = "none";
     document.getElementById("round-tracker").textContent = `Round ${currentRound + 1}/${totalRounds}`;
-
-    // Set up choices
+    
+    // Set up choices with randomization
     const choicesContainer = document.getElementById("choices");
     choicesContainer.innerHTML = "";
-    round.options.forEach((option, index) => {
+    
+    // Randomize options
+    const shuffledOptions = [...round.options]
+        .sort(() => Math.random() - 0.5);
+    
+    // Store correct answer index for checking
+    const correctIndex = shuffledOptions.indexOf(round.sentence);
+    
+    shuffledOptions.forEach((option, index) => {
         const button = document.createElement("button");
         button.textContent = option;
         button.className = "choice";
-        button.onclick = () => checkAnswer(button, index);
+        button.onclick = () => checkAnswer(button, index === correctIndex);
         choicesContainer.appendChild(button);
     });
 }
@@ -113,19 +127,37 @@ document.getElementById("toggle-speed").onclick = () => {
 };
 
 function loadNextRound() {
-    console.log("Loading the next round"); // This will log to the console when the function is triggered
+    console.log("Loading the next round");
     currentRound++;
-    if (currentRound < roundData.length) {
+    if (currentRound < totalRounds) {
         loadRound();
     } else {
-        alert("Exercise completed! Your final score: " + score + " out of " + totalRounds);
-        goHome();
+        showEndGame();
     }
 }
 
+function showEndGame() {
+    const container = document.getElementById("choices");
+    container.innerHTML = `
+        <div class="end-game">
+            <h2>Exercise Complete!</h2>
+            <p>Your final score: ${score} out of ${totalRounds}</p>
+            <button onclick="window.location.reload()" class="choice">New Round</button>
+            <button onclick="window.location.href='/index.html'" class="choice">Home</button>
+        </div>
+    `;
+    // Hide all game elements
+    document.getElementById("feedback").textContent = "";
+    document.getElementById("next-button").style.display = "none";
+    document.getElementById("play-sound").style.display = "none";
+    document.getElementById("toggle-speed").style.display = "none";
+}
+
+// Connect Next button
+document.getElementById("next-button").onclick = loadNextRound;
+
 function goHome() {
-    console.log("Navigating to the home page"); // This will log to the console when the function is triggered
-    window.location.href = "index.html";
+    window.location.href = "/index.html";
 }
 
 // Initial call to load category data
