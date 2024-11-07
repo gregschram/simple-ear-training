@@ -124,7 +124,7 @@ document.getElementById("toggle-speed").onclick = () => {
     audioSpeed = audioSpeed === 1.0 ? 0.65 : 1.0;
     audio.playbackRate = audioSpeed;
     const speedText = audioSpeed === 1.0 ? 'Normal Speed' : 'Slow Speed';
-    const icon = audioSpeed === 1.0 ? '⏵⏵' : '⏵';
+    const icon = audioSpeed === 1.0 ? '⏩' : '🞂';
     document.getElementById("toggle-speed").innerHTML = `<span class="icon">${icon}</span> ${speedText}`;
     document.getElementById("toggle-speed").classList.toggle("active");
 };
