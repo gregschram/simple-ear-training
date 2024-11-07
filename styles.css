@@ -1,254 +1,267 @@
+/* Basic reset and layout */
 body, html {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #1a1a2e;
-    color: #fff;
-    font-family: Arial, sans-serif;
+   margin: 0;
+   padding: 0;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 100vh;
+   background-color: #1a1a2e;
+   color: #fff;
+   font-family: Arial, sans-serif;
 }
 
+/* Main container setup */
 .container {
-    text-align: center;
-    max-width: 400px;
-    margin: auto;
-    min-height: 500px; /* Add fixed minimum height */
-    display: flex;
-    flex-direction: column;
+   text-align: center;
+   width: 90%;
+   max-width: 400px;
+   margin: auto;
+   min-height: 500px;
+   padding: 20px;
+   box-sizing: border-box;
+   display: flex;
+   flex-direction: column;
 }
 
 h2, h3 {
-    margin: 5px 0;
+   margin: 5px 0;
 }
 
-#home-button, #next-button {
-    background-color: transparent;
-    color: #ffffff;
-    border: 2px solid #ffffff;
-    padding: 8px 16px;
-    cursor: pointer;
-    font-size: 0.9em;
-    border-radius: 5px;
-    margin: 10px;
-    transition: background-color 0.3s, color 0.3s;
-    height: 40px;
+/* Navigation and control buttons */
+#home-button {
+   display: inline-block;
+   background-color: transparent;
+   color: #ffffff;
+   border: 2px solid #ffffff;
+   padding: 8px 16px;
+   cursor: pointer;
+   font-size: 0.9em;
+   border-radius: 5px;
+   margin: 10px;
+   transition: background-color 0.3s, color 0.3s;
+   white-space: nowrap;
 }
 
 #next-button {
-    visibility: hidden;
-    display: block !important;
-    margin: 10px auto;
+   background-color: transparent;
+   color: #ffffff;
+   border: 2px solid #ffffff;
+   padding: 8px 16px;
+   cursor: pointer;
+   font-size: 0.9em;
+   border-radius: 5px;
+   margin: 10px auto;
+   transition: background-color 0.3s, color 0.3s;
+   height: 40px;
+   visibility: hidden;
+   display: block !important;
 }
 
 #next-button[style*="inline-block"] {
-    visibility: visible;
+   visibility: visible;
 }
 
 #home-button:hover, #next-button:hover {
-    background-color: #ffffff;
-    color: #1a1a2e;
+   background-color: #ffffff;
+   color: #1a1a2e;
 }
 
+/* Status displays */
 #score, #round-tracker {
-    font-size: 0.9em;
-    margin: 5px 0;
-    opacity: 0.8;
-    min-height: 1.5em;
+   font-size: 0.9em;
+   margin: 5px 0;
+   opacity: 0.8;
+   min-height: 1.5em;
 }
 
+/* Main action button */
 .play-sound {
-    background-color: #0d6efd;
-    color: #fff;
-    padding: 15px 30px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1.2em;
-    margin: 15px 0;
-    transition: background-color 0.3s, transform 0.2s;
+   background-color: #0d6efd;
+   color: #fff;
+   padding: 15px 30px;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   font-size: 1.2em;
+   margin: 15px 0;
+   transition: background-color 0.3s, transform 0.2s;
 }
 
 .play-sound:hover {
-    background-color: #084298;
-    transform: scale(1.03);
+   background-color: #084298;
+   transform: scale(1.03);
 }
 
+/* Speed control button */
 .toggle-speed {
-    background-color: transparent;
-    color: #ffffff;
-    border: 2px solid #ffffff;
-    padding: 8px 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.9em;
-    margin: 10px;
-    display: inline-flex;
-    align-items: center;
-    transition: background-color 0.3s, color 0.3s;
+   display: inline-block;
+   background-color: transparent;
+   color: #ffffff;
+   border: 2px solid #ffffff;
+   padding: 8px 16px;
+   border-radius: 5px;
+   cursor: pointer;
+   font-size: 0.9em;
+   margin: 10px;
+   white-space: nowrap;
+   transition: background-color 0.3s, color 0.3s;
 }
 
 .toggle-speed:hover {
-    background-color: #ffffff;
-    color: #1a1a2e;
+   background-color: #ffffff;
+   color: #1a1a2e;
 }
 
 .icon {
-    margin-right: 5px;
+   margin-right: 5px;
 }
 
+/* Choices section */
 #choices {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 20px;
-    min-height: 300px;
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+   margin-top: 20px;
+   min-height: 300px;
 }
 
 .choice {
-    background-color: #3a3a3a;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.3s;
-    height: 45px; /* Fixed height for choice buttons */
+   background-color: #3a3a3a;
+   color: #fff;
+   padding: 10px 20px;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   font-size: 1em;
+   transition: background-color 0.3s;
+   height: 45px;
 }
 
 .choice:hover {
-    background-color: #555;
-    transform: scale(1.02);
+   background-color: #555;
+   transform: scale(1.02);
 }
 
 .choice.correct {
-    background-color: #4CAF50;
+   background-color: #4CAF50;
 }
 
 .choice.incorrect {
-    background-color: #F44336;
+   background-color: #F44336;
 }
 
 .choice:disabled {
-    cursor: not-allowed;
-    opacity: 0.5;
+   cursor: not-allowed;
+   opacity: 0.5;
 }
 
+/* Feedback area */
 #feedback {
-    font-size: 1.5em;
-    min-height: 1.5em;
-    margin: 20px 0;
-    font-weight: bold;
-    color: #fff;
-    visibility: hidden;
+   font-size: 1.5em;
+   min-height: 1.5em;
+   margin: 20px 0;
+   font-weight: bold;
+   color: #fff;
+   visibility: hidden;
 }
 
 #feedback:not(:empty) {
-    visibility: visible;
+   visibility: visible;
 }
 
 #feedback.correct {
-    color: #7fff7f;
+   color: #7fff7f;
 }
 
 #feedback.incorrect {
-    color: #ff7f7f;
+   color: #ff7f7f;
 }
 
+/* Start screen button */
 .start-exercise {
-    background-color: #0d6efd;
-    color: #fff;
-    padding: 15px 30px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1.2em;
-    margin: 20px 0;
-    transition: background-color 0.3s, transform 0.2s;
+   background-color: #0d6efd;
+   color: #fff;
+   padding: 15px 30px;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   font-size: 1.2em;
+   margin: 20px 0;
+   transition: background-color 0.3s, transform 0.2s;
 }
 
 .start-exercise:hover {
-    background-color: #084298;
-    transform: scale(1.05);
+   background-color: #084298;
+   transform: scale(1.05);
 }
 
+/* End game screen */
 .end-game {
-    text-align: center;
-    margin: 20px 0;
-    min-height: 300px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+   text-align: center;
+   margin: 20px 0;
+   min-height: 300px;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
 }
 
 .end-game button {
-    margin: 10px;
+   margin: 10px;
 }
 
-/* Base container size adjustment */
-.container {
-    text-align: center;
-    width: 90%;
-    max-width: 400px;
-    margin: auto;
-    min-height: 500px;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
+/* Responsive design */
 /* For phones */
 @media screen and (max-width: 480px) {
-    .container {
-        width: 95%;
-        min-height: 100vh;
-        padding: 10px;
-    }
+   .container {
+       width: 95%;
+       min-height: 100vh;
+       padding: 10px;
+   }
 
-    .choice {
-        padding: 8px 12px;
-        font-size: 0.9em;
-    }
+   .choice {
+       padding: 8px 12px;
+       font-size: 0.9em;
+   }
 
-    #feedback {
-        font-size: 1.2em;
-    }
+   #feedback {
+       font-size: 1.2em;
+   }
 
-    h2 {
-        font-size: 1.4em;
-    }
+   h2 {
+       font-size: 1.4em;
+   }
 
-    h3 {
-        font-size: 1.2em;
-    }
+   h3 {
+       font-size: 1.2em;
+   }
 
-    .play-sound {
-        padding: 12px 24px;
-    }
+   .play-sound {
+       padding: 12px 24px;
+   }
 }
 
 /* For tablets */
 @media screen and (min-width: 481px) and (max-width: 768px) {
-    .container {
-        width: 90%;
-        min-height: 90vh;
-    }
+   .container {
+       width: 90%;
+       min-height: 90vh;
+   }
 }
 
 /* For landscape orientation on phones */
 @media screen and (max-height: 480px) and (orientation: landscape) {
-    body {
-        align-items: flex-start;
-    }
+   body {
+       align-items: flex-start;
+   }
 
-    .container {
-        min-height: auto;
-        padding: 10px;
-    }
+   .container {
+       min-height: auto;
+       padding: 10px;
+   }
 
-    #choices {
-        min-height: 200px;
-    }
+   #choices {
+       min-height: 200px;
+   }
 }
