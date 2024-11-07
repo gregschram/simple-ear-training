@@ -37,6 +37,13 @@ h2, h3 {
     margin: 3px 0;
 }
 
+.header-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 0;
+}
+
 /* Navigation and control buttons */
 #home-button {
     display: inline-block;
@@ -102,28 +109,29 @@ h2, h3 {
     transform: scale(1.03);
 }
 
-/* Speed control button */
-.toggle-speed {
-    display: inline-block;
-    background-color: transparent;
-    color: #ffffff;
-    border: 2px solid #ffffff;
-    padding: 8px 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.9em;
-    margin: 10px;
-    white-space: nowrap;
-    transition: background-color 0.3s, color 0.3s;
+/* Speed control */
+.audio-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    justify-content: center;
 }
 
-.toggle-speed:hover {
-    background-color: #ffffff;
-    color: #1a1a2e;
+.speed-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.9em;
 }
 
 .icon {
     margin-right: 5px;
+}
+/* instructions */
+.instruction-text {
+    font-weight: bold;
+    font-size: 0.9em;
+    margin: 5px 0;
 }
 
 /* Choices section */
