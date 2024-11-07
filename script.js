@@ -7,7 +7,6 @@ const totalRounds = 10;
 let firstTryCorrect = 0;
 let attemptsInCurrentRound = 0;
 let answerHistory = [];  // Add this new array
-updateScoreDisplay();
 
 const audio = new Audio();
 audio.preload = "auto";
@@ -48,7 +47,7 @@ function loadRound() {
     const round = roundData[currentRound];
     const paddedId = round.id.toString().padStart(2, '0');
     
-    audio.src = /${round.audioPath};
+    audio.src = `${round.audioPath}`;  // or just round.audioPath since it already has the leading slash
     console.log("Attempting to load audio from:", audio.src);
     
     audio.onloadeddata = () => {
@@ -166,4 +165,7 @@ function goHome() {
     window.location.href = "/index.html";
 }
 
-loadCategoryData(category);
+document.addEventListener('DOMContentLoaded', () => {
+    updateScoreDisplay();
+    loadCategoryData(category);
+});
