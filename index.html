@@ -14,7 +14,7 @@
     <script>
         function startExercise() {
         console.log("Starting exercise"); // Log for debugging
-        const categories = ["grocery"];
+        const categories = ["grocery", "doctor"];
         const selectedCategory = categories[Math.floor(Math.random() * categories.length)];
         window.location.href = `exercise.html?category=${selectedCategory}`;
         }
