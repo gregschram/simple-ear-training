@@ -3,7 +3,7 @@ export const groceryExercises = {
   sentences: [
     {
         id: 1,
-        audioPath: './audio/grocery/grocery-1.mp3',
+        audioPath: '/audio/grocery/grocery-1.mp3',
         sentence: 'Would you like some bread and eggs?',
         options: [
           'Would you like some bread and eggs?',
@@ -14,7 +14,7 @@ export const groceryExercises = {
       },
       {
         id: 2,
-        audioPath: './audio/grocery/grocery-2.mp3',
+        audioPath: '/audio/grocery/grocery-2.mp3',
         sentence: 'The apples are on sale today.',
         options: [
           'The apples are on sale today.',
@@ -25,7 +25,7 @@ export const groceryExercises = {
       },
       {
         id: 3,
-        audioPath: './audio/grocery/grocery-3.mp3',
+        audioPath: '/audio/grocery/grocery-3.mp3',
         sentence: 'Can you pass me the milk, please?',
         options: [
           'Can you pass me the milk, please?',
