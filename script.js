@@ -43,18 +43,26 @@ async function loadCategoryData(category) {
 
 function loadRound() {
     const round = roundData[currentRound];
-    audio.src = `/audio/grocery/grocery-${round.id}.mp3`;  // Make sure this matches your file naming
-    console.log("Audio source set to:", audio.src); // Check the path
-    audio.play().catch(error => console.log("Audio play error:", error));
+    // Pad the ID to 2 digits
+    const paddedId = round.id.toString().padStart(2, '0');
+    audio.src = `/audio/grocery/grocery-${paddedId}.mp3`;
+    
+    console.log("Attempting to load audio from:", audio.src); // Debug log
+    
+    // Add load event listener to verify file loading
+    audio.onloadeddata = () => {
+        console.log("Audio loaded successfully");
+    };
 
+    // Reset UI elements
     document.getElementById("feedback").textContent = "";
     document.getElementById("feedback").className = "";
     document.getElementById("next-button").style.display = "none";
     document.getElementById("round-tracker").textContent = `Round ${currentRound + 1}/${totalRounds}`;
-    
+
+    // Set up choices
     const choicesContainer = document.getElementById("choices");
     choicesContainer.innerHTML = "";
-
     round.options.forEach((option, index) => {
         const button = document.createElement("button");
         button.textContent = option;
