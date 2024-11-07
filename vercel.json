@@ -7,8 +7,4 @@
       "src": "audio/*",
       "use": "@vercel/static"
     }
-  ],
-  "routes": [
-    { "src": "/audio/(.*)", "dest": "/audio/$1" }
-  ]
 }
