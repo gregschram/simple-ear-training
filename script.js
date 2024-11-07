@@ -43,7 +43,7 @@ async function loadCategoryData(category) {
 
 function loadRound() {
     const round = roundData[currentRound];
-    audio.src = round.audioPath;
+    audio.src = `/audio/grocery/grocery-${round.id}.mp3`;  // Make sure this matches your file naming
     console.log("Audio source set to:", audio.src); // Check the path
     audio.play().catch(error => console.log("Audio play error:", error));
 
