@@ -28,19 +28,10 @@ document.getElementById("category-title").textContent = `Category: ${category.ch
 
 async function loadCategoryData(category) {
     try {
-        let module;
-        if (category === "grocery") {
-            module = await import('./spoken-sentence/grocery.js');
-            roundData = module.groceryExercises.sentences;
-        } else if (category === "doctor") {
-            module = await import('./spoken-sentence/doctor.js');
-            roundData = module.doctorExercises.sentences;  // Make sure this matches your export name
-        } else {
-            alert("Category not found. Returning to home page.");
-            goHome();
-            return;
-        }
-
+        let module = await import(`./spoken-sentence/${category}.js`);
+        roundData = module[`${category}Exercises`].sentences;
+        // This way it automatically matches: groceryExercises, doctorExercises, etc.
+        
         roundData = roundData.sort(() => 0.5 - Math.random()).slice(0, totalRounds);
         loadRound();
     } catch (error) {
@@ -57,7 +48,7 @@ function loadRound() {
     const round = roundData[currentRound];
     const paddedId = round.id.toString().padStart(2, '0');
     
-    audio.src = `/audio/grocery/grocery-${paddedId}.mp3`;
+    audio.src = /${round.audioPath};
     console.log("Attempting to load audio from:", audio.src);
     
     audio.onloadeddata = () => {
