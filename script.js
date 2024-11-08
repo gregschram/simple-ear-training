@@ -6,7 +6,8 @@ let currentRound = 0;
 const totalRounds = 10;
 let firstTryCorrect = 0;
 let attemptsInCurrentRound = 0;
-let answerHistory = [];  // Add this new array
+let answerHistory = []; 
+let isSlowSpeed = false;  // Track checkbox state
 
 const audio = new Audio();
 audio.preload = "auto";
@@ -18,6 +19,8 @@ document.getElementById("home-button").onclick = () => {
 
 document.getElementById("play-sound").onclick = () => {
     audio.currentTime = 0;
+    // Ensure correct speed before playing
+    audio.playbackRate = audioSpeed;
     audio.play().catch(error => console.log("Audio play error:", error));
 };
 
@@ -42,7 +45,9 @@ async function loadCategoryData(category) {
 
 function loadRound() {
     attemptsInCurrentRound = 0;
+    audioSpeed = isSlowSpeed ? 0.65 : 1.0;
     audio.playbackRate = audioSpeed;
+    document.getElementById("toggle-speed").checked = isSlowSpeed; 
     const round = roundData[currentRound];
     
     console.log("Current round data:", round);  // Log the round data
@@ -128,7 +133,8 @@ function updateScoreDisplay() {
 */
 
 document.getElementById("toggle-speed").onchange = (e) => {
-    audioSpeed = e.target.checked ? 0.65 : 1.0;
+    isSlowSpeed = e.target.checked;
+    audioSpeed = isSlowSpeed ? 0.65 : 1.0;
     audio.playbackRate = audioSpeed;
 };
 
