@@ -151,7 +151,9 @@ function showEndGame() {
         <div class="end-game">
             <h2>Exercise Complete!</h2>
             <p>⭐ Your score: ${firstTryCorrect}/10 correct on first try ⭐</p>
+            /*
             <p>⭐ Total correct: ${score}/10 ⭐</p>
+            */
             <button onclick="window.location.reload()" class="choice">New Round</button>
             <button onclick="window.location.href='/index.html'" class="choice">Home</button>
         </div>
