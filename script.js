@@ -41,14 +41,13 @@ async function loadCategoryData(category) {
 }
 
 function loadRound() {
-    attemptsInCurrentRound = 0;
     //KEEPING IN CASE WE BRING BACK SCORE DURING WHOLE THING
     //updateScoreDisplay();
+    attemptsInCurrentRound = 0;
     audio.playbackRate = audioSpeed;
     const round = roundData[currentRound];
-    const paddedId = round.id.toString().padStart(2, '0');
     
-    audio.src = `${round.audioPath}`;  // or just round.audioPath since it already has the leading slash
+    audio.src = round.audioPath;  // No need for any string manipulation since paths will be consistent
     console.log("Attempting to load audio from:", audio.src);
     
     audio.onloadeddata = () => {
