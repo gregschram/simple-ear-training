@@ -41,17 +41,23 @@ async function loadCategoryData(category) {
 }
 
 function loadRound() {
-    //KEEPING IN CASE WE BRING BACK SCORE DURING WHOLE THING
-    //updateScoreDisplay();
     attemptsInCurrentRound = 0;
     audio.playbackRate = audioSpeed;
     const round = roundData[currentRound];
     
-    audio.src = round.audioPath;  // No need for any string manipulation since paths will be consistent
-    console.log("Attempting to load audio from:", audio.src);
+    console.log("Current round data:", round);  // Log the round data
+    console.log("Audio path being used:", round.audioPath);  // Log the exact path
+    
+    audio.src = round.audioPath;
+    
+    // Add error handling
+    audio.onerror = (e) => {
+        console.error("Audio loading error:", e);
+        console.error("Failed path:", audio.src);
+    };
     
     audio.onloadeddata = () => {
-        console.log("Audio loaded successfully");
+        console.log("Audio loaded successfully for path:", audio.src);
         if (currentRound === 0) {
             setTimeout(() => audio.play(), 750);
         }
