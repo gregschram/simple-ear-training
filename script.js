@@ -42,8 +42,6 @@ async function loadCategoryData(category) {
 
 function loadRound() {
     attemptsInCurrentRound = 0;
-    
-
     //KEEPING IN CASE WE BRING BACK SCORE DURING WHOLE THING
     //updateScoreDisplay();
     audio.playbackRate = audioSpeed;
