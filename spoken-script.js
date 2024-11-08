@@ -6,7 +6,8 @@ let currentRound = 0;
 const totalRounds = 10;
 let firstTryCorrect = 0;
 let attemptsInCurrentRound = 0;
-let answerHistory = [];  // Add this new array
+let answerHistory = []; 
+let isSlowSpeed = false;  // Track checkbox state
 
 const audio = new Audio();
 audio.preload = "auto";
@@ -18,6 +19,8 @@ document.getElementById("home-button").onclick = () => {
 
 document.getElementById("play-sound").onclick = () => {
     audio.currentTime = 0;
+    // Ensure correct speed before playing
+    audio.playbackRate = audioSpeed;
     audio.play().catch(error => console.log("Audio play error:", error));
 };
 
@@ -42,17 +45,24 @@ async function loadCategoryData(category) {
 
 function loadRound() {
     attemptsInCurrentRound = 0;
-    //KEEPING IN CASE WE BRING BACK SCORE DURING WHOLE THING
-    //updateScoreDisplay();
-    
+    audioSpeed = isSlowSpeed ? 0.65 : 1.0;
+    audio.playbackRate = audioSpeed;
+    document.getElementById("toggle-speed").checked = isSlowSpeed; 
     const round = roundData[currentRound];
-    const paddedId = round.id.toString().padStart(2, '0');
     
-    audio.src = `${round.audioPath}`;  // or just round.audioPath since it already has the leading slash
-    console.log("Attempting to load audio from:", audio.src);
+    console.log("Current round data:", round);  // Log the round data
+    console.log("Audio path being used:", round.audioPath);  // Log the exact path
+    
+    audio.src = round.audioPath;
+    
+    // Add error handling
+    audio.onerror = (e) => {
+        console.error("Audio loading error:", e);
+        console.error("Failed path:", audio.src);
+    };
     
     audio.onloadeddata = () => {
-        console.log("Audio loaded successfully");
+        console.log("Audio loaded successfully for path:", audio.src);
         if (currentRound === 0) {
             setTimeout(() => audio.play(), 750);
         }
@@ -122,13 +132,10 @@ function updateScoreDisplay() {
 }
 */
 
-document.getElementById("toggle-speed").onclick = () => {
-    audioSpeed = audioSpeed === 1.0 ? 0.65 : 1.0;
+document.getElementById("toggle-speed").onchange = (e) => {
+    isSlowSpeed = e.target.checked;
+    audioSpeed = isSlowSpeed ? 0.65 : 1.0;
     audio.playbackRate = audioSpeed;
-    const speedText = audioSpeed === 1.0 ? '▶️ Switch to normal speed' : '⏩ Switch to slow Speed';
-    const icon = audioSpeed === 1.0 ? ' ' : ' ';
-    document.getElementById("toggle-speed").innerHTML = `<span class="icon">${icon}</span> ${speedText}`;
-    document.getElementById("toggle-speed").classList.toggle("active");
 };
 
 function loadNextRound() {
@@ -138,6 +145,7 @@ function loadNextRound() {
         loadRound();
         setTimeout(() => {
             audio.currentTime = 0;
+            audio.playbackRate = isSlowSpeed ? 0.65 : 1.0;
             audio.play();
         }, 750);
     } else {

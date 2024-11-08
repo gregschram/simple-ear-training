@@ -9,21 +9,22 @@
 <body>
     <div class="container">
         <h1>Ear Training Exercises</h1>
-        <button class="start-exercise" onclick="startExercise()">Identify the Spoken Sentence</button>
-        <button class="start-exercise" onclick="startWrittenExercise()">Identify the Written Sentence</button>
+        <div class="exercise-choices">
+            <button class="start-exercise" onclick="startSpokenExercise()">Identify the Spoken Sentence</button>
+            <button class="start-exercise" onclick="startWrittenExercise()">Identify the Written Sentence</button>
+        </div>
     </div>
     <script>
-        // Move categories to top for easy maintenance
-        const categories = [
-            "grocery",
-            "doctor"
-            // Add new categories here
-        ];
-
-        function startExercise() {
-            console.log("Starting exercise with available categories:", categories); // Better debugging
+        const categories = ["grocery", "doctor"];
+        
+        function startSpokenExercise() {
             const selectedCategory = categories[Math.floor(Math.random() * categories.length)];
-            window.location.href = `exercise.html?category=${selectedCategory}`;
+            window.location.href = `spoken-exercise.html?category=${selectedCategory}`;
+        }
+
+        function startWrittenExercise() {
+            const selectedCategory = categories[Math.floor(Math.random() * categories.length)];
+            window.location.href = `written-exercise.html?category=${selectedCategory}`;
         }
     </script>
 </body>
