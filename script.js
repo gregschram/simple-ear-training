@@ -145,6 +145,7 @@ function loadNextRound() {
         loadRound();
         setTimeout(() => {
             audio.currentTime = 0;
+            audio.playbackRate = isSlowSpeed ? 0.65 : 1.0;
             audio.play();
         }, 750);
     } else {
