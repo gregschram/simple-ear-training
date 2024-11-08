@@ -122,14 +122,9 @@ function updateScoreDisplay() {
 }
 */
 
-document.getElementById("toggle-speed").onclick = () => {
-    audioSpeed = audioSpeed === 1.0 ? 0.65 : 1.0;
+document.getElementById("toggle-speed").onchange = (e) => {
+    audioSpeed = e.target.checked ? 0.65 : 1.0;
     audio.playbackRate = audioSpeed;
-    document.getElementById("toggle-speed").checked = audioSpeed !== 1.0;
-    const speedText = audioSpeed === 1.0 ? '▶️ Switch to normal speed' : '⏩ Switch to slow Speed';
-    const icon = audioSpeed === 1.0 ? ' ' : ' ';
-    document.getElementById("toggle-speed").innerHTML = `<span class="icon">${icon}</span> ${speedText}`;
-    document.getElementById("toggle-speed").classList.toggle("active");
 };
 
 function loadNextRound() {
