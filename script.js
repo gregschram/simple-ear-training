@@ -54,7 +54,7 @@ function loadRound() {
     audio.onloadeddata = () => {
         console.log("Audio loaded successfully");
         if (currentRound === 0) {
-            setTimeout(() => audio.play(), 1000);
+            setTimeout(() => audio.play(), 750);
         }
     };
 
