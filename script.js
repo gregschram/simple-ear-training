@@ -42,9 +42,11 @@ async function loadCategoryData(category) {
 
 function loadRound() {
     attemptsInCurrentRound = 0;
+    
+
     //KEEPING IN CASE WE BRING BACK SCORE DURING WHOLE THING
     //updateScoreDisplay();
-    
+    audio.playbackRate = audioSpeed;
     const round = roundData[currentRound];
     const paddedId = round.id.toString().padStart(2, '0');
     
@@ -125,6 +127,7 @@ function updateScoreDisplay() {
 document.getElementById("toggle-speed").onclick = () => {
     audioSpeed = audioSpeed === 1.0 ? 0.65 : 1.0;
     audio.playbackRate = audioSpeed;
+    document.getElementById("toggle-speed").checked = audioSpeed !== 1.0;
     const speedText = audioSpeed === 1.0 ? '▶️ Switch to normal speed' : '⏩ Switch to slow Speed';
     const icon = audioSpeed === 1.0 ? ' ' : ' ';
     document.getElementById("toggle-speed").innerHTML = `<span class="icon">${icon}</span> ${speedText}`;
