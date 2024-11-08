@@ -152,7 +152,7 @@ function showEndGame() {
             <h2>Complete!</h2>
             <p>⭐${firstTryCorrect}/10 correct on the first try! ⭐</p>
             <button onclick="window.location.reload()" class="choice">New Round</button>
-            <button onclick="window.location.href='/index.html'" class="choice">Home</button>
+            <button onclick="window.location.href='/index.html'" class="choice">Main Menu</button>
         </div>
     `;
     document.getElementById("feedback").textContent = "";
