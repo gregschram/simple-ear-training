@@ -3,7 +3,7 @@ export const doctorExercises = {
   sentences: [
     {
         id: 1,
-        audioPath: '/audio/doctor/doctor-01.mp3',
+        audioPath: '/audio/sentences/doctor/doctor-01.mp3',
         sentence: "I need to make an appointment for next week",
         options: [
           "I need to make an appointment for next week",
@@ -14,7 +14,7 @@ export const doctorExercises = {
     },
     {
         id: 2,
-        audioPath: '/audio/doctor/doctor-02.mp3',
+        audioPath: '/audio/sentences/doctor/doctor-02.mp3',
         sentence: "My back hurts when I bend down",
         options: [
           "My back hurts when I bend down",
@@ -25,7 +25,7 @@ export const doctorExercises = {
     },
     {
         id: 3,
-        audioPath: '/audio/doctor/doctor-03.mp3',
+        audioPath: '/audio/sentences/doctor/doctor-03.mp3',
         sentence: "The nurse took my temperature",
         options: [
           "The nurse took my temperature",
@@ -36,7 +36,7 @@ export const doctorExercises = {
     },
     {
         id: 4,
-        audioPath: '/audio/doctor/doctor-04.mp3',
+        audioPath: '/audio/sentences/doctor/doctor-04.mp3',
         sentence: "The doctor gave me a prescription",
         options: [
           "The doctor gave me a prescription",
@@ -47,7 +47,7 @@ export const doctorExercises = {
     },
     {
         id: 5,
-        audioPath: '/audio/doctor/doctor-05.mp3',
+        audioPath: '/audio/sentences/doctor/doctor-05.mp3',
         sentence: "I've had a sore throat for a few days",
         options: [
           "I've had a sore throat for a few days",
@@ -58,7 +58,7 @@ export const doctorExercises = {
     },
     {
         id: 6,
-        audioPath: '/audio/doctor/doctor-06.mp3',
+        audioPath: '/audio/sentences/doctor/doctor-06.mp3',
         sentence: "I'm starting to feel better now",
         options: [
           "I'm starting to feel better now",
@@ -69,7 +69,7 @@ export const doctorExercises = {
     },
     {
         id: 7,
-        audioPath: '/audio/doctor/doctor-07.mp3',
+        audioPath: '/audio/sentences/doctor/doctor-07.mp3',
         sentence: "The waiting room is really full today",
         options: [
           "The waiting room is really full today",
@@ -80,7 +80,7 @@ export const doctorExercises = {
     },
     {
         id: 8,
-        audioPath: '/audio/doctor/doctor-08.mp3',
+        audioPath: '/audio/sentences/doctor/doctor-08.mp3',
         sentence: "She asked about my allergies",
         options: [
           "She asked about my allergies",
@@ -91,7 +91,7 @@ export const doctorExercises = {
     },
     {
         id: 9,
-        audioPath: '/audio/doctor/doctor-09.mp3',
+        audioPath: '/audio/sentences/doctor/doctor-09.mp3',
         sentence: "You'll need to schedule a follow-up visit",
         options: [
           "You'll need to schedule a follow-up visit",
@@ -102,7 +102,7 @@ export const doctorExercises = {
     },
     {
         id: 10,
-        audioPath: '/audio/doctor/doctor-10.mp3',
+        audioPath: '/audio/sentences/doctor/doctor-10.mp3',
         sentence: "I'm here for my annual check-up",
         options: [
           "I'm here for my annual check-up",
@@ -113,7 +113,7 @@ export const doctorExercises = {
     },
     {
         id: 11,
-        audioPath: '/audio/doctor/doctor-11.mp3',
+        audioPath: '/audio/sentences/doctor/doctor-11.mp3',
         sentence: "Could you sit in that chair, please?",
         options: [
           "Could you sit in that chair, please?",
@@ -124,7 +124,7 @@ export const doctorExercises = {
     },
     {
         id: 12,
-        audioPath: '/audio/doctor/doctor-12.mp3',
+        audioPath: '/audio/sentences/doctor/doctor-12.mp3',
         sentence: "Do you need anything for the pain?",
         options: [
           "Do you need anything for the pain?",
@@ -135,7 +135,7 @@ export const doctorExercises = {
     },
     {
         id: 13,
-        audioPath: '/audio/doctor/doctor-13.mp3',
+        audioPath: '/audio/sentences/doctor/doctor-13.mp3',
         sentence: "The doctor said to drink more water",
         options: [
           "The doctor said to drink more water",
@@ -146,7 +146,7 @@ export const doctorExercises = {
     },
     {
         id: 14,
-        audioPath: '/audio/doctor/doctor-14.mp3',
+        audioPath: '/audio/sentences/doctor/doctor-14.mp3',
         sentence: "She wants to see you again next week",
         options: [
           "She wants to see you again next week",
@@ -157,7 +157,7 @@ export const doctorExercises = {
     },
     {
         id: 15,
-        audioPath: '/audio/doctor/doctor-15.mp3',
+        audioPath: '/audio/sentences/doctor/doctor-15.mp3',
         sentence: "I'm allergic to penicillin",
         options: [
           "I'm allergic to penicillin",
@@ -168,7 +168,7 @@ export const doctorExercises = {
     },
     {
         id: 16,
-        audioPath: '/audio/doctor/doctor-16.mp3',
+        audioPath: '/audio/sentences/doctor/doctor-16.mp3',
         sentence: "The exam went well today",
         options: [
           "The exam went well today",
@@ -179,7 +179,7 @@ export const doctorExercises = {
     },
     {
         id: 17,
-        audioPath: '/audio/doctor/doctor-17.mp3',
+        audioPath: '/audio/sentences/doctor/doctor-17.mp3',
         sentence: "The nurse checked my blood pressure",
         options: [
           "The nurse checked my blood pressure",
@@ -190,7 +190,7 @@ export const doctorExercises = {
     },
     {
         id: 18,
-        audioPath: '/audio/doctor/doctor-18.mp3',
+        audioPath: '/audio/sentences/doctor/doctor-18.mp3',
         sentence: "The medicine should help you feel better",
         options: [
           "The medicine should help you feel better",
@@ -201,7 +201,7 @@ export const doctorExercises = {
     },
     {
         id: 19,
-        audioPath: '/audio/doctor/doctor-19.mp3',
+        audioPath: '/audio/sentences/doctor/doctor-19.mp3',
         sentence: "I don't have a fever right now",
         options: [
           "I don't have a fever right now",
@@ -212,7 +212,7 @@ export const doctorExercises = {
     },
     {
         id: 20,
-        audioPath: '/audio/doctor/doctor-20.mp3',
+        audioPath: '/audio/sentences/doctor/doctor-20.mp3',
         sentence: "My throat still feels a little sore",
         options: [
           "My throat still feels a little sore",
