@@ -260,6 +260,12 @@ function goHome() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    //updateScoreDisplay();
-    loadCategoryData(category);
+    if (exerciseType === 'word') {
+        loadCategoryData();  // No category needed for word exercises
+    } else if (category) {
+        loadCategoryData(category);
+    } else {
+        console.error("No valid exercise type or category specified");
+        goHome();
+    }
 });
