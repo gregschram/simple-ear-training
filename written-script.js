@@ -164,5 +164,3 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById("category-title").textContent = `Category: ${category.charAt(0).toUpperCase() + category.slice(1)}`;
     loadCategoryData(category);
 });
-    loadCategoryData(category);
-});
