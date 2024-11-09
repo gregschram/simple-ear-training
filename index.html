@@ -10,8 +10,30 @@
     <div class="container">
         <h1>Ear Training Exercises</h1>
         <div class="exercise-choices">
+            <!-- Sentence exercises -->
             <button class="start-exercise" onclick="startSpokenExercise()">Identify the Spoken Sentence</button>
             <button class="start-exercise" onclick="startWrittenExercise()">Identify the Written Sentence</button>
+            
+            <!-- Word exercises with sub-menus -->
+            <div class="exercise-group">
+                <button class="start-exercise" onclick="toggleWordOptions('spoken')">Identify the Spoken Word</button>
+                <div id="spoken-word-options" class="word-options" style="display: none;">
+                    <button class="sub-option" onclick="startWordExercise('spoken', 'all')">All Words</button>
+                    <button class="sub-option" onclick="startWordExercise('spoken', 'one')">One Syllable</button>
+                    <button class="sub-option" onclick="startWordExercise('spoken', 'two')">Two Syllables</button>
+                    <button class="sub-option" onclick="startWordExercise('spoken', 'three')">Three Syllables</button>
+                </div>
+            </div>
+
+            <div class="exercise-group">
+                <button class="start-exercise" onclick="toggleWordOptions('written')">Identify the Written Word</button>
+                <div id="written-word-options" class="word-options" style="display: none;">
+                    <button class="sub-option" onclick="startWordExercise('written', 'all')">All Words</button>
+                    <button class="sub-option" onclick="startWordExercise('written', 'one')">One Syllable</button>
+                    <button class="sub-option" onclick="startWordExercise('written', 'two')">Two Syllables</button>
+                    <button class="sub-option" onclick="startWordExercise('written', 'three')">Three Syllables</button>
+                </div>
+            </div>
         </div>
     </div>
     <script>
@@ -25,6 +47,24 @@
         function startWrittenExercise() {
             const selectedCategory = categories[Math.floor(Math.random() * categories.length)];
             window.location.href = `written-exercise.html?category=${selectedCategory}`;
+        }
+
+        function toggleWordOptions(type) {
+            const optionsDiv = document.getElementById(`${type}-word-options`);
+            const currentDisplay = optionsDiv.style.display;
+            
+            // Hide all options first
+            document.querySelectorAll('.word-options').forEach(div => {
+                div.style.display = 'none';
+            });
+            
+            // Toggle the clicked one
+            optionsDiv.style.display = currentDisplay === 'none' ? 'flex' : 'none';
+        }
+
+        function startWordExercise(type, syllables) {
+            const page = type === 'spoken' ? 'spoken-exercise' : 'written-exercise';
+            window.location.href = `${page}.html?type=word&syllables=${syllables}`;
         }
     </script>
 </body>
