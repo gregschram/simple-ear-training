@@ -45,69 +45,65 @@ async function loadCategoryData(category) {
 
 function loadRound() {
     attemptsInCurrentRound = 0;
-    audioSpeed = isSlowSpeed ? 0.65 : 1.0;
     audio.playbackRate = audioSpeed;
-    document.getElementById("toggle-speed").checked = isSlowSpeed; 
+    document.getElementById("toggle-speed").checked = isSlowSpeed;
+    
     const round = roundData[currentRound];
-
-    // Show loading message
+    
+    // Reset UI elements
     document.getElementById("feedback").textContent = "Loading audio...";
-    
-    // Preload audio for this round
-    const preloadPromise = new Promise((resolve, reject) => {
-        audio.addEventListener('canplaythrough', () => resolve(), { once: true });
-        audio.addEventListener('error', reject);
-        audio.src = round.audioPath;
-    });
-
-    preloadPromise.then(() => {
-        document.getElementById("feedback").textContent = "";
-        if (currentRound === 0) {
-            setTimeout(() => audio.play(), 750);
-        }
-    }).catch(error => {
-        console.error("Error loading audio:", error);
-        document.getElementById("feedback").textContent = "Error loading audio. Please try again.";
-    });
-    
-    console.log("Current round data:", round);  // Log the round data
-    console.log("Audio path being used:", round.audioPath);  // Log the exact path
-    
-    audio.src = round.audioPath;
-    
-    // Add error handling
-    audio.onerror = (e) => {
-        console.error("Audio loading error:", e);
-        console.error("Failed path:", audio.src);
-    };
-    
-    audio.onloadeddata = () => {
-        console.log("Audio loaded successfully for path:", audio.src);
-        if (currentRound === 0) {
-            setTimeout(() => audio.play(), 750);
-        }
-    };
-
-    document.getElementById("feedback").textContent = "";
     document.getElementById("feedback").className = "";
     document.getElementById("next-button").style.display = "none";
     document.getElementById("round-tracker").textContent = `Round ${currentRound + 1}/${totalRounds}`;
     
-    const choicesContainer = document.getElementById("choices");
-    choicesContainer.innerHTML = "";
-    
-    const shuffledOptions = [...round.options]
-        .sort(() => Math.random() - 0.5);
-    
-    const correctIndex = shuffledOptions.indexOf(round.sentence);
-    
-    shuffledOptions.forEach((option, index) => {
-        const button = document.createElement("button");
-        button.textContent = option;
-        button.className = "choice";
-        button.onclick = () => checkAnswer(button, index === correctIndex);
-        choicesContainer.appendChild(button);
+    // Debug log
+    console.log("Attempting to load audio from path:", round.audioPath);
+
+    // Preload audio for this round
+    const preloadPromise = new Promise((resolve, reject) => {
+        audio.addEventListener('canplaythrough', () => {
+            console.log(`Successfully loaded audio: ${round.audioPath}`);
+            resolve();
+        }, { once: true });
+        
+        audio.addEventListener('error', (e) => {
+            console.error(`Failed to load audio ${round.audioPath}:`, e);
+            reject(`Failed to load ${round.audioPath}`);
+        }, { once: true });
+
+        // Ensure path starts with leading slash
+        audio.src = round.audioPath.startsWith('/') ? round.audioPath : `/${round.audioPath}`;
     });
+
+    preloadPromise
+        .then(() => {
+            console.log("Audio file loaded successfully");
+            document.getElementById("feedback").textContent = "";
+            if (currentRound === 0) {
+                setTimeout(() => audio.play(), 750);
+            }
+            
+            // Create choices after audio is loaded
+            const choicesContainer = document.getElementById("choices");
+            choicesContainer.innerHTML = "";
+            
+            const shuffledOptions = [...round.options]
+                .sort(() => Math.random() - 0.5);
+            
+            const correctIndex = shuffledOptions.indexOf(round.sentence);
+            
+            shuffledOptions.forEach((option, index) => {
+                const button = document.createElement("button");
+                button.textContent = option;
+                button.className = "choice";
+                button.onclick = () => checkAnswer(button, index === correctIndex);
+                choicesContainer.appendChild(button);
+            });
+        })
+        .catch(error => {
+            console.error("Error in audio preload:", error);
+            document.getElementById("feedback").textContent = "Error loading audio. Please try again.";
+        });
 }
 
 function checkAnswer(button, isCorrect) {
