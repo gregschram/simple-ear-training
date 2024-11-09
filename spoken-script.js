@@ -30,6 +30,13 @@ document.getElementById("category-title").textContent = `Category: ${category.ch
 
 const exerciseType = urlParams.get('type');
 
+//Instructions for Spoken Word game specifically
+if (exerciseType === 'word') {
+    document.getElementById("exercise-title").textContent = "Identify the Spoken Word";
+    document.getElementById("category-title").style.display = 'none';
+    document.querySelector(".instruction-text").textContent = "Press the word that matches what you hear. Press \"Play Sound\" to listen again.";
+}
+
 if (exerciseType === 'word') {
     document.querySelectorAll('.play-sound, .choice').forEach(button => {
         button.style.backgroundColor = '#7952b3';
