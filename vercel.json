@@ -5,6 +5,10 @@
  "version": 2,
   "builds": [
     {
+      "src": "generate-audio-list.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "**/*",
       "use": "@vercel/static"
     }
