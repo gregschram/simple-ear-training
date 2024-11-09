@@ -59,31 +59,41 @@ async function loadCategoryData(category) {
             let wordBank = await import('./word-banks.js');
             let audioFilesList = await import('./audio-files.js');
             
-           // Convert syllables parameter to folder name
-            const folderName = syllables === 'all' ? 
-                ['one-syllable', 'two-syllable', 'three-syllable'][Math.floor(Math.random() * 3)] : 
-                `${syllables}-syllable`;
-            
-            // Get actual available audio files for this syllable count
-            let availableWords = audioFilesList.audioFiles[folderName];
-            // Get wrong answer options from word bank
-            let wrongAnswerBank = wordBank.wordBanks[syllables === 'all' ? 
-                folderName.split('-')[0] : syllables].words;
-            
-            
-            // For this version, we'll use the word bank to simulate the available audio files
-            // Later we can update this to match your actual audio files
-               roundData = availableWords.map(word => ({
-                audioPath: `/audio/words/${folderName}/${word}.mp3`,
-                sentence: word,
-                options: [
-                    word,
-                    ...wrongAnswerBank
-                        .filter(w => w !== word)
-                        .sort(() => Math.random() - 0.5)
-                        .slice(0, 3)
-                ]
-            }));
+            let availableWords;
+            let getSyllableType;
+
+            if (syllables === 'all') {
+                // Combine all syllable types, but keep track of which type each word is
+                availableWords = [
+                    ...audioFilesList.audioFiles['one-syllable'].map(word => ({ word, type: 'one' })),
+                    ...audioFilesList.audioFiles['two-syllable'].map(word => ({ word, type: 'two' })),
+                    ...audioFilesList.audioFiles['three-syllable'].map(word => ({ word, type: 'three' }))
+                ];
+                getSyllableType = (word) => availableWords.find(w => w.word === word)?.type;
+            } else {
+                const folderName = `${syllables}-syllable`;
+                availableWords = audioFilesList.audioFiles[folderName].map(word => ({ word, type: syllables }));
+                getSyllableType = () => syllables;
+            }
+
+            // Create round data using actual audio files
+            roundData = availableWords.map(({ word, type }) => {
+                const folderName = `${type}-syllable`;
+                // Get wrong answers from the same syllable type
+                const wrongAnswerPool = wordBank.wordBanks[type].words;
+
+                return {
+                    audioPath: `/audio/words/${folderName}/${word}.mp3`,
+                    sentence: word,
+                    options: [
+                        word,
+                        ...wrongAnswerPool
+                            .filter(w => w !== word)
+                            .sort(() => Math.random() - 0.5)
+                            .slice(0, 3)
+                    ]
+                };
+            });
             
             // Randomize and take 10 rounds
             roundData = roundData.sort(() => 0.5 - Math.random()).slice(0, totalRounds);
