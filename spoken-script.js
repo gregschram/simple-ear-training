@@ -57,24 +57,28 @@ async function loadCategoryData(category) {
         if (exerciseType === 'word') {
             const syllables = urlParams.get('syllables');
             let wordBank = await import('./word-banks.js');
+            let audioFilesList = await import('./audio-files.js');
             
-            // Convert syllables parameter to folder name
+           // Convert syllables parameter to folder name
             const folderName = syllables === 'all' ? 
                 ['one-syllable', 'two-syllable', 'three-syllable'][Math.floor(Math.random() * 3)] : 
                 `${syllables}-syllable`;
             
-            // Create a data structure similar to sentence exercises
-            let currentWords = wordBank.wordBanks[syllables === 'all' ? 
+            // Get actual available audio files for this syllable count
+            let availableWords = audioFilesList.audioFiles[folderName];
+            // Get wrong answer options from word bank
+            let wrongAnswerBank = wordBank.wordBanks[syllables === 'all' ? 
                 folderName.split('-')[0] : syllables].words;
+            
             
             // For this version, we'll use the word bank to simulate the available audio files
             // Later we can update this to match your actual audio files
-            roundData = currentWords.map(word => ({
+               roundData = availableWords.map(word => ({
                 audioPath: `/audio/words/${folderName}/${word}.mp3`,
                 sentence: word,
                 options: [
                     word,
-                    ...currentWords
+                    ...wrongAnswerBank
                         .filter(w => w !== word)
                         .sort(() => Math.random() - 0.5)
                         .slice(0, 3)
