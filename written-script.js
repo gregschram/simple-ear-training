@@ -21,6 +21,23 @@ const urlParams = new URLSearchParams(window.location.search);
 const category = urlParams.get('category');
 document.getElementById("category-title").textContent = `Category: ${category.charAt(0).toUpperCase() + category.slice(1)}`;
 
+const exerciseType = urlParams.get('type');
+
+if (exerciseType === 'word') {
+    document.querySelectorAll('.play-audio-button, .choice').forEach(button => {
+        button.style.backgroundColor = '#7952b3';
+    });
+    
+    // Update hover state via CSS
+    const style = document.createElement('style');
+    style.textContent = `
+        .play-audio-button:hover, .choice:hover { background-color: #563d7c !important; }
+        .choice.correct { background-color: #4CAF50 !important; }
+        .choice.incorrect { background-color: #F44336 !important; }
+    `;
+    document.head.appendChild(style);
+}
+
 async function loadCategoryData(category) {
     try {
         let module = await import(`./spoken-sentence/${category}.js`);
