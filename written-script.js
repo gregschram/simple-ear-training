@@ -159,5 +159,10 @@ function goHome() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const category = urlParams.get('category');
+    document.getElementById("category-title").textContent = `Category: ${category.charAt(0).toUpperCase() + category.slice(1)}`;
+    loadCategoryData(category);
+});
     loadCategoryData(category);
 });
