@@ -47,16 +47,68 @@ if (exerciseType === 'word') {
 
 async function loadCategoryData(category) {
     try {
-        let module = await import(`./spoken-sentence/${category}.js`);
-        roundData = module[`${category}Exercises`].sentences;
-        // This way it automatically matches: groceryExercises, doctorExercises, etc.
-        
-        roundData = roundData.sort(() => 0.5 - Math.random()).slice(0, totalRounds);
-        loadRound();
+        if (exerciseType === 'word') {
+            const syllables = urlParams.get('syllables');
+            let wordBank = await import('./word-banks.js');
+            
+            // Get the list of audio files for the selected syllable count
+            // You'll need to implement this function based on your file structure
+            const audioFiles = await getAudioFileList(syllables);
+            
+            // Create round data using audio files and word bank
+            roundData = audioFiles.map(file => {
+                const word = file.replace('.mp3', '');
+                let options = [word];
+                
+                // Get three random words from word bank for wrong answers
+                const availableWords = wordBank.wordBanks[syllables === 'all' ? 
+                    ['one', 'two', 'three'][Math.floor(Math.random() * 3)] : 
+                    syllables].words.filter(w => w !== word);
+                
+                while (options.length < 4) {
+                    const randomWord = availableWords[Math.floor(Math.random() * availableWords.length)];
+                    if (!options.includes(randomWord)) {
+                        options.push(randomWord);
+                    }
+                }
+                
+                return {
+                    audioPath: `/audio/words/${syllables}/${file}`,
+                    sentence: word,
+                    options: options.sort(() => Math.random() - 0.5)
+                };
+            });
+            
+            roundData = roundData.sort(() => 0.5 - Math.random()).slice(0, totalRounds);
+            loadRound();
+            
+        } else {
+            let module = await import(`./spoken-sentence/${category}.js`);
+            roundData = module[`${category}Exercises`].sentences;
+            roundData = roundData.sort(() => 0.5 - Math.random()).slice(0, totalRounds);
+            loadRound();
+        }
     } catch (error) {
         console.error("Error loading category data:", error);
         alert("Failed to load the selected category.");
         goHome();
+    }
+}
+
+// Add this function after loadCategoryData
+async function getAudioFileList(syllables) {
+    // For now, return a simulated list - you'll need to implement this
+    // based on how you want to access your audio files
+    // This should return an array of filenames like ['word1.mp3', 'word2.mp3', etc]
+    
+    // Example implementation:
+    try {
+        const response = await fetch(`/api/audio-files?syllables=${syllables}`);
+        if (!response.ok) throw new Error('Failed to fetch audio files');
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching audio files:', error);
+        return [];
     }
 }
 
