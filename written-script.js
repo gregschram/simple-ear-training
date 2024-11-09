@@ -23,6 +23,13 @@ document.getElementById("category-title").textContent = `Category: ${category.ch
 
 const exerciseType = urlParams.get('type');
 
+// Instructions for Written Word game
+if (exerciseType === 'word') {
+    document.getElementById("exercise-title").textContent = "Identify the Written Word";
+    document.getElementById("category-title").style.display = 'none';
+    document.querySelector(".instruction-text").textContent = "Play each audio clip ▶️, then pick the clip that matches the word below.";
+}
+
 if (exerciseType === 'word') {
     document.querySelectorAll('.play-audio-button, .choice').forEach(button => {
         button.style.backgroundColor = '#7952b3';
