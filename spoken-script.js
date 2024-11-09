@@ -49,6 +49,26 @@ function loadRound() {
     audio.playbackRate = audioSpeed;
     document.getElementById("toggle-speed").checked = isSlowSpeed; 
     const round = roundData[currentRound];
+
+    // Show loading message
+    document.getElementById("feedback").textContent = "Loading audio...";
+    
+    // Preload audio for this round
+    const preloadPromise = new Promise((resolve, reject) => {
+        audio.addEventListener('canplaythrough', () => resolve(), { once: true });
+        audio.addEventListener('error', reject);
+        audio.src = round.audioPath;
+    });
+
+    preloadPromise.then(() => {
+        document.getElementById("feedback").textContent = "";
+        if (currentRound === 0) {
+            setTimeout(() => audio.play(), 750);
+        }
+    }).catch(error => {
+        console.error("Error loading audio:", error);
+        document.getElementById("feedback").textContent = "Error loading audio. Please try again.";
+    });
     
     console.log("Current round data:", round);  // Log the round data
     console.log("Audio path being used:", round.audioPath);  // Log the exact path
