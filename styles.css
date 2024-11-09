@@ -255,8 +255,8 @@ h2, h3 {
 .play-audio-button {
     background-color: #0d6efd;
     color: #fff;
-    width: 40px;
-    height: 40px;
+    width: 48px;    /* Increased from 40px */
+    height: 48px;   /* Increased from 40px */
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -277,6 +277,8 @@ h2, h3 {
 .audio-choice-pair .choice {
     flex-grow: 1;
     margin: 0;
+    height: 40px;   /* Reduced from 45px */
+    font-size: 0.9em;  /* Slightly smaller font */
 }
 
 /* Add to existing mobile styles */
@@ -293,8 +295,8 @@ h2, h3 {
     }
 
     .play-audio-button {
-        width: 35px;
-        height: 35px;
+        width: 42px;    /* Slightly smaller on mobile but still bigger than original */
+        height: 42px;
         font-size: 1.1em;
     }
 }
