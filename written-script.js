@@ -50,22 +50,26 @@ async function loadCategoryData(category) {
         if (exerciseType === 'word') {
             const syllables = urlParams.get('syllables');
             let wordBank = await import('./word-banks.js');
-            
+            let audioFilesList = await import('./audio-files.js');
+
             // Convert syllables parameter to folder name
             const folderName = syllables === 'all' ? 
                 ['one-syllable', 'two-syllable', 'three-syllable'][Math.floor(Math.random() * 3)] : 
                 `${syllables}-syllable`;
             
-            // Create a data structure similar to sentence exercises
-            let currentWords = wordBank.wordBanks[syllables === 'all' ? 
+            // Get actual available audio files for this syllable count
+            let availableWords = audioFilesList.audioFiles[folderName];
+            // Get wrong answer options from word bank
+            let wrongAnswerBank = wordBank.wordBanks[syllables === 'all' ? 
                 folderName.split('-')[0] : syllables].words;
             
-            roundData = currentWords.map(word => ({
+            // Create round data using actual audio files
+            roundData = availableWords.map(word => ({
                 audioPath: `/audio/words/${folderName}/${word}.mp3`,
                 sentence: word,
                 options: [
                     word,
-                    ...currentWords
+                    ...wrongAnswerBank
                         .filter(w => w !== word)
                         .sort(() => Math.random() - 0.5)
                         .slice(0, 3)
@@ -74,14 +78,9 @@ async function loadCategoryData(category) {
             
             // Randomize and take 10 rounds
             roundData = roundData.sort(() => 0.5 - Math.random()).slice(0, totalRounds);
+            // Randomize options for each round
             roundData.forEach(round => {
-                // For written exercise, create the multiple choice with 4 different audio files
-                const otherOptions = roundData
-                    .filter(r => r !== round)
-                    .sort(() => Math.random() - 0.5)
-                    .slice(0, 3);
-                
-                round.options = [round, ...otherOptions].sort(() => Math.random() - 0.5);
+                round.options = round.options.sort(() => Math.random() - 0.5);
             });
             
             loadRound();
