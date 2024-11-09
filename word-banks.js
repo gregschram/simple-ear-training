@@ -17,11 +17,11 @@ export const wordBanks = {
             "rail", "rat", "reed", "rice", "road", "roof", "rose", "rust", "sage", "sail",
             "sand", "saw", "scale", "scarf", "scene", "seal", "seed", "shark", "sheep", "shell",
             "shield", "shore", "shrimp", "sign", "silk", "sink", "size", "skate", "smell", "smile", "spruce",
-            "soap", "sock", "soil", "soup", "spade", "spark", "spice", "spine", "sponge", "spoon", "spring",
+            "soap", "sock", "soil", "soup", "spade", "spark", "spice", "spine", "sponge", "spoon",
             "spring", "square", "squash", "stain", "stamp", "steam", "steel", "stem", "stick", "storm",
             "straw", "stream", "street", "string", "swan", "sweep", "sweet", "swim", "swing", "sword",
             "tale", "tank", "tape", "tea", "teeth", "theme", "thief", "thread", "thumb", "tide", "yacht", 
-            "warmth", "wasp", "wedge", "whale", "youth", "zeal",
+            "warmth", "wasp", "wedge", "whale", "youth", "zeal"
         ]
     },
     "two": {
@@ -35,7 +35,7 @@ export const wordBanks = {
             "lion", "little", "lotus", "magic", "maple", "marble", "melon", "mirror", "needle", "ocean", 
             "olive", "orange", "oyster", "palace", "panel", "parrot", "peanut", "pebble", "pepper", 
             "pickle", "pigeon", "pizza", "planet", "pocket", "portal", "puppy", "rabbit", "rainbow", 
-            "razor", "rescue", "ribbon", "running", "saddle", "sailor", "season", "silver", "simple", "spider"
+            "razor", "rescue", "ribbon", "running", "saddle", "sailor", "season", "silver", "simple", "spider",
             "spirit", "stable", "station", "statue", "sunset", "symbol", "syrup", "tackle",
             "tailor", "talent", "target", "teacup", "temple", "theory", "thimble", "thistle", "tidal", "tiger",
             "timid", "tinsel", "token", "topaz", "topic", "tower", "traffic", "treasure", "treaty", "tribal",
