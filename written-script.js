@@ -40,10 +40,50 @@ if (exerciseType === 'word') {
 
 async function loadCategoryData(category) {
     try {
-        let module = await import(`./spoken-sentence/${category}.js`);
-        roundData = module[`${category}Exercises`].sentences;
-        roundData = roundData.sort(() => 0.5 - Math.random()).slice(0, totalRounds);
-        loadRound();
+        if (exerciseType === 'word') {
+            const syllables = urlParams.get('syllables');
+            let wordBank = await import('./word-banks.js');
+            
+            // Convert syllables parameter to folder name
+            const folderName = syllables === 'all' ? 
+                ['one-syllable', 'two-syllable', 'three-syllable'][Math.floor(Math.random() * 3)] : 
+                `${syllables}-syllable`;
+            
+            // Create a data structure similar to sentence exercises
+            let currentWords = wordBank.wordBanks[syllables === 'all' ? 
+                folderName.split('-')[0] : syllables].words;
+            
+            roundData = currentWords.map(word => ({
+                audioPath: `/audio/words/${folderName}/${word}.mp3`,
+                sentence: word,
+                options: [
+                    word,
+                    ...currentWords
+                        .filter(w => w !== word)
+                        .sort(() => Math.random() - 0.5)
+                        .slice(0, 3)
+                ]
+            }));
+            
+            // Randomize and take 10 rounds
+            roundData = roundData.sort(() => 0.5 - Math.random()).slice(0, totalRounds);
+            roundData.forEach(round => {
+                // For written exercise, create the multiple choice with 4 different audio files
+                const otherOptions = roundData
+                    .filter(r => r !== round)
+                    .sort(() => Math.random() - 0.5)
+                    .slice(0, 3);
+                
+                round.options = [round, ...otherOptions].sort(() => Math.random() - 0.5);
+            });
+            
+            loadRound();
+        } else {
+            let module = await import(`./spoken-sentence/${category}.js`);
+            roundData = module[`${category}Exercises`].sentences;
+            roundData = roundData.sort(() => 0.5 - Math.random()).slice(0, totalRounds);
+            loadRound();
+        }
     } catch (error) {
         console.error("Error loading category data:", error);
         alert("Failed to load the selected category.");
