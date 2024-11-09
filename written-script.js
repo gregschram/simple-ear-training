@@ -141,7 +141,7 @@ function showEndGame() {
     container.innerHTML = `
         <div class="end-game">
             <h2>Complete!</h2>
-            <p>⭐${firstTryCorrect}/10 correct on the first try! ⭐</p>
+            <p>⭐ ${firstTryCorrect}/10 correct on the first try! ⭐</p>
             <button onclick="window.location.reload()" class="choice">New Round</button>
             <button onclick="window.location.href='/index.html'" class="choice">Main Menu</button>
         </div>
@@ -150,6 +150,8 @@ function showEndGame() {
     document.getElementById("next-button").style.display = "none";
     document.querySelector(".instruction-text").style.display = "none";
     document.querySelector(".speed-checkbox").style.display = "none";
+    document.getElementById("written-prompt").style.display = "none";  // Add this line
+
 }
 
 document.getElementById("next-button").onclick = loadNextRound;
