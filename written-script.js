@@ -35,60 +35,80 @@ async function loadCategoryData(category) {
 }
 
 function loadRound() {
-    attemptsInCurrentRound = 0;
-    audio.playbackRate = audioSpeed;
-    document.getElementById("toggle-speed").checked = isSlowSpeed;
-    
-    const round = roundData[currentRound];
-    
-    // Display the written sentence prompt
-    document.getElementById("written-prompt").textContent = round.sentence;
-    
-    // Reset UI elements
-    document.getElementById("feedback").textContent = "";
-    document.getElementById("feedback").className = "";
-    document.getElementById("next-button").style.display = "none";
-    document.getElementById("round-tracker").textContent = `Round ${currentRound + 1}/${totalRounds}`;
-    
-    // Create four audio-button pairs
-    const choicesContainer = document.getElementById("choices");
-    choicesContainer.innerHTML = "";
-    
-    // Get 3 random different audio paths from roundData
-    const otherOptions = roundData
-        .filter(r => r !== round)  // Exclude current round
-        .sort(() => 0.5 - Math.random())
-        .slice(0, 3);
-    
-    // Combine correct option with random ones and shuffle
-    const allOptions = [round, ...otherOptions]
-        .sort(() => 0.5 - Math.random());
-    
-    // Create audio-button pairs
-    allOptions.forEach((option, index) => {
-        const pairContainer = document.createElement("div");
-        pairContainer.className = "audio-choice-pair";
-        
-        // Create play button
-        const playButton = document.createElement("button");
-        playButton.className = "play-audio-button";
-        playButton.textContent = "▶";
-        playButton.onclick = () => {
-            audio.src = option.audioPath;
-            audio.playbackRate = isSlowSpeed ? 0.65 : 1.0;
-            audio.play().catch(error => console.log("Audio play error:", error));
-        };
-        
-        // Create answer button
-        const answerButton = document.createElement("button");
-        answerButton.className = "choice";
-        answerButton.textContent = `Audio ${index + 1}`;
-        answerButton.onclick = () => checkAnswer(answerButton, option === round);
-        
-        pairContainer.appendChild(playButton);
-        pairContainer.appendChild(answerButton);
-        choicesContainer.appendChild(pairContainer);
-    });
+   attemptsInCurrentRound = 0;
+   audio.playbackRate = audioSpeed;
+   document.getElementById("toggle-speed").checked = isSlowSpeed;
+   
+   const round = roundData[currentRound];
+   
+   // Display the written sentence prompt
+   document.getElementById("written-prompt").textContent = round.sentence;
+   
+   // Reset UI elements
+   document.getElementById("feedback").textContent = "Loading audio...";
+   document.getElementById("feedback").className = "";
+   document.getElementById("next-button").style.display = "none";
+   document.getElementById("round-tracker").textContent = `Round ${currentRound + 1}/${totalRounds}`;
+   
+   // Get 3 random different audio paths from roundData
+   const otherOptions = roundData
+       .filter(r => r !== round)
+       .sort(() => 0.5 - Math.random())
+       .slice(0, 3);
+   
+   // Combine correct option with random ones and shuffle
+   const allOptions = [round, ...otherOptions]
+       .sort(() => 0.5 - Math.random());
+
+   // Preload all audio files for this round
+   const preloadPromises = allOptions.map(option => {
+       return new Promise((resolve, reject) => {
+           const tempAudio = new Audio();
+           tempAudio.addEventListener('canplaythrough', () => resolve(), { once: true });
+           tempAudio.addEventListener('error', reject);
+           tempAudio.src = option.audioPath;
+       });
+   });
+
+   Promise.all(preloadPromises)
+       .then(() => {
+           // Clear loading message
+           document.getElementById("feedback").textContent = "";
+           
+           // Create four audio-button pairs
+           const choicesContainer = document.getElementById("choices");
+           choicesContainer.innerHTML = "";
+           
+           // Create audio-button pairs
+           allOptions.forEach((option, index) => {
+               const pairContainer = document.createElement("div");
+               pairContainer.className = "audio-choice-pair";
+               
+               // Create play button
+               const playButton = document.createElement("button");
+               playButton.className = "play-audio-button";
+               playButton.textContent = "▶";
+               playButton.onclick = () => {
+                   audio.src = option.audioPath;
+                   audio.playbackRate = isSlowSpeed ? 0.65 : 1.0;
+                   audio.play().catch(error => console.log("Audio play error:", error));
+               };
+               
+               // Create answer button
+               const answerButton = document.createElement("button");
+               answerButton.className = "choice";
+               answerButton.textContent = `Audio ${index + 1}`;
+               answerButton.onclick = () => checkAnswer(answerButton, option === round);
+               
+               pairContainer.appendChild(playButton);
+               pairContainer.appendChild(answerButton);
+               choicesContainer.appendChild(pairContainer);
+           });
+       })
+       .catch(error => {
+           console.error("Error loading audio:", error);
+           document.getElementById("feedback").textContent = "Error loading audio. Please try again.";
+       });
 }
 
 function checkAnswer(button, isCorrect) {
