@@ -21,19 +21,13 @@ const urlParams = new URLSearchParams(window.location.search);
 const exerciseType = urlParams.get('type');
 const category = urlParams.get('category');
 
+// Instructions for Written Word game
 if (exerciseType === 'word') {
     document.getElementById("exercise-title").textContent = "Identify the Written Word";
     document.getElementById("category-title").style.display = 'none';
     document.querySelector(".instruction-text").textContent = "Play each audio clip ▶️, then pick the clip that matches the word below.";
 } else if (category) {
     document.getElementById("category-title").textContent = `Category: ${category.charAt(0).toUpperCase() + category.slice(1)}`;
-}
-
-// Instructions for Written Word game
-if (exerciseType === 'word') {
-    document.getElementById("exercise-title").textContent = "Identify the Written Word";
-    document.getElementById("category-title").style.display = 'none';
-    document.querySelector(".instruction-text").textContent = "Play each audio clip ▶️, then pick the clip that matches the word below.";
 }
 
 if (exerciseType === 'word') {
