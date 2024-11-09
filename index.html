@@ -10,34 +10,30 @@
     <div class="container">
         <h1>Ear Training Exercises</h1>
         <div class="exercise-choices">
-            <!-- Sentence exercises -->
             <button class="start-exercise" onclick="startSpokenExercise()">Identify the Spoken Sentence</button>
             <button class="start-exercise" onclick="startWrittenExercise()">Identify the Written Sentence</button>
-            
-            <!-- Word exercises with sub-menus -->
-            <div class="exercise-group">
-                <button class="start-exercise" onclick="toggleWordOptions('spoken')">Identify the Spoken Word</button>
-                <div id="spoken-word-options" class="word-options" style="display: none;">
-                    <button class="sub-option" onclick="startWordExercise('spoken', 'all')">All Words</button>
-                    <button class="sub-option" onclick="startWordExercise('spoken', 'one')">One Syllable</button>
-                    <button class="sub-option" onclick="startWordExercise('spoken', 'two')">Two Syllables</button>
-                    <button class="sub-option" onclick="startWordExercise('spoken', 'three')">Three Syllables</button>
-                </div>
-            </div>
+            <button class="start-exercise" onclick="showWordOptions('spoken')">Identify the Spoken Word</button>
+            <button class="start-exercise" onclick="showWordOptions('written')">Identify the Written Word</button>
+        </div>
+    </div>
 
-            <div class="exercise-group">
-                <button class="start-exercise" onclick="toggleWordOptions('written')">Identify the Written Word</button>
-                <div id="written-word-options" class="word-options" style="display: none;">
-                    <button class="sub-option" onclick="startWordExercise('written', 'all')">All Words</button>
-                    <button class="sub-option" onclick="startWordExercise('written', 'one')">One Syllable</button>
-                    <button class="sub-option" onclick="startWordExercise('written', 'two')">Two Syllables</button>
-                    <button class="sub-option" onclick="startWordExercise('written', 'three')">Three Syllables</button>
-                </div>
+    <!-- Modal for word options -->
+    <div id="word-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-button" onclick="hideModal()">×</button>
+            <h2 id="modal-title"></h2>
+            <div class="word-options">
+                <button class="sub-option" onclick="startWordExercise(currentType, 'all')">All Words</button>
+                <button class="sub-option" onclick="startWordExercise(currentType, 'one')">One Syllable</button>
+                <button class="sub-option" onclick="startWordExercise(currentType, 'two')">Two Syllables</button>
+                <button class="sub-option" onclick="startWordExercise(currentType, 'three')">Three Syllables</button>
             </div>
         </div>
     </div>
+
     <script>
         const categories = ["grocery", "doctor"];
+        let currentType = '';
         
         function startSpokenExercise() {
             const selectedCategory = categories[Math.floor(Math.random() * categories.length)];
@@ -49,23 +45,46 @@
             window.location.href = `written-exercise.html?category=${selectedCategory}`;
         }
 
-        function toggleWordOptions(type) {
-            const optionsDiv = document.getElementById(`${type}-word-options`);
-            const currentDisplay = optionsDiv.style.display;
-            
-            // Hide all options first
-            document.querySelectorAll('.word-options').forEach(div => {
-                div.style.display = 'none';
-            });
-            
-            // Toggle the clicked one
-            optionsDiv.style.display = currentDisplay === 'none' ? 'flex' : 'none';
+        function showWordOptions(type) {
+            currentType = type;
+            const modal = document.getElementById('word-modal');
+            const title = document.getElementById('modal-title');
+            title.textContent = `Identify the ${type.charAt(0).toUpperCase() + type.slice(1)} Word`;
+            modal.style.display = 'block';
+            // Trigger reflow before adding show class
+            modal.offsetHeight;
+            modal.classList.add('show');
+        }
+
+        function hideModal() {
+            const modal = document.getElementById('word-modal');
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 200); // Match transition duration
         }
 
         function startWordExercise(type, syllables) {
             const page = type === 'spoken' ? 'spoken-exercise' : 'written-exercise';
-            window.location.href = `${page}.html?type=word&syllables=${syllables}`;
+            hideModal();
+            setTimeout(() => {
+                window.location.href = `${page}.html?type=word&syllables=${syllables}`;
+            }, 200);
         }
+
+        // Close modal if clicking outside content
+        document.getElementById('word-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideModal();
+            }
+        });
+
+        // Close modal on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                hideModal();
+            }
+        });
     </script>
 </body>
 </html>
