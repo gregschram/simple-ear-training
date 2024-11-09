@@ -82,6 +82,22 @@ h2, h3 {
     background-color: #ffffff;
     color: #1a1a2e;
 }
+/* Add the new purple styles here */
+.start-exercise[onclick*="Word"] {
+    background-color: #7952b3;
+}
+
+.start-exercise[onclick*="Word"]:hover {
+    background-color: #563d7c;
+}
+
+.modal .sub-option {
+    background-color: #7952b3;
+}
+
+.modal .sub-option:hover {
+    background-color: #563d7c;
+}
 
 .exercise-group {
     width: 100%;
