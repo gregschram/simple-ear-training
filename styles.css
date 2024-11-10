@@ -602,7 +602,7 @@ h2, h3 {
 }
 
 .choice.correct {
-    animation: glowPulse 0.6s cubic-bezier(0.4, 0.0, 0.2, 1) !important;
+    animation: glowPulse 1.2s cubic-bezier(0.4, 0.0, 0.2, 1) !important;
     transform: scale(1) !important;
 }
 
