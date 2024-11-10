@@ -338,35 +338,28 @@ function createCelebration() {
 }
 
 function addSparkleEffect(container) {
-    function createSparkle() {
-        const sparkle = document.createElement('div');
-        sparkle.className = 'sparkle';
-        document.body.appendChild(sparkle);
-        
-        const sparkleEmoji = document.createElement('span');
-        sparkleEmoji.textContent = '✨';
-        sparkleEmoji.style.position = 'absolute';
-        
-        // Random size (3 distinct sizes)
-        const sizes = ['16px', '20px', '24px'];
-        const size = sizes[Math.floor(Math.random() * sizes.length)];
-        sparkleEmoji.style.fontSize = size;
-        
-        // Get viewport dimensions
-        const viewportWidth = window.innerWidth;
-        const viewportHeight = window.innerHeight;
-        
-        // Position within viewport with padding from edges
-        sparkleEmoji.style.left = (Math.random() * (viewportWidth - 40) + 20) + 'px';
-        sparkleEmoji.style.top = (Math.random() * (viewportHeight - 40) + 20) + 'px';
-        
-        sparkle.appendChild(sparkleEmoji);
-        
-        // Start fading in
-        sparkle.style.animation = 'sparkleWave 5s ease-in-out';
-        
-        // Remove after animation completes
-        setTimeout(() => sparkle.remove(), 5000);
+   function createSparkle() {
+       const sparkle = document.createElement('div');
+       sparkle.className = 'sparkle';
+       document.body.appendChild(sparkle);
+    
+       const sparkleEmoji = document.createElement('span');
+       sparkleEmoji.textContent = '✨';
+    
+       // Random size (3 distinct sizes)
+       const sizes = ['16px', '20px', '24px'];
+       const size = sizes[Math.floor(Math.random() * sizes.length)];
+       sparkleEmoji.style.fontSize = size;
+    
+       // Position within viewport with padding from edges
+       const viewportWidth = window.innerWidth;
+       const viewportHeight = window.innerHeight;
+       sparkleEmoji.style.left = (Math.random() * (viewportWidth - 40) + 20) + 'px';
+       sparkleEmoji.style.top = (Math.random() * (viewportHeight - 40) + 20) + 'px';
+    
+       sparkle.appendChild(sparkleEmoji);
+    
+       setTimeout(() => sparkle.remove(), 4000);
     }
 
     // Create initial set of sparkles
