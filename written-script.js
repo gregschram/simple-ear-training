@@ -109,6 +109,27 @@ async function loadCategoryData(category) {
     }
 }
 
+function preloadNextRound() {
+    if (currentRound + 1 < totalRounds) {
+        const nextRound = roundData[currentRound + 1];
+        const audioToPreload = new Audio();
+        audioToPreload.preload = "auto";
+        audioToPreload.src = nextRound.audioPath.startsWith('/') ? 
+            nextRound.audioPath : `/${nextRound.audioPath}`;
+        
+        // For written exercise, also preload the other options
+        if (nextRound.options) {
+            nextRound.options.forEach(option => {
+                if (option.audioPath) {
+                    const optionAudio = new Audio();
+                    optionAudio.preload = "auto";
+                    optionAudio.src = option.audioPath.startsWith('/') ? 
+                        option.audioPath : `/${option.audioPath}`;
+                }
+            });
+        }
+    }
+}
 function loadRound() {
     attemptsInCurrentRound = 0;
     audio.playbackRate = audioSpeed;
@@ -201,6 +222,7 @@ function loadRound() {
             console.error("Error in audio preload:", error);
             document.getElementById("feedback").textContent = "Error loading audio files. Please reload the page.";
         });
+    preloadNextRound();  // Add this line at the end
 }
 
 function checkAnswer(button, isCorrect) {
@@ -308,33 +330,28 @@ function createCelebration() {
 }
 
 function addSparkleEffect(container) {
+    console.log('Adding sparkle effect to:', container);
+    
     function animate() {
         const sparkle = document.createElement('div');
         sparkle.className = 'sparkle';
-        document.body.appendChild(sparkle);  // Append to body instead of container
+        container.appendChild(sparkle);
+        console.log('Created sparkle element');
         
         const sparkleEmoji = document.createElement('span');
         sparkleEmoji.textContent = '✨';
         sparkleEmoji.style.position = 'absolute';
         sparkleEmoji.style.fontSize = '20px';
-        // Random vertical position across whole screen
-        sparkleEmoji.style.top = Math.random() * 100 + 'vh';
+        sparkleEmoji.style.top = Math.random() * 100 + '%';
         sparkle.appendChild(sparkleEmoji);
         
-        sparkle.style.animation = 'sparkleWave 4s ease-in-out';
-        setTimeout(() => sparkle.remove(), 4000);
+        sparkle.style.animation = 'sparkleWave 3s ease-in-out';
+        setTimeout(() => sparkle.remove(), 3000);
     }
 
-    // Create multiple sparkles initially
-    for(let i = 0; i < 3; i++) {
-        setTimeout(() => animate(), i * 200);
-    }
-    
-    // Continue creating new sparkles
-    const interval = setInterval(() => {
-        animate();
-    }, 2000);
-
+    // Create initial sparkles
+    animate();
+    const interval = setInterval(animate, 2000);
     return () => clearInterval(interval);
 }
 
