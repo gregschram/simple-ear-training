@@ -644,15 +644,17 @@ h2, h3 {
 @keyframes sparkleWave {
     0% {
         opacity: 0;
+        transform: translateX(-30px);
     }
-    20% {
+    15% {
         opacity: 1;
     }
-    80% {
+    85% {
         opacity: 1;
     }
     100% {
         opacity: 0;
+        transform: translateX(30px);
     }
 }
 
@@ -660,9 +662,12 @@ h2, h3 {
     position: fixed;
     pointer-events: none;
     z-index: -1;
+    width: 100%;
+    height: 100%;
 }
 
 .sparkle span {
     display: block;
+    position: absolute;
+    animation: sparkleWave 4s ease-in-out;
 }
-
