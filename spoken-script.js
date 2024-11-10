@@ -116,6 +116,27 @@ async function loadCategoryData(category) {
     }
 }
 
+function preloadNextRound() {
+    if (currentRound + 1 < totalRounds) {
+        const nextRound = roundData[currentRound + 1];
+        const audioToPreload = new Audio();
+        audioToPreload.preload = "auto";
+        audioToPreload.src = nextRound.audioPath.startsWith('/') ? 
+            nextRound.audioPath : `/${nextRound.audioPath}`;
+        
+        // For written exercise, also preload the other options
+        if (nextRound.options) {
+            nextRound.options.forEach(option => {
+                if (option.audioPath) {
+                    const optionAudio = new Audio();
+                    optionAudio.preload = "auto";
+                    optionAudio.src = option.audioPath.startsWith('/') ? 
+                        option.audioPath : `/${option.audioPath}`;
+                }
+            });
+        }
+    }
+}
 
 function loadRound() {
     attemptsInCurrentRound = 0;
@@ -178,6 +199,7 @@ function loadRound() {
             console.error("Error in audio preload:", error);
             document.getElementById("feedback").textContent = "Error loading audio. Please try again.";
         });
+    preloadNextRound();
 }
 
 function checkAnswer(button, isCorrect) {
