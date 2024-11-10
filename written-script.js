@@ -218,6 +218,7 @@ function checkAnswer(button, isCorrect) {
         document.getElementById("feedback").className = "correct";
         document.getElementById("next-button").style.display = "inline-block";
         disableAllChoices();
+        createCelebration();  // Add celebration here
     } else {
         button.classList.add("incorrect");
         button.disabled = true;
@@ -303,12 +304,6 @@ function createCelebration() {
     }
     
     setTimeout(() => celebration.remove(), 1000);
-}
-
-// Add to correct answer section of checkAnswer:
-if (isCorrect) {
-    // ... existing correct answer code ...
-    createCelebration();
 }
 
 function goHome() {
