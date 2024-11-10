@@ -272,15 +272,13 @@ function showEndGame() {
         container.style.transition = 'opacity 0.3s, transform 0.3s';
     }, 300);
 
-}
-
     document.getElementById("feedback").textContent = "";
     document.getElementById("next-button").style.display = "none";
     document.getElementById("play-sound").style.display = "none";
     document.getElementById("toggle-speed").style.display = "none";
     document.querySelector(".instruction-text").style.display = "none";
     document.querySelector(".speed-checkbox").style.display = "none";
-}
+
 
 document.getElementById("next-button").onclick = loadNextRound;
 
