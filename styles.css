@@ -624,11 +624,15 @@ h2, h3 {
 }
 
 .sparkle {
-    position: absolute;
+    position: fixed;  /* Change from absolute to fixed */
     width: 20px;
     height: 20px;
     pointer-events: none;
     z-index: -1;
+    top: 0;  /* Add this */
+    left: 0;  /* Add this */
+    width: 100%;  /* Add this */
+    height: 100%;  /* Add this */
 }
 
 .sparkle::before {
@@ -643,16 +647,16 @@ h2, h3 {
 @keyframes sparkleWave {
     0% {
         opacity: 0;
-        transform: translateX(-120%);  /* Start off-screen */
+        transform: translateX(-120%);
     }
-    10% {
-        opacity: 1;
+    20% {
+        opacity: 0.8;  /* Fade in */
     }
-    90% {
-        opacity: 1;
+    80% {
+        opacity: 0.8;  /* Stay visible */
     }
     100% {
-        opacity: 0;
-        transform: translateX(120%);  /* End off-screen */
+        opacity: 0;    /* Fade out */
+        transform: translateX(120%);
     }
 }
