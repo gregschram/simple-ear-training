@@ -268,6 +268,37 @@ function showEndGame() {
 
 document.getElementById("next-button").onclick = loadNextRound;
 
+function createCelebration() {
+    const celebration = document.createElement('div');
+    celebration.className = 'celebration';
+    document.body.appendChild(celebration);
+    
+    // Create particles in a circular pattern
+    for (let i = 0; i < 20; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'celebration-particle';
+        
+        // Calculate position around the center
+        const angle = (i / 20) * Math.PI * 2;
+        const x = 50 + Math.cos(angle) * 30;
+        const y = 50 + Math.sin(angle) * 30;
+        
+        particle.style.left = `${x}%`;
+        particle.style.top = `${y}%`;
+        particle.style.backgroundColor = ['#4CAF50', '#2196F3', '#FFC107'][Math.floor(Math.random() * 3)];
+        
+        celebration.appendChild(particle);
+    }
+    
+    setTimeout(() => celebration.remove(), 1000);
+}
+
+// Add to correct answer section of checkAnswer:
+if (isCorrect) {
+    // ... existing correct answer code ...
+    createCelebration();
+}
+
 function goHome() {
     window.location.href = "/index.html";
 }
