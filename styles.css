@@ -644,31 +644,25 @@ h2, h3 {
 @keyframes sparkleWave {
     0% {
         opacity: 0;
-        transform: translateX(-50px);
     }
-    10% { /* lower number = slower fade in */
+    20% {
         opacity: 1;
     }
-    30% {
+    80% {
         opacity: 1;
     }
     100% {
         opacity: 0;
-        transform: translateX(50px);
     }
 }
 
 .sparkle {
-    position: fixed;  /* Change to fixed to cover entire viewport */
-    width: 20px;
-    height: 20px;
+    position: fixed;
     pointer-events: none;
     z-index: -1;
 }
 
-.sparkle::before {
-    content: '✨';
-    position: absolute;
+.sparkle span {
     display: block;
 }
 
