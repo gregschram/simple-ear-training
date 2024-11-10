@@ -229,6 +229,28 @@ function createCelebration() {
     setTimeout(() => celebration.remove(), 1000);
 }
 
+function addSparkleEffect(container) {
+    const sparkle = document.createElement('div');
+    sparkle.className = 'sparkle';
+    container.appendChild(sparkle);
+
+    function animate() {
+        const newSparkle = sparkle.cloneNode(true);
+        container.appendChild(newSparkle);
+        newSparkle.style.animation = 'sparkleWave 2s ease-in-out';
+        newSparkle.style.top = Math.random() * 80 + 10 + '%';
+        setTimeout(() => newSparkle.remove(), 2000);
+    }
+
+    // Initial sparkle
+    animate();
+    // Repeat sparkle every 2 seconds
+    const interval = setInterval(animate, 2000);
+    
+    // Clean up on page change
+    return () => clearInterval(interval);
+}
+
 function disableAllChoices() {
     document.querySelectorAll(".choice").forEach(button => {
         button.disabled = true;
@@ -280,6 +302,9 @@ function showEndGame() {
                 <button onclick="window.location.href='/index.html'" class="choice">Main Menu</button>
             </div>
         `;
+       
+        // Add sparkle effect to end game screen
+        addSparkleEffect(container.querySelector('.end-game'));
         
         // Add the fade back in
         container.style.opacity = '1';
