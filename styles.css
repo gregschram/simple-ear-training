@@ -203,6 +203,7 @@ h2, h3 {
     display: flex;
     align-items: center;
     justify-content: center;
+    transform: scale(1);  /* Add this */
 }
 
 .choice:hover {
@@ -212,6 +213,7 @@ h2, h3 {
 
 .choice.correct {
     background-color: #4CAF50;
+    transform: scale(1) !important;  /* Add this to prevent shift */
 }
 
 .choice.incorrect {
@@ -535,9 +537,18 @@ h2, h3 {
         transform: scale(1);
         box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.4);
     }
+    35% {
+        transform: scale(1.12);
+        box-shadow: 0 0 0 10px rgba(76, 175, 80, 0.2);
+    }
     50% {
-        transform: scale(1.02);
-        box-shadow: 0 0 0 10px rgba(76, 175, 80, 0);
+        transform: scale(0.98);
+    }
+    65% {
+        transform: scale(1.05);
+    }
+    85% {
+        transform: scale(0.99);
     }
     100% {
         transform: scale(1);
@@ -546,7 +557,8 @@ h2, h3 {
 }
 
 .choice.correct {
-    animation: successPulse 0.6s ease-out;
+    animation: successPulse 0.8s cubic-bezier(0.36, 0, 0.66, -0.56) !important;
+    transform: scale(1) !important;
 }
 
 /* Celebration effect */
@@ -582,4 +594,31 @@ h2, h3 {
     height: 8px;
     border-radius: 50%;
     animation: celebrate 0.6s ease-out forwards;
+}
+
+@keyframes sparkleWave {
+    0% {
+        transform: translateX(-100%) rotate(0deg);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(100%) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.sparkle {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+}
+
+.sparkle::before {
+    content: '✨';
+    font-size: 20px;
+    position: absolute;
 }
