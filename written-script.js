@@ -230,7 +230,7 @@ function loadRound() {
             console.error("Error in audio preload:", error);
             document.getElementById("feedback").textContent = "Error loading audio files. Please reload the page.";
         });
-    setTimeout(() => preloadNextRound(), 1000);
+    setTimeout(() => preloadNextRound(), 500);
 }
 
 function checkAnswer(button, isCorrect) {
