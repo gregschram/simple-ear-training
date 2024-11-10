@@ -338,10 +338,10 @@ function createCelebration() {
 }
 
 function addSparkleEffect(container) {
-    function animate() {
+    function createSparkle() {
         const sparkle = document.createElement('div');
         sparkle.className = 'sparkle';
-        document.body.appendChild(sparkle);  // Append to body instead of container
+        document.body.appendChild(sparkle);
         
         const sparkleEmoji = document.createElement('span');
         sparkleEmoji.textContent = '✨';
@@ -352,26 +352,40 @@ function addSparkleEffect(container) {
         const size = sizes[Math.floor(Math.random() * sizes.length)];
         sparkleEmoji.style.fontSize = size;
         
-        // Position anywhere in viewport
-        sparkleEmoji.style.top = Math.random() * 100 + 'vh';
-        sparkleEmoji.style.left = Math.random() * 100 + 'vw';
+        // Get viewport dimensions
+        const viewportWidth = window.innerWidth;
+        const viewportHeight = window.innerHeight;
+        
+        // Position within viewport with padding from edges
+        sparkleEmoji.style.left = (Math.random() * (viewportWidth - 40) + 20) + 'px';
+        sparkleEmoji.style.top = (Math.random() * (viewportHeight - 40) + 20) + 'px';
         
         sparkle.appendChild(sparkleEmoji);
         
-        sparkle.style.animation = 'sparkleWave 4s ease-in-out';
-        setTimeout(() => sparkle.remove(), 4000);
+        // Start fading in
+        sparkle.style.animation = 'sparkleWave 5s ease-in-out';
+        
+        // Remove after animation completes
+        setTimeout(() => sparkle.remove(), 5000);
     }
 
-    // Create multiple sparkles initially with random positions
-    for(let i = 0; i < 5; i++) {  // Increased initial count
-        setTimeout(() => animate(), i * 200);
+    // Create initial set of sparkles
+    for(let i = 0; i < 5; i++) {
+        createSparkle();
     }
     
-    // Continue creating new sparkles
-    const interval = setInterval(animate, 1500);  // Slightly more frequent
+    // Continuously maintain 3-5 sparkles
+    const interval = setInterval(() => {
+        const currentSparkles = document.getElementsByClassName('sparkle').length;
+        if (currentSparkles < 3) {
+            for(let i = 0; i < 2; i++) {
+                createSparkle();
+            }
+        }
+    }, 1000);
+
     return () => clearInterval(interval);
 }
-
 function goHome() {
     window.location.href = "/index.html";
 }
