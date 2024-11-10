@@ -278,6 +278,8 @@ h2, h3 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
+    overflow: visible;  /* Allow sparkles to go outside */
 }
 
 .end-game button {
