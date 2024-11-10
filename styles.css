@@ -278,8 +278,8 @@ h2, h3 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: relative;
-    overflow: visible;  /* Allow sparkles to go outside */
+    position: relative;  /* Make sure this is here */
+    overflow: visible;   /* Make sure this is here */
 }
 
 .end-game button {
@@ -628,14 +628,16 @@ h2, h3 {
     width: 20px;
     height: 20px;
     pointer-events: none;
-    z-index: -1;  /* Put behind UI elements */
+    z-index: -1;
 }
 
 .sparkle::before {
     content: '✨';
     font-size: 20px;
     position: absolute;
-    opacity: 0;
+    display: block;  /* Add this */
+    width: 100%;    /* Add this */
+    height: 100%;   /* Add this */
 }
 
 @keyframes sparkleWave {
