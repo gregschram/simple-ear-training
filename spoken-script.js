@@ -259,17 +259,19 @@ function createCelebration() {
 }
 
 function addSparkleEffect(container) {
+    container.style.position = 'relative';  // Add this line
+    
     function animate() {
         const sparkle = document.createElement('div');
         sparkle.className = 'sparkle';
-        document.body.appendChild(sparkle);  // Append to body instead of container
+        container.appendChild(sparkle);
         
         const sparkleEmoji = document.createElement('span');
         sparkleEmoji.textContent = '✨';
         sparkleEmoji.style.position = 'absolute';
         sparkleEmoji.style.fontSize = '20px';
-        // Random vertical position across whole screen
-        sparkleEmoji.style.top = Math.random() * 100 + 'vh';
+        sparkleEmoji.style.top = Math.random() * 80 + 10 + '%';  // Keep sparkles away from edges
+        sparkleEmoji.style.left = '0';
         sparkle.appendChild(sparkleEmoji);
         
         sparkle.style.animation = 'sparkleWave 4s ease-in-out';
@@ -282,10 +284,7 @@ function addSparkleEffect(container) {
     }
     
     // Continue creating new sparkles
-    const interval = setInterval(() => {
-        animate();
-    }, 2000);
-
+    const interval = setInterval(animate, 2000);
     return () => clearInterval(interval);
 }
 
