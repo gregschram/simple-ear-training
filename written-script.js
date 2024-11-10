@@ -250,20 +250,32 @@ function loadNextRound() {
 
 function showEndGame() {
     const container = document.getElementById("choices");
-    container.innerHTML = `
-        <div class="end-game">
-            <h2>Complete!</h2>
-            <p>⭐ ${firstTryCorrect}/10 correct on the first try! ⭐</p>
-            <button onclick="window.location.reload()" class="choice">New Round</button>
-            <button onclick="window.location.href='/index.html'" class="choice">Main Menu</button>
-        </div>
-    `;
+    container.style.opacity = '0';
+    container.style.transform = 'translateY(10px)';
+    
+    setTimeout(() => {
+        container.innerHTML = `
+            <div class="end-game">
+                <h2>Complete!</h2>
+                <p>⭐ ${firstTryCorrect}/10 correct on the first try! ⭐</p>
+                <button onclick="window.location.reload()" class="choice">New Round</button>
+                <button onclick="window.location.href='/index.html'" class="choice">Main Menu</button>
+            </div>
+        `;
+        
+        // Add the fade back in
+        container.style.opacity = '1';
+        container.style.transform = 'translateY(0)';
+        container.style.transition = 'opacity 0.3s, transform 0.3s';
+        
+    }, 300);
+
     document.getElementById("feedback").textContent = "";
     document.getElementById("next-button").style.display = "none";
+    document.getElementById("play-sound").style.display = "none";
+    document.getElementById("toggle-speed").style.display = "none";
     document.querySelector(".instruction-text").style.display = "none";
     document.querySelector(".speed-checkbox").style.display = "none";
-    document.getElementById("written-prompt").style.display = "none";  // Add this line
-
 }
 
 document.getElementById("next-button").onclick = loadNextRound;
