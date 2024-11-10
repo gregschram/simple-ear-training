@@ -646,10 +646,10 @@ h2, h3 {
         opacity: 0;
         transform: translateX(-50px);
     }
-    20% {
+    10% { /* lower number = slower fade in */
         opacity: 1;
     }
-    80% {
+    30% {
         opacity: 1;
     }
     100% {
@@ -659,16 +659,15 @@ h2, h3 {
 }
 
 .sparkle {
-    position: absolute;
-    width: 100%;  /* Change this */
-    height: 100%; /* Change this */
+    position: fixed;  /* Change to fixed to cover entire viewport */
+    width: 20px;
+    height: 20px;
     pointer-events: none;
     z-index: -1;
 }
 
 .sparkle::before {
     content: '✨';
-    font-size: 20px;
     position: absolute;
     display: block;
 }
