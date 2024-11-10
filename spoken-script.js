@@ -232,22 +232,22 @@ function createCelebration() {
 function addSparkleEffect(container) {
     const sparkle = document.createElement('div');
     sparkle.className = 'sparkle';
+    container.style.position = 'relative';  // Ensure container is positioned
     container.appendChild(sparkle);
 
     function animate() {
         const newSparkle = sparkle.cloneNode(true);
         container.appendChild(newSparkle);
-        newSparkle.style.animation = 'sparkleWave 2s ease-in-out';
-        newSparkle.style.top = Math.random() * 80 + 10 + '%';
-        setTimeout(() => newSparkle.remove(), 2000);
+        newSparkle.style.animation = 'sparkleWave 3s ease-out';
+        // Randomize vertical position but keep within container
+        newSparkle.style.top = Math.random() * 100 + '%';
+        // Add slight vertical movement
+        newSparkle.style.transform = `translateY(${Math.random() * 20 - 10}px)`;
+        setTimeout(() => newSparkle.remove(), 3000);
     }
 
-    // Initial sparkle
     animate();
-    // Repeat sparkle every 2 seconds
     const interval = setInterval(animate, 2000);
-    
-    // Clean up on page change
     return () => clearInterval(interval);
 }
 
