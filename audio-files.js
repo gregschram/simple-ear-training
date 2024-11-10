@@ -146,7 +146,7 @@ export const audioFiles = {
     "momentum",
     "nectarine",
     "nostalgia",
-    "obstalce",
+    "obstacle",
     "pajamas",
     "scenery",
     "showstopper",
