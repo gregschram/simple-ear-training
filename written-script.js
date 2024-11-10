@@ -338,27 +338,31 @@ function createCelebration() {
 }
 
 function addSparkleEffect(container) {
-    console.log('Adding sparkle effect to:', container);
+    container.style.position = 'relative';  // Add this line
     
     function animate() {
         const sparkle = document.createElement('div');
         sparkle.className = 'sparkle';
         container.appendChild(sparkle);
-        console.log('Created sparkle element');
         
         const sparkleEmoji = document.createElement('span');
         sparkleEmoji.textContent = '✨';
         sparkleEmoji.style.position = 'absolute';
         sparkleEmoji.style.fontSize = '20px';
-        sparkleEmoji.style.top = Math.random() * 100 + '%';
+        sparkleEmoji.style.top = Math.random() * 80 + 10 + '%';  // Keep sparkles away from edges
+        sparkleEmoji.style.left = '0';
         sparkle.appendChild(sparkleEmoji);
         
-        sparkle.style.animation = 'sparkleWave 3s ease-in-out';
-        setTimeout(() => sparkle.remove(), 3000);
+        sparkle.style.animation = 'sparkleWave 4s ease-in-out';
+        setTimeout(() => sparkle.remove(), 4000);
     }
 
-    // Create initial sparkles
-    animate();
+    // Create multiple sparkles initially
+    for(let i = 0; i < 3; i++) {
+        setTimeout(() => animate(), i * 200);
+    }
+    
+    // Continue creating new sparkles
     const interval = setInterval(animate, 2000);
     return () => clearInterval(interval);
 }
