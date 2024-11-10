@@ -222,7 +222,7 @@ function loadRound() {
             console.error("Error in audio preload:", error);
             document.getElementById("feedback").textContent = "Error loading audio files. Please reload the page.";
         });
-    preloadNextRound();  // Add this line at the end
+    setTimeout(() => preloadNextRound(), 1000);
 }
 
 function checkAnswer(button, isCorrect) {
