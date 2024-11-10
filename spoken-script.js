@@ -185,9 +185,9 @@ function checkAnswer(button, isCorrect) {
     if (isCorrect) {
         if (attemptsInCurrentRound === 1) {
             firstTryCorrect++;
-            answerHistory[currentRound] = true;  // Mark as first try correct
+            answerHistory[currentRound] = true;
         } else {
-            answerHistory[currentRound] = false;  // Mark as eventually correct
+            answerHistory[currentRound] = false;
         }
         score++;
         button.classList.add("correct");
@@ -195,15 +195,13 @@ function checkAnswer(button, isCorrect) {
         document.getElementById("feedback").className = "correct";
         document.getElementById("next-button").style.display = "inline-block";
         disableAllChoices();
+        createCelebration();  // Add celebration here
     } else {
         button.classList.add("incorrect");
         button.disabled = true;
         document.getElementById("feedback").textContent = "That's not quite it. Try again.";
         document.getElementById("feedback").className = "incorrect";
-        audio.currentTime = 0;
-        setTimeout(() => audio.play(), 500);
     }
-    // updateScoreDisplay();
 }
 // CELEBRATION ANIMATIONS ADDED HERE
 function createCelebration() {
@@ -229,12 +227,6 @@ function createCelebration() {
     }
     
     setTimeout(() => celebration.remove(), 1000);
-}
-
-// Add to correct answer section of checkAnswer:
-if (isCorrect) {
-    // ... existing correct answer code ...
-    createCelebration();
 }
 
 function disableAllChoices() {
