@@ -263,15 +263,16 @@ function showEndGame() {
                 <button onclick="window.location.href='/index.html'" class="choice">Main Menu</button>
             </div>
         `;
-        // Add sparkle effect to end game screen
-        addSparkleEffect(container.querySelector('.end-game'));
         
-        // Add the fade back in
+        const endGameDiv = container.querySelector('.end-game');
+        addSparkleEffect(endGameDiv);
+        
         container.style.opacity = '1';
         container.style.transform = 'translateY(0)';
         container.style.transition = 'opacity 0.3s, transform 0.3s';
-        
     }, 300);
+
+}
 
     document.getElementById("feedback").textContent = "";
     document.getElementById("next-button").style.display = "none";
