@@ -308,24 +308,33 @@ function createCelebration() {
 }
 
 function addSparkleEffect(container) {
-    const sparkle = document.createElement('div');
-    sparkle.className = 'sparkle';
-    container.style.position = 'relative';  // Ensure container is positioned
-    container.appendChild(sparkle);
-
     function animate() {
-        const newSparkle = sparkle.cloneNode(true);
-        container.appendChild(newSparkle);
-        newSparkle.style.animation = 'sparkleWave 3s ease-out';
-        // Randomize vertical position but keep within container
-        newSparkle.style.top = Math.random() * 100 + '%';
-        // Add slight vertical movement
-        newSparkle.style.transform = `translateY(${Math.random() * 20 - 10}px)`;
-        setTimeout(() => newSparkle.remove(), 3000);
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+        document.body.appendChild(sparkle);  // Append to body instead of container
+        
+        const sparkleEmoji = document.createElement('span');
+        sparkleEmoji.textContent = '✨';
+        sparkleEmoji.style.position = 'absolute';
+        sparkleEmoji.style.fontSize = '20px';
+        // Random vertical position across whole screen
+        sparkleEmoji.style.top = Math.random() * 100 + 'vh';
+        sparkle.appendChild(sparkleEmoji);
+        
+        sparkle.style.animation = 'sparkleWave 4s ease-in-out';
+        setTimeout(() => sparkle.remove(), 4000);
     }
 
-    animate();
-    const interval = setInterval(animate, 2000);
+    // Create multiple sparkles initially
+    for(let i = 0; i < 3; i++) {
+        setTimeout(() => animate(), i * 200);
+    }
+    
+    // Continue creating new sparkles
+    const interval = setInterval(() => {
+        animate();
+    }, 2000);
+
     return () => clearInterval(interval);
 }
 
