@@ -311,8 +311,6 @@ function showEndGame() {
         container.style.transition = 'opacity 0.3s, transform 0.3s';
     }, 300);
 
-}
-
     document.getElementById("feedback").textContent = "";
     document.getElementById("next-button").style.display = "none";
     document.getElementById("play-sound").style.display = "none";
