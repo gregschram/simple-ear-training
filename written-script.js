@@ -278,7 +278,7 @@ function showEndGame() {
     document.getElementById("toggle-speed").style.display = "none";
     document.querySelector(".instruction-text").style.display = "none";
     document.querySelector(".speed-checkbox").style.display = "none";
-
+}
 
 document.getElementById("next-button").onclick = loadNextRound;
 
