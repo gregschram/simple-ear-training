@@ -110,26 +110,34 @@ async function loadCategoryData(category) {
 }
 
 function preloadNextRound() {
-    if (currentRound + 1 < totalRounds) {
-        const nextRound = roundData[currentRound + 1];
-        const audioToPreload = new Audio();
-        audioToPreload.preload = "auto";
-        audioToPreload.src = nextRound.audioPath.startsWith('/') ? 
-            nextRound.audioPath : `/${nextRound.audioPath}`;
-        
-        // For written exercise, also preload the other options
-        if (nextRound.options) {
-            nextRound.options.forEach(option => {
-                if (option.audioPath) {
-                    const optionAudio = new Audio();
-                    optionAudio.preload = "auto";
-                    optionAudio.src = option.audioPath.startsWith('/') ? 
-                        option.audioPath : `/${option.audioPath}`;
-                }
-            });
+    try {
+        if (currentRound + 1 < totalRounds) {
+            const nextRound = roundData[currentRound + 1];
+            
+            // Only preload the main audio for the next round
+            if (nextRound && nextRound.audioPath) {
+                console.log('Preloading next audio:', nextRound.audioPath);
+                const audioToPreload = new Audio();
+                audioToPreload.preload = "auto";
+                
+                // Add error handling
+                audioToPreload.onerror = () => {
+                    console.log('Failed to preload:', nextRound.audioPath);
+                };
+                
+                audioToPreload.src = nextRound.audioPath.startsWith('/') ? 
+                    nextRound.audioPath : `/${nextRound.audioPath}`;
+            }
+            
+            // Remove the option preloading for now
+            // We can add it back later if needed
         }
+    } catch (error) {
+        // Silently fail preloading - don't disrupt the game
+        console.log('Preload failed:', error);
     }
 }
+
 function loadRound() {
     attemptsInCurrentRound = 0;
     audio.playbackRate = audioSpeed;
