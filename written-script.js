@@ -95,11 +95,13 @@ async function loadCategoryData(category) {
                 round.options = round.options.sort(() => Math.random() - 0.5);
             });
             
+            audio.play().catch(() => {}); // Add here for word exercises
             loadRound();
         } else {
             let module = await import(`./spoken-sentence/${category}.js`);
             roundData = module[`${category}Exercises`].sentences;
             roundData = roundData.sort(() => 0.5 - Math.random()).slice(0, totalRounds);
+            audio.play().catch(() => {}); // Add here for word exercises
             loadRound();
         }
     } catch (error) {
