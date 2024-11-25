@@ -226,7 +226,7 @@ function loadRound() {
                 const answerButton = document.createElement("button");
                 answerButton.className = "choice";
                 answerButton.textContent = `Audio ${index + 1}`;
-                answerButton.onclick = () => checkAnswer(answerButton, option === round);
+                answerButton.onclick = () => checkAnswer(answerButton, option === round, option);
                 
                 pairContainer.appendChild(playButton);
                 pairContainer.appendChild(answerButton);
@@ -240,7 +240,7 @@ function loadRound() {
     setTimeout(() => preloadNextRound(), 500);
 }
 
-function checkAnswer(button, isCorrect) {
+function checkAnswer(button, isCorrect, option) {
     attemptsInCurrentRound++;
     if (isCorrect) {
         if (attemptsInCurrentRound === 1) {
@@ -259,6 +259,8 @@ function checkAnswer(button, isCorrect) {
     } else {
         button.classList.add("incorrect");
         button.disabled = true;
+        button.classList.add("fade-in");
+        button.textContent = option.sentence;  // Replace the "Audio X" text with the actual sentence
         document.getElementById("feedback").textContent = "That's not quite it. Try again.";
         document.getElementById("feedback").className = "incorrect";
     }
