@@ -101,7 +101,7 @@ async function loadCategoryData(category) {
             roundData.forEach(round => {
                 round.options = round.options.sort(() => Math.random() - 0.5);
             });
-            
+            audio.play().catch(() => {}); // Add here for word exercises
             loadRound();
         } else {
             let module = await import(`./spoken-sentence/${category}.js`);
