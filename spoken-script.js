@@ -101,7 +101,7 @@ async function loadCategoryData(category) {
             roundData.forEach(round => {
                 round.options = round.options.sort(() => Math.random() - 0.5);
             });
-            audio.play().catch(() => {}); // Add here for word exercises
+            
             loadRound();
         } else {
             let module = await import(`./spoken-sentence/${category}.js`);
@@ -145,28 +145,6 @@ function preloadNextRound() {
     }
 }
 
-function loadAudioWithRetry(path, maxRetries = 3) {
-  return new Promise((resolve, reject) => {
-    const audio = new Audio();
-    
-    audio.addEventListener('canplaythrough', () => {
-      resolve(audio);
-    }, { once: true });
-    
-    audio.addEventListener('error', (e) => {
-      if (maxRetries > 0) {
-        console.warn(`Retrying ${path}, ${maxRetries} attempts left`);
-        setTimeout(() => loadAudioWithRetry(path, maxRetries - 1), 1000);
-      } else {
-        reject(new Error(`Failed to load audio: ${path}`));
-      }
-    }, { once: true });
-
-    audio.src = path;
-    audio.load(); // Explicitly trigger load
-  });
-}
-
 function loadRound() {
     attemptsInCurrentRound = 0;
     audio.playbackRate = audioSpeed;
@@ -183,16 +161,23 @@ function loadRound() {
     // Debug log
     console.log("Attempting to load audio from path:", round.audioPath);
 
-    // Create the options array first
-    const shuffledOptions = [...round.options]
-        .sort(() => Math.random() - 0.5);
-    
-    const correctIndex = shuffledOptions.indexOf(round.sentence);
-
     // Preload audio for this round
-    const preloadPromises = [loadAudioWithRetry(round.audioPath)];
+    const preloadPromise = new Promise((resolve, reject) => {
+        audio.addEventListener('canplaythrough', () => {
+            console.log(`Successfully loaded audio: ${round.audioPath}`);
+            resolve();
+        }, { once: true });
+        
+        audio.addEventListener('error', (e) => {
+            console.error(`Failed to load audio ${round.audioPath}:`, e);
+            reject(`Failed to load ${round.audioPath}`);
+        }, { once: true });
 
-    Promise.all(preloadPromises)
+        // Ensure path starts with leading slash
+        audio.src = round.audioPath.startsWith('/') ? round.audioPath : `/${round.audioPath}`;
+    });
+
+    preloadPromise
         .then(() => {
             console.log("Audio file loaded successfully");
             document.getElementById("feedback").textContent = "";
@@ -203,6 +188,11 @@ function loadRound() {
             // Create choices after audio is loaded
             const choicesContainer = document.getElementById("choices");
             choicesContainer.innerHTML = "";
+            
+            const shuffledOptions = [...round.options]
+                .sort(() => Math.random() - 0.5);
+            
+            const correctIndex = shuffledOptions.indexOf(round.sentence);
             
             shuffledOptions.forEach((option, index) => {
                 const button = document.createElement("button");
@@ -394,4 +384,3 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error("No valid exercise type or category specified");
         goHome();
     }
-});
