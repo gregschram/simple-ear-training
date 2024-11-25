@@ -147,28 +147,23 @@ function preloadNextRound() {
 
 function loadAudioWithRetry(path, maxRetries = 3) {
   return new Promise((resolve, reject) => {
-    function tryLoad(attempt = 1) {
-      const audio = new Audio();
-      
-      audio.addEventListener('loadeddata', () => {
-        resolve(audio);
-      }, { once: true });
-      
-      audio.addEventListener('error', (e) => {
-        console.warn(`Attempt ${attempt} failed for ${path}`, e);
-        if (attempt < maxRetries) {
-          setTimeout(() => tryLoad(attempt + 1), 1000 * attempt);
-        } else {
-          reject(new Error(`Failed to load after ${maxRetries} attempts: ${path}`));
-        }
-      }, { once: true });
+    const audio = new Audio();
+    
+    audio.addEventListener('canplaythrough', () => {
+      resolve(audio);
+    }, { once: true });
+    
+    audio.addEventListener('error', (e) => {
+      if (maxRetries > 0) {
+        console.warn(`Retrying ${path}, ${maxRetries} attempts left`);
+        setTimeout(() => loadAudioWithRetry(path, maxRetries - 1), 1000);
+      } else {
+        reject(new Error(`Failed to load audio: ${path}`));
+      }
+    }, { once: true });
 
-      // Force no range requests
-      audio.preload = 'auto';
-      audio.src = path;
-    }
-
-    tryLoad();
+    audio.src = path;
+    audio.load(); // Explicitly trigger load
   });
 }
 
