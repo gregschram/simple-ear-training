@@ -189,9 +189,10 @@ function loadRound() {
     const preloadPromises = [loadAudioWithRetry(round.audioPath)];
 
     Promise.all(preloadPromises)
-        .then(() => {
+        .then((loadedAudios) => {
             console.log("Audio file loaded successfully");
             document.getElementById("feedback").textContent = "";
+            audio.src = round.audioPath;
             if (currentRound === 0) {
                 setTimeout(() => audio.play(), 750);
             }
