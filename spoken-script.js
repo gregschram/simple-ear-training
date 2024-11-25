@@ -395,3 +395,4 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error("No valid exercise type or category specified");
         goHome();
     }
+});
