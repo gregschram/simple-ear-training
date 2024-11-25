@@ -5,6 +5,13 @@
   "version": 2,
   "builds": [
     {
+      "src": "generate-audio-list.js",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": ["audio/**/*"]
+      }
+    },
+    {
       "src": "audio/**/*",
       "use": "@vercel/static"
     },
@@ -17,9 +24,10 @@
     {
       "src": "/audio/(.*)",
       "headers": {
-        "cache-control": "public, max-age=31536000, immutable"
+        "cache-control": "public, max-age=31536000, immutable",
+        "Accept-Ranges": "bytes"
       },
-      "dest": "/audio/$1"
+      "continue": true
     },
     {
       "src": "/(.*)",
