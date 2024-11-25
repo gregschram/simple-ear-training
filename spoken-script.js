@@ -196,10 +196,16 @@ function loadRound() {
     // Debug log
     console.log("Attempting to load audio from path:", round.audioPath);
 
-    // Preload audio for this round
-    const preloadPromises = allOptions.map(option => loadAudioWithRetry(option.audioPath));
+    // Create the options array first
+    const shuffledOptions = [...round.options]
+        .sort(() => Math.random() - 0.5);
+    
+    const correctIndex = shuffledOptions.indexOf(round.sentence);
 
-    preloadPromise
+    // Preload audio for this round
+    const preloadPromises = [loadAudioWithRetry(round.audioPath)];
+
+    Promise.all(preloadPromises)
         .then(() => {
             console.log("Audio file loaded successfully");
             document.getElementById("feedback").textContent = "";
@@ -210,11 +216,6 @@ function loadRound() {
             // Create choices after audio is loaded
             const choicesContainer = document.getElementById("choices");
             choicesContainer.innerHTML = "";
-            
-            const shuffledOptions = [...round.options]
-                .sort(() => Math.random() - 0.5);
-            
-            const correctIndex = shuffledOptions.indexOf(round.sentence);
             
             shuffledOptions.forEach((option, index) => {
                 const button = document.createElement("button");
