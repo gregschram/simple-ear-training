@@ -95,13 +95,11 @@ async function loadCategoryData(category) {
                 round.options = round.options.sort(() => Math.random() - 0.5);
             });
             
-            audio.play().catch(() => {}); // Add here for word exercises
             loadRound();
         } else {
             let module = await import(`./spoken-sentence/${category}.js`);
             roundData = module[`${category}Exercises`].sentences;
             roundData = roundData.sort(() => 0.5 - Math.random()).slice(0, totalRounds);
-            audio.play().catch(() => {}); // Add here for word exercises
             loadRound();
         }
     } catch (error) {
@@ -140,28 +138,6 @@ function preloadNextRound() {
     }
 }
 
-function loadAudioWithRetry(path, maxRetries = 3) {
-  return new Promise((resolve, reject) => {
-    const audio = new Audio();
-    
-    audio.addEventListener('canplaythrough', () => {
-      resolve(audio);
-    }, { once: true });
-    
-    audio.addEventListener('error', (e) => {
-      if (maxRetries > 0) {
-        console.warn(`Retrying ${path}, ${maxRetries} attempts left`);
-        setTimeout(() => loadAudioWithRetry(path, maxRetries - 1), 1000);
-      } else {
-        reject(new Error(`Failed to load audio: ${path}`));
-      }
-    }, { once: true });
-
-    audio.src = path;
-    audio.load(); // Explicitly trigger load
-  });
-}
-
 function loadRound() {
     attemptsInCurrentRound = 0;
     audio.playbackRate = audioSpeed;
@@ -191,8 +167,25 @@ function loadRound() {
     // Debug log
     console.log("Attempting to preload audio files for paths:", allOptions.map(opt => opt.audioPath));
 
-    // Create all audio preload promises
-    const preloadPromises = allOptions.map(option => loadAudioWithRetry(option.audioPath));
+    // Preload all audio files for this round
+    const preloadPromises = allOptions.map(option => {
+        return new Promise((resolve, reject) => {
+            const tempAudio = new Audio();
+            
+            tempAudio.addEventListener('canplaythrough', () => {
+                console.log(`Successfully loaded audio: ${option.audioPath}`);
+                resolve();
+            }, { once: true });
+            
+            tempAudio.addEventListener('error', (e) => {
+                console.error(`Failed to load audio ${option.audioPath}:`, e);
+                reject(`Failed to load ${option.audioPath}`);
+            }, { once: true });
+
+            // Ensure path starts with leading slash
+            tempAudio.src = option.audioPath.startsWith('/') ? option.audioPath : `/${option.audioPath}`;
+        });
+    });
 
     Promise.all(preloadPromises)
         .then(() => {
