@@ -145,6 +145,30 @@ function preloadNextRound() {
     }
 }
 
+function loadAudioWithRetry(path, maxRetries = 3) {
+  return new Promise((resolve, reject) => {
+    const audio = new Audio();
+    
+    audio.addEventListener('canplaythrough', () => {
+      console.log(`Successfully loaded audio: ${path}`);  // Added debug log
+      resolve(audio);
+    }, { once: true });
+    
+    audio.addEventListener('error', (e) => {
+      console.error(`Failed to load audio ${path}:`, e);  // Added debug log
+      if (maxRetries > 0) {
+        console.warn(`Retrying ${path}, ${maxRetries} attempts left`);
+        setTimeout(() => loadAudioWithRetry(path, maxRetries - 1), 1000);
+      } else {
+        reject(new Error(`Failed to load audio: ${path}`));
+      }
+    }, { once: true });
+
+    audio.src = path;
+    audio.load(); // Explicitly trigger load
+  });
+}
+
 function loadRound() {
     attemptsInCurrentRound = 0;
     audio.playbackRate = audioSpeed;
@@ -162,22 +186,9 @@ function loadRound() {
     console.log("Attempting to load audio from path:", round.audioPath);
 
     // Preload audio for this round
-    const preloadPromise = new Promise((resolve, reject) => {
-        audio.addEventListener('canplaythrough', () => {
-            console.log(`Successfully loaded audio: ${round.audioPath}`);
-            resolve();
-        }, { once: true });
-        
-        audio.addEventListener('error', (e) => {
-            console.error(`Failed to load audio ${round.audioPath}:`, e);
-            reject(`Failed to load ${round.audioPath}`);
-        }, { once: true });
+    const preloadPromises = [loadAudioWithRetry(round.audioPath)];
 
-        // Ensure path starts with leading slash
-        audio.src = round.audioPath.startsWith('/') ? round.audioPath : `/${round.audioPath}`;
-    });
-
-    preloadPromise
+    Promise.all(preloadPromises)
         .then(() => {
             console.log("Audio file loaded successfully");
             document.getElementById("feedback").textContent = "";
