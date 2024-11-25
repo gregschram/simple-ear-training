@@ -148,19 +148,12 @@ function preloadNextRound() {
 function preloadAudio(path) {
   return new Promise((resolve, reject) => {
     const audio = new Audio();
-    audio.preload = "auto";
     
-    const timeoutId = setTimeout(() => {
-      reject(new Error(`Timeout loading: ${path}`));
-    }, 5000);
-
-    audio.addEventListener('canplaythrough', () => {
-      clearTimeout(timeoutId);
+    audio.addEventListener('loadeddata', () => {
       resolve(audio);
     }, { once: true });
     
-    audio.addEventListener('error', (e) => {
-      clearTimeout(timeoutId);
+    audio.addEventListener('error', () => {
       reject(new Error(`Failed to load: ${path}`));
     }, { once: true });
 
