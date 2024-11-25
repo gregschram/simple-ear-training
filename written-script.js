@@ -251,11 +251,13 @@ function checkAnswer(button, isCorrect, option) {
         }
         score++;
         button.classList.add("correct");
+        button.classList.add("fade-in");
+        button.textContent = option.sentence;  // Add this line
         document.getElementById("feedback").textContent = "Correct!";
         document.getElementById("feedback").className = "correct";
         document.getElementById("next-button").style.display = "inline-block";
         disableAllChoices();
-        createCelebration();  // Add celebration here
+        createCelebration();
     } else {
         button.classList.add("incorrect");
         button.disabled = true;
