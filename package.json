@@ -1,5 +1,6 @@
 {
   "scripts": {
-    "build": "node generate-audio-list.js"
+    "build": "node generate-audio-list.js",
+    "vercel-build": "npm run build"
   }
 }
