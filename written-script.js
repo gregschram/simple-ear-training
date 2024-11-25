@@ -201,6 +201,7 @@ function loadRound() {
     // Debug log
     console.log("Attempting to preload audio files for paths:", allOptions.map(opt => opt.audioPath));
 
+    // Create all audio preload promises
     const preloadPromises = allOptions.map(option => loadAudioWithRetry(option.audioPath));
 
     Promise.all(preloadPromises)
