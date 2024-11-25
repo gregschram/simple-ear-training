@@ -217,7 +217,7 @@ h2, h3 {
 }
 
 .choice.incorrect {
-    background-color: #F44336;
+    background-color: #E54545;
 }
 
 .choice:disabled {
@@ -248,7 +248,7 @@ h2, h3 {
 }
 
 #feedback.incorrect {
-    color: #ff7f7f;
+    color: #E54545;
 }
 
 #feedback.fade-in {
