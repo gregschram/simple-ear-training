@@ -195,32 +195,32 @@ function loadRound() {
     const preloadPromises = allOptions.map(option => loadAudioWithRetry(option.audioPath));
 
     Promise.all(preloadPromises)
-        .then(() => {
-            console.log("All audio files loaded successfully");
-            // Clear loading message
-            document.getElementById("feedback").textContent = "";
+    .then(() => {
+        console.log("All audio files loaded successfully");
+        // Clear loading message
+        document.getElementById("feedback").textContent = "";
+        
+        // Create four audio-button pairs
+        const choicesContainer = document.getElementById("choices");
+        choicesContainer.innerHTML = "";
+        
+        // Create audio-button pairs
+        allOptions.forEach((option, index) => {
+            const pairContainer = document.createElement("div");
+            pairContainer.className = "audio-choice-pair";
             
-            // Create four audio-button pairs
-            const choicesContainer = document.getElementById("choices");
-            choicesContainer.innerHTML = "";
-            
-            // Create audio-button pairs
-            allOptions.forEach((option, index) => {
-                const pairContainer = document.createElement("div");
-                pairContainer.className = "audio-choice-pair";
-                
-                // Create play button
-                const playButton = document.createElement("button");
-                playButton.className = "play-audio-button";
-                playButton.textContent = "▶";
-                playButton.onclick = () => {
-                    audio.src = option.audioPath.startsWith('/') ? option.audioPath : `/${option.audioPath}`;
-                    audio.playbackRate = isSlowSpeed ? 0.65 : 1.0;
-                    audio.play().catch(error => {
-                        console.error("Play error for", option.audioPath, error);
-                        document.getElementById("feedback").textContent = "Error playing audio. Please try again.";
-                    });
-                };
+            // Create play button
+            const playButton = document.createElement("button");
+            playButton.className = "play-audio-button";
+            playButton.textContent = "▶";
+            playButton.onclick = () => {
+                audio.src = option.audioPath;
+                audio.playbackRate = isSlowSpeed ? 0.65 : 1.0;
+                audio.play().catch(error => {
+                    console.error("Play error for", option.audioPath, error);
+                    document.getElementById("feedback").textContent = "Error playing audio. Please try again.";
+                });
+            };
                 
                 // Create answer button
                 const answerButton = document.createElement("button");
