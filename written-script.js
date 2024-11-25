@@ -137,6 +137,40 @@ function preloadNextRound() {
         console.log('Preload failed:', error);
     }
 }
+function preloadAudio(path) {
+  return new Promise((resolve, reject) => {
+    const audio = new Audio();
+    audio.preload = "auto";
+    
+    const timeoutId = setTimeout(() => {
+      reject(new Error(`Timeout loading: ${path}`));
+    }, 5000);
+
+    audio.addEventListener('canplaythrough', () => {
+      clearTimeout(timeoutId);
+      resolve(audio);
+    }, { once: true });
+    
+    audio.addEventListener('error', (e) => {
+      clearTimeout(timeoutId);
+      reject(new Error(`Failed to load: ${path}`));
+    }, { once: true });
+
+    audio.src = path.startsWith('/') ? path : `/${path}`;
+  });
+}
+
+async function loadAudioWithRetry(path, maxRetries = 3) {
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      return await preloadAudio(path);
+    } catch (error) {
+      console.warn(`Attempt ${i + 1} failed for ${path}`);
+      if (i === maxRetries - 1) throw error;
+      await new Promise(resolve => setTimeout(resolve, 1000 * (i + 1)));
+    }
+  }
+}
 
 function loadRound() {
     attemptsInCurrentRound = 0;
@@ -167,25 +201,7 @@ function loadRound() {
     // Debug log
     console.log("Attempting to preload audio files for paths:", allOptions.map(opt => opt.audioPath));
 
-    // Preload all audio files for this round
-    const preloadPromises = allOptions.map(option => {
-        return new Promise((resolve, reject) => {
-            const tempAudio = new Audio();
-            
-            tempAudio.addEventListener('canplaythrough', () => {
-                console.log(`Successfully loaded audio: ${option.audioPath}`);
-                resolve();
-            }, { once: true });
-            
-            tempAudio.addEventListener('error', (e) => {
-                console.error(`Failed to load audio ${option.audioPath}:`, e);
-                reject(`Failed to load ${option.audioPath}`);
-            }, { once: true });
-
-            // Ensure path starts with leading slash
-            tempAudio.src = option.audioPath.startsWith('/') ? option.audioPath : `/${option.audioPath}`;
-        });
-    });
+    const preloadPromises = allOptions.map(option => loadAudioWithRetry(option.audioPath));
 
     Promise.all(preloadPromises)
         .then(() => {
