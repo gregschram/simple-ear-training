@@ -145,32 +145,44 @@ function preloadNextRound() {
     }
 }
 
-function preloadAudio(path) {
+function loadAudioWithRetry(path, maxRetries = 3) {
   return new Promise((resolve, reject) => {
-    const audio = new Audio();
-    
-    audio.addEventListener('loadeddata', () => {
-      resolve(audio);
-    }, { once: true });
-    
-    audio.addEventListener('error', () => {
-      reject(new Error(`Failed to load: ${path}`));
-    }, { once: true });
+    const xhr = new XMLHttpRequest();
+    let attempts = 0;
 
-    audio.src = path.startsWith('/') ? path : `/${path}`;
-  });
-}
+    function tryLoad() {
+      attempts++;
+      xhr.open('GET', path, true);
+      xhr.responseType = 'blob';
 
-async function loadAudioWithRetry(path, maxRetries = 3) {
-  for (let i = 0; i < maxRetries; i++) {
-    try {
-      return await preloadAudio(path);
-    } catch (error) {
-      console.warn(`Attempt ${i + 1} failed for ${path}`);
-      if (i === maxRetries - 1) throw error;
-      await new Promise(resolve => setTimeout(resolve, 1000 * (i + 1)));
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+          const blob = new Blob([xhr.response], { type: 'audio/mpeg' });
+          const url = URL.createObjectURL(blob);
+          const audio = new Audio(url);
+          resolve(audio);
+        } else if (attempts < maxRetries) {
+          console.warn(`Attempt ${attempts} failed for ${path}`);
+          setTimeout(tryLoad, 1000 * attempts);
+        } else {
+          reject(new Error(`Failed to load: ${path} after ${attempts} attempts`));
+        }
+      };
+
+      xhr.onerror = function() {
+        if (attempts < maxRetries) {
+          console.warn(`Attempt ${attempts} failed for ${path}`);
+          setTimeout(tryLoad, 1000 * attempts);
+        } else {
+          reject(new Error(`Failed to load: ${path} after ${attempts} attempts`));
+        }
+      };
+
+      xhr.send();
     }
-  }
+
+    tryLoad();
+  });
 }
 
 function loadRound() {
