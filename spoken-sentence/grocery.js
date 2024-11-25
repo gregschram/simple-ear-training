@@ -3,7 +3,7 @@ export const groceryExercises = {
   sentences: [
     {
         id: 1,
-        audioPath: '/audio/sentences/grocery/grocery-1.mp3',
+        audioPath: '/audio/sentences/grocery/grocery-01.mp3',
         sentence: 'Would you like some bread and eggs?',
         options: [
           'Would you like some bread and eggs?',
@@ -14,7 +14,7 @@ export const groceryExercises = {
       },
       {
         id: 2,
-        audioPath: '/audio/sentences/grocery/grocery-2.mp3',
+        audioPath: '/audio/sentences/grocery/grocery-02.mp3',
         sentence: 'The apples are on sale today.',
         options: [
           'The apples are on sale today.',
@@ -25,7 +25,7 @@ export const groceryExercises = {
       },
       {
         id: 3,
-        audioPath: '/audio/sentences/grocery/grocery-3.mp3',
+        audioPath: '/audio/sentences/grocery/grocery-03.mp3',
         sentence: 'Can you pass me the milk, please?',
         options: [
           'Can you pass me the milk, please?',
@@ -36,7 +36,7 @@ export const groceryExercises = {
       },
       {
         id: 4,
-        audioPath: '/audio/sentences/grocery/grocery-4.mp3',
+        audioPath: '/audio/sentences/grocery/grocery-04.mp3',
         sentence: "I'll take two bananas, thanks.",
         options: [
           "I'll take two bananas, thanks.",
@@ -47,7 +47,7 @@ export const groceryExercises = {
       },
       {
         id: 5,
-        audioPath: '/audio/sentences/grocery/grocery-5.mp3',
+        audioPath: '/audio/sentences/grocery/grocery-05.mp3',
         sentence: 'Would you grab the carrots?',
         options: [
           'Would you grab the carrots?',
@@ -58,7 +58,7 @@ export const groceryExercises = {
       },
       {
         id: 6,
-        audioPath: '/audio/sentences/grocery/grocery-6.mp3',
+        audioPath: '/audio/sentences/grocery/grocery-06.mp3',
         sentence: "I'll take the green peppers.",
         options: [
           "I'll take the green peppers.",
@@ -69,7 +69,7 @@ export const groceryExercises = {
       },
       {
         id: 7,
-        audioPath: '/audio/sentences/grocery/grocery-7.mp3',
+        audioPath: '/audio/sentences/grocery/grocery-07.mp3',
         sentence: "It's really crowded in here today.",
         options: [
           "It's really crowded in here today.",
@@ -80,7 +80,7 @@ export const groceryExercises = {
       },
       {
         id: 8,
-        audioPath: '/audio/sentences/grocery/grocery-8.mp3',
+        audioPath: '/audio/sentences/grocery/grocery-08.mp3',
         sentence: 'Do you know where the cereal aisle is?',
         options: [
           'Do you know where the cereal aisle is?',
@@ -91,7 +91,7 @@ export const groceryExercises = {
       },
       {
         id: 9,
-        audioPath: '/audio/sentences/grocery/grocery-9.mp3',
+        audioPath: '/audio/sentences/grocery/grocery-09.mp3',
         sentence: 'Could I have a bag of flour, please?',
         options: [
           'Could I have a bag of flour, please?',
