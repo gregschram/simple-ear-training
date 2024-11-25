@@ -251,6 +251,10 @@ h2, h3 {
     color: #ff7f7f;
 }
 
+#feedback.fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
 /* Start screen button */
 .start-exercise {
     background-color: #0d6efd;
