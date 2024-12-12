@@ -689,23 +689,19 @@ h2, h3 {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 15px;
-    margin: 20px 0;
-    max-width: 400px;  /* Match container max-width */
+    margin: 20px auto;
     width: 100%;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .image-choice {
     position: relative;
     aspect-ratio: 1;
     border-radius: 8px;
-    background-color: white;  /* Changed from #3a3a3a for better visibility */
+    background-color: #3a3a3a;
     cursor: pointer;
     transition: all 0.2s ease;
     padding: 15px;
     border: none;
-    min-height: 120px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -713,50 +709,36 @@ h2, h3 {
 }
 
 .image-choice:hover {
-    background-color: #f0f0f0;  /* Light gray hover */
+    background-color: #555;
     transform: scale(1.02);
 }
 
 .image-choice img {
-    width: 80%;
-    height: 80%;
+    width: 70%;
+    height: 70%;
     object-fit: contain;
-    filter: invert(1);  /* Make SVGs black for better contrast */
+    filter: brightness(0) invert(1);
 }
 
-/* Update the correct/incorrect states to match other exercises */
 .image-choice.correct {
     background-color: #4CAF50;
-}
-
-.image-choice.correct img {
-    filter: invert(0);  /* Show SVG in white when correct */
 }
 
 .image-choice.incorrect {
     background-color: #E54545;
 }
 
-.image-choice.incorrect img {
-    filter: invert(0);  /* Show SVG in white when incorrect */
-}
-
 /* Responsive adjustments */
 @media screen and (max-width: 480px) {
     .image-grid {
         gap: 10px;
-        min-height: 250px;
-    }
-    
-    .image-choice {
-        min-height: 100px;
-        padding: 10px;
     }
 }
 
-/* Responsive adjustments */
-@media screen and (max-width: 480px) {
+/* Handle wide screens */
+@media screen and (min-width: 768px) {
     .image-grid {
-        gap: 10px;
+        width: 80%;
+        max-width: 600px;
     }
 }
