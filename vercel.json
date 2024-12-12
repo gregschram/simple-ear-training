@@ -16,6 +16,10 @@
       "use": "@vercel/static"
     },
     {
+      "src": "sound-effects.js",
+      "use": "@vercel/static"
+    },
+    {
       "src": "**/*",
       "use": "@vercel/static"
     }
@@ -26,8 +30,16 @@
       "dest": "/audio/$1"
     },
     {
+      "src": "/images/(.*)",
+      "dest": "/images/$1"
+    },
+    {
       "src": "/audio-files.js",
       "dest": "/audio-files.js"
+    },
+    {
+      "src": "/sound-effects.js",
+      "dest": "/sound-effects.js"
     },
     {
       "src": "/(.*)",
