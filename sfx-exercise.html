@@ -1,25 +1,25 @@
-:::::::: container
-## Identify the Sound Effect {#exercise-title}
+<div class="container">
+    <h2 id="exercise-title">Identify the Sound Effect</h2>
 
-:::: header-controls
-Main Menu
+    <div class="header-controls">
+        <button id="home-button">Main Menu</button>
+        <div id="round-tracker">Round 1/10</div>
+    </div>
 
-::: {#round-tracker}
-Round 1/10
-:::
-::::
+    <div class="instruction-text">
+        Press "Play Sound" then select the matching image.
+    </div>
 
-Press "Play Sound" then select the matching image.
+    <div class="audio-controls">
+        <button id="play-sound" class="play-sound">▶️ Play Sound</button>
+    </div>
 
-::: audio-controls
-▶️ Play Sound
-:::
+    <div id="choices" class="image-grid">
+    </div>
 
-::: {#choices .image-grid}
-:::
+    <div id="feedback"></div>
 
-::: {#feedback}
-:::
+    <button id="next-button" style="display: none;">Next</button>
+</div>
 
-Next
-::::::::
+<script src="sfx-script.js" type="module"></script>
