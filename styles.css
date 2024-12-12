@@ -696,42 +696,31 @@ h2, h3 {
     position: relative;
     aspect-ratio: 1;
     border-radius: 8px;
-    overflow: hidden;
+    background-color: #3a3a3a;  /* Match other choice buttons */
     cursor: pointer;
-    transition: transform 0.2s ease;
+    transition: all 0.2s ease;
+    padding: 10px;
+    border: none;
 }
 
 .image-choice:hover {
+    background-color: #555;
     transform: scale(1.02);
 }
 
-.image-choice img {
+.image-choice svg {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;  /* This will maintain aspect ratio */
 }
 
-/* Correct/Incorrect states */
-.image-choice.correct::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(76, 175, 80, 0.3);
-    pointer-events: none;
+/* Update the correct/incorrect states to match other exercises */
+.image-choice.correct {
+    background-color: #4CAF50;
 }
 
-.image-choice.incorrect::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(244, 67, 54, 0.3);
-    pointer-events: none;
+.image-choice.incorrect {
+    background-color: #E54545;
 }
 
 /* Responsive adjustments */

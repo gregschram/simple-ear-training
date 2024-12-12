@@ -93,16 +93,17 @@ function loadRound() {
     choicesContainer.innerHTML = "";
     
     allOptions.forEach((option) => {
-        const imageChoice = document.createElement("div");
-        imageChoice.className = "image-choice";
+        const button = document.createElement("button");
+        button.className = "image-choice";
+        button.onclick = () => checkAnswer(button, option === round);
         
+        // Create an img element for the SVG
         const img = document.createElement("img");
         img.src = option.imagePath;
         img.alt = option.name;
         
-        imageChoice.appendChild(img);
-        imageChoice.onclick = () => checkAnswer(imageChoice, option === round);
-        choicesContainer.appendChild(imageChoice);
+        button.appendChild(img);
+        choicesContainer.appendChild(button);
     });
     
     // Preload audio
