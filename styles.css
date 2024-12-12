@@ -690,14 +690,17 @@ h2, h3 {
     grid-template-columns: repeat(2, 1fr);
     gap: 15px;
     margin: 20px 0;
-    min-height: 300px;  /* Ensure grid has room to display */
+    max-width: 400px;  /* Match container max-width */
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .image-choice {
     position: relative;
     aspect-ratio: 1;
     border-radius: 8px;
-    background-color: #3a3a3a;
+    background-color: white;  /* Changed from #3a3a3a for better visibility */
     cursor: pointer;
     transition: all 0.2s ease;
     padding: 15px;
@@ -710,14 +713,15 @@ h2, h3 {
 }
 
 .image-choice:hover {
-    background-color: #555;
+    background-color: #f0f0f0;  /* Light gray hover */
     transform: scale(1.02);
 }
 
-.image-choice img {  /* Changed from svg to img */
-    width: 80%;     /* Slightly smaller to give breathing room */
+.image-choice img {
+    width: 80%;
     height: 80%;
     object-fit: contain;
+    filter: invert(1);  /* Make SVGs black for better contrast */
 }
 
 /* Update the correct/incorrect states to match other exercises */
@@ -725,8 +729,16 @@ h2, h3 {
     background-color: #4CAF50;
 }
 
+.image-choice.correct img {
+    filter: invert(0);  /* Show SVG in white when correct */
+}
+
 .image-choice.incorrect {
     background-color: #E54545;
+}
+
+.image-choice.incorrect img {
+    filter: invert(0);  /* Show SVG in white when incorrect */
 }
 
 /* Responsive adjustments */
