@@ -1,3 +1,4 @@
+import { soundEffects } from './sound-effects.js';
 let score = 0;
 let attempts = 0;
 let roundData = [];
@@ -52,20 +53,18 @@ document.getElementById("play-sound").onclick = () => {
 
 async function loadCategoryData() {
     try {
-        // This will be replaced with actual sound effects data
-        roundData = [
-            {
-                audioPath: '/audio/sfx/sfx-applause.mp3',
-                imagePath: '/images/sfx/applause.jpg',
-                name: 'applause'
-            },
-            // ... more sound effects will be added here
-        ];
+        // Get effects from our generated data file
+        roundData = soundEffects.effects.map(effect => ({
+            audioPath: effect.audioPath,
+            imagePath: effect.imagePath,
+            name: effect.id
+        }));
         
+        // Randomize and slice to 10 rounds
         roundData = roundData.sort(() => 0.5 - Math.random()).slice(0, totalRounds);
         loadRound();
     } catch (error) {
-        console.error("Error loading category data:", error);
+        console.error("Error loading sound effects data:", error);
         alert("Failed to load the sound effects.");
         goHome();
     }

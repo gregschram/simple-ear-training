@@ -91,12 +91,12 @@ h2, h3 {
     background-color: #563d7c;
 }
 
-.start-exercise[onclick*="sfx"] {
-    background-color: #cd7f32;  /* Bronze color */
+.start-exercise[onclick*="startSfxExercise"] {
+    background-color: #cd7f32;
 }
 
-.start-exercise[onclick*="sfx"]:hover {
-    background-color: #b26d2b;  /* Darker bronze for hover */
+.start-exercise[onclick*="startSfxExercise"]:hover {
+    background-color: #b26d2b;
 }
 
 .modal .sub-option {
