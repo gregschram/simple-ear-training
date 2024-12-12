@@ -14,7 +14,7 @@
             <button class="start-exercise" onclick="startWrittenExercise()">Identify the Written Sentence</button>
             <button class="start-exercise" onclick="showWordOptions('spoken')">Identify the Spoken Word</button>
             <button class="start-exercise" onclick="showWordOptions('written')">Identify the Written Word</button>
-            <button class="start-exercise" onclick="startExercise('sfx')">Identify the Sound Effect</button>
+            <button class="start-exercise" onclick="startSfxExercise()">Identify the Sound Effect</button>
         </div>
     </div>
 
@@ -46,6 +46,10 @@
             window.location.href = `written-exercise.html?category=${selectedCategory}`;
         }
 
+        function startSfxExercise() {
+            window.location.href = '/sfx-exercise.html';
+        }
+        
         function showWordOptions(type) {
             currentType = type;
             const modal = document.getElementById('word-modal');
