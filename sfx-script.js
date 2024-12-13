@@ -26,28 +26,36 @@ function initAudio() {
 
 function playWithFade() {
     try {
-        if (currentSource) {
-            currentSource.disconnect();
+        if (!audio.paused) {
+            audio.pause();
         }
         
+        // Complete cleanup of old source
+        if (currentSource) {
+            currentSource.disconnect();
+            currentSource = null;
+        }
+        
+        audio.currentTime = 0;  // Reset audio position
         currentSource = audioContext.createMediaElementSource(audio);
         currentSource.connect(gainNode);
         
-        // Reset gain and fade in
         gainNode.gain.setValueAtTime(0, audioContext.currentTime);
         gainNode.gain.linearRampToValueAtTime(1, audioContext.currentTime + 0.2);
         
-        // Schedule fade out for end of audio
         audio.addEventListener('timeupdate', function() {
             if (audio.duration - audio.currentTime <= 0.2) {
                 gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + 0.2);
             }
-        });
+        }, { once: true });  // Added once:true to prevent listener buildup
         
-        audio.play();
+        audio.play().catch(e => {
+            console.log('Direct play fallback due to:', e);
+            audio.play();
+        });
     } catch (e) {
         console.log('Audio play error:', e);
-        // Fallback to playing without fade if there's an error
+        // Last resort fallback
         audio.play();
     }
 }
