@@ -116,7 +116,13 @@ function loadRound() {
 }
 
 function checkAnswer(element, isCorrect) {
+    console.log("checkAnswer called", { isCorrect });
     attemptsInCurrentRound++;
+    const feedback = document.getElementById("feedback");
+    const nextButton = document.getElementById("next-button");
+    
+    console.log("Elements found:", { feedback, nextButton });
+    
     if (isCorrect) {
         if (attemptsInCurrentRound === 1) {
             firstTryCorrect++;
@@ -126,16 +132,18 @@ function checkAnswer(element, isCorrect) {
         }
         score++;
         element.classList.add("correct");
-        document.getElementById("feedback").textContent = "Correct!";
-        document.getElementById("feedback").className = "correct";
-        document.getElementById("next-button").style.display = "inline-block";
+        feedback.textContent = "Correct!";
+        feedback.className = "correct";
+        nextButton.style.display = "inline-block";
         disableAllChoices();
         createCelebration();
+        console.log("Correct answer processed");
     } else {
         element.classList.add("incorrect");
         element.style.pointerEvents = "none";
-        document.getElementById("feedback").textContent = "Try again.";
-        document.getElementById("feedback").className = "incorrect";
+        feedback.textContent = "Not quite. Have another listen.";
+        feedback.className = "incorrect";
+        console.log("Incorrect answer processed");
     }
 }
 

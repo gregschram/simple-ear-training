@@ -686,11 +686,12 @@ h2, h3 {
 
 /* Image grid layout */
 .image-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display: grid !important;  /* Override any flex settings */
+    grid-template-columns: repeat(2, 1fr) !important;
     gap: 15px;
     margin: 20px auto;
     width: 100%;
+    min-height: unset !important;  /* Remove inherited min-height */
 }
 
 .image-choice {
