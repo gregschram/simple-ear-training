@@ -243,11 +243,13 @@ function showEndGame() {
     
     setTimeout(() => {
         container.innerHTML = `
-            <div class="end-game">
+            <div class="end-game" style="width: 100%;">  /* Added width: 100% */
                 <h2>Complete!</h2>
                 <p>⭐ ${firstTryCorrect}/10 correct on the first try! ⭐</p>
-                <button onclick="window.location.reload()" class="choice">New Round</button>
-                <button onclick="window.location.href='/index.html'" class="choice">Main Menu</button>
+                <div style="width: 100%; display: flex; flex-direction: column; gap: 10px;">
+                    <button onclick="window.location.reload()" class="choice">New Round</button>
+                    <button onclick="window.location.href='/index.html'" class="choice">Main Menu</button>
+                </div>
             </div>
         `;
         
