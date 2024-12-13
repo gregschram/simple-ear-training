@@ -9,16 +9,9 @@ let attemptsInCurrentRound = 0;
 let answerHistory = [];
 
 // Audio-related variables
-let audioElement = null;
+let audio = new Audio();  // We'll keep this one instead of audioElement
 let audioContext = null;
 let gainNode = null;
-
-// Removed these as they're redundant with the above declarations:
-// const audio = new Audio();
-// audio.preload = "auto";
-// let currentSource = null;
-// const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-// let gainNode;
 
 function initAudio() {
     audioContext = new (window.AudioContext || window.webkitAudioContext)();
