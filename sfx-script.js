@@ -14,10 +14,12 @@ audio.preload = "auto";
 
 // Add fade in/out effect
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-let source;
 let gainNode;
 
 function initAudio() {
+    if (audioContext.state === 'suspended') {
+        audioContext.resume();
+    }
     gainNode = audioContext.createGain();
     gainNode.connect(audioContext.destination);
 }
@@ -78,6 +80,15 @@ async function loadCategoryData() {
 }
 
 function loadRound() {
+    // Clean up previous audio connections
+    if (currentSource) {
+        try {
+            currentSource.disconnect();
+            currentSource = null;
+        } catch (e) {
+            console.log('Cleanup error:', e);
+        }
+    }
     attemptsInCurrentRound = 0;
     const round = roundData[currentRound];
     
@@ -115,6 +126,7 @@ function loadRound() {
     
     // Preload audio
     audio.src = round.audioPath;
+    audio.load();
     
     // Play initial sound after a short delay
     if (currentRound === 0) {
