@@ -21,34 +21,23 @@ function initAudio() {
 
 function playWithFade() {
     try {
-        // Create a brand new audio element each time
-        const newAudio = new Audio();
-        newAudio.src = audioElement ? audioElement.src : audio.src;
-        
-        // Replace old audio element
-        if (audioElement) {
-            audioElement.pause();
-        }
-        audioElement = newAudio;
-        
-        const source = audioContext.createMediaElementSource(newAudio);
-        source.connect(gainNode);
+        const currentSource = audioContext.createMediaElementSource(audio);
+        currentSource.connect(gainNode);
         
         gainNode.gain.setValueAtTime(0, audioContext.currentTime);
         gainNode.gain.linearRampToValueAtTime(1, audioContext.currentTime + 0.2);
         
-        newAudio.addEventListener('timeupdate', function() {
-            if (newAudio.duration - newAudio.currentTime <= 0.2) {
+        audio.addEventListener('timeupdate', function() {
+            if (audio.duration - audio.currentTime <= 0.2) {
                 gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + 0.2);
             }
-        });
+        }, { once: true });  // Use once:true so the listener is automatically removed
         
-        newAudio.play();
+        audio.play();
     } catch (e) {
         console.log('Audio play error:', e);
-        // Fallback to basic play without fade
-        const fallbackAudio = new Audio(audio.src);
-        fallbackAudio.play();
+        // Simple fallback without fade
+        audio.play();
     }
 }
 
@@ -80,15 +69,6 @@ async function loadCategoryData() {
 }
 
 function loadRound() {
-    // Clean up previous audio connections
-    if (currentSource) {
-        try {
-            currentSource.disconnect();
-            currentSource = null;
-        } catch (e) {
-            console.log('Cleanup error:', e);
-        }
-    }
     attemptsInCurrentRound = 0;
     const round = roundData[currentRound];
     
