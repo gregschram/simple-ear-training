@@ -7,6 +7,7 @@ const totalRounds = 10;
 let firstTryCorrect = 0;
 let attemptsInCurrentRound = 0;
 let answerHistory = [];
+let currentSource = null;  // Add this at the top with your other variables
 
 const audio = new Audio();
 audio.preload = "auto";
@@ -22,19 +23,13 @@ function initAudio() {
 }
 
 function playWithFade() {
-    // Disconnect old source if it exists
-    if (source) {
-        try {
-            source.disconnect();
-        } catch (e) {
-            console.log('Source disconnect error:', e);
-        }
-    }
-    
     try {
-        // Create new source for each play
-        source = audioContext.createMediaElementSource(audio);
-        source.connect(gainNode);
+        if (currentSource) {
+            currentSource.disconnect();
+        }
+        
+        currentSource = audioContext.createMediaElementSource(audio);
+        currentSource.connect(gainNode);
         
         // Reset gain and fade in
         gainNode.gain.setValueAtTime(0, audioContext.currentTime);
