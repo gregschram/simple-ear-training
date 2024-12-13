@@ -22,25 +22,37 @@ function initAudio() {
 }
 
 function playWithFade() {
+    // Disconnect old source if it exists
     if (source) {
-        source.stop();
+        try {
+            source.disconnect();
+        } catch (e) {
+            console.log('Source disconnect error:', e);
+        }
     }
     
-    source = audioContext.createMediaElementSource(audio);
-    source.connect(gainNode);
-    
-    // Reset gain and fade in
-    gainNode.gain.setValueAtTime(0, audioContext.currentTime);
-    gainNode.gain.linearRampToValueAtTime(1, audioContext.currentTime + 0.2);
-    
-    // Schedule fade out for end of audio
-    audio.addEventListener('timeupdate', function() {
-        if (audio.duration - audio.currentTime <= 0.2) {
-            gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + 0.2);
-        }
-    });
-    
-    audio.play();
+    try {
+        // Create new source for each play
+        source = audioContext.createMediaElementSource(audio);
+        source.connect(gainNode);
+        
+        // Reset gain and fade in
+        gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+        gainNode.gain.linearRampToValueAtTime(1, audioContext.currentTime + 0.2);
+        
+        // Schedule fade out for end of audio
+        audio.addEventListener('timeupdate', function() {
+            if (audio.duration - audio.currentTime <= 0.2) {
+                gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + 0.2);
+            }
+        });
+        
+        audio.play();
+    } catch (e) {
+        console.log('Audio play error:', e);
+        // Fallback to playing without fade if there's an error
+        audio.play();
+    }
 }
 
 document.getElementById("home-button").onclick = () => {

@@ -715,10 +715,12 @@ h2, h3 {
 }
 
 .image-choice img {
-    width: 70%;
-    height: 70%;
-    object-fit: contain;
+    width: 140%;
+    height: 140%;
+    object-fit: cover;
     filter: brightness(0) invert(1);
+    transform: scale(1.4);  /* Additional scaling */
+    transform-origin: center;
 }
 
 .image-choice.correct {
