@@ -140,7 +140,129 @@ function checkAnswer(element, isCorrect) {
 }
 
 // ... rest of the shared functions (createCelebration, showEndGame, etc.) remain the same ...
+// CELEBRATION ANIMATIONS ADDED HERE
+function createCelebration() {
+    const celebration = document.createElement('div');
+    celebration.className = 'celebration';
+    document.body.appendChild(celebration);
+    
+    // Create particles in a circular pattern
+    for (let i = 0; i < 20; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'celebration-particle';
+        
+        // Calculate position around the center
+        const angle = (i / 20) * Math.PI * 2;
+        const x = 50 + Math.cos(angle) * 30;
+        const y = 50 + Math.sin(angle) * 30;
+        
+        particle.style.left = `${x}%`;
+        particle.style.top = `${y}%`;
+        particle.style.backgroundColor = ['#4CAF50', '#2196F3', '#FFC107'][Math.floor(Math.random() * 3)];
+        
+        celebration.appendChild(particle);
+    }
+    
+    setTimeout(() => celebration.remove(), 1000);
+}
 
+function addSparkleEffect(container) {
+   function createSparkle() {
+       const sparkle = document.createElement('div');
+       sparkle.className = 'sparkle';
+       document.body.appendChild(sparkle);
+    
+       const sparkleEmoji = document.createElement('span');
+       sparkleEmoji.textContent = '✨';
+    
+       // Random size (3 distinct sizes)
+       const sizes = ['16px', '20px', '24px'];
+       const size = sizes[Math.floor(Math.random() * sizes.length)];
+       sparkleEmoji.style.fontSize = size;
+    
+       // Position within viewport with padding from edges
+       const viewportWidth = window.innerWidth;
+       const viewportHeight = window.innerHeight;
+       sparkleEmoji.style.left = (Math.random() * (viewportWidth - 40) + 20) + 'px';
+       sparkleEmoji.style.top = (Math.random() * (viewportHeight - 40) + 20) + 'px';
+    
+       sparkle.appendChild(sparkleEmoji);
+    
+       setTimeout(() => sparkle.remove(), 4000);
+    }
+
+    // Create initial set of sparkles
+    for(let i = 0; i < 5; i++) {
+        createSparkle();
+    }
+    
+    // Continuously maintain 3-5 sparkles
+    const interval = setInterval(() => {
+        const currentSparkles = document.getElementsByClassName('sparkle').length;
+        if (currentSparkles < 3) {
+            for(let i = 0; i < 2; i++) {
+                createSparkle();
+            }
+        }
+    }, 1000);
+
+    return () => clearInterval(interval);
+}
+
+function disableAllChoices() {
+    document.querySelectorAll(".image-choice").forEach(button => {
+        button.disabled = true;
+    });
+}
+
+function loadNextRound() {
+    console.log("Loading the next round");
+    currentRound++;
+    if (currentRound < totalRounds) {
+        loadRound();
+        setTimeout(() => {
+            audio.currentTime = 0;
+            playWithFade();
+        }, 750);
+    } else {
+        showEndGame();
+    }
+}
+
+function showEndGame() {
+    const container = document.getElementById("choices");
+    container.style.opacity = '0';
+    container.style.transform = 'translateY(10px)';
+    
+    setTimeout(() => {
+        container.innerHTML = `
+            <div class="end-game">
+                <h2>Complete!</h2>
+                <p>⭐ ${firstTryCorrect}/10 correct on the first try! ⭐</p>
+                <button onclick="window.location.reload()" class="choice">New Round</button>
+                <button onclick="window.location.href='/index.html'" class="choice">Main Menu</button>
+            </div>
+        `;
+        
+        const endGameDiv = container.querySelector('.end-game');
+        addSparkleEffect(endGameDiv);
+        
+        container.style.opacity = '1';
+        container.style.transform = 'translateY(0)';
+        container.style.transition = 'opacity 0.3s, transform 0.3s';
+    }, 300);
+
+    document.getElementById("feedback").textContent = "";
+    document.getElementById("next-button").style.display = "none";
+    document.getElementById("play-sound").style.display = "none";
+    document.querySelector(".instruction-text").style.display = "none";
+}
+
+document.getElementById("next-button").onclick = loadNextRound;
+
+function goHome() {
+    window.location.href = "/index.html";
+}
 document.addEventListener('DOMContentLoaded', () => {
     initAudio();
     loadCategoryData();
