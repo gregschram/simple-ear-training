@@ -7,56 +7,55 @@ const totalRounds = 10;
 let firstTryCorrect = 0;
 let attemptsInCurrentRound = 0;
 let answerHistory = [];
-let currentSource = null;  // Add this at the top with your other variables
 
-const audio = new Audio();
-audio.preload = "auto";
+// Audio-related variables
+let audioElement = null;
+let audioContext = null;
+let gainNode = null;
 
-// Add fade in/out effect
-const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-let gainNode;
+// Removed these as they're redundant with the above declarations:
+// const audio = new Audio();
+// audio.preload = "auto";
+// let currentSource = null;
+// const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+// let gainNode;
 
 function initAudio() {
-    if (audioContext.state === 'suspended') {
-        audioContext.resume();
-    }
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
     gainNode = audioContext.createGain();
     gainNode.connect(audioContext.destination);
 }
 
 function playWithFade() {
     try {
-        if (!audio.paused) {
-            audio.pause();
-        }
+        // Create a brand new audio element each time
+        const newAudio = new Audio();
+        newAudio.src = audioElement ? audioElement.src : audio.src;
         
-        // Complete cleanup of old source
-        if (currentSource) {
-            currentSource.disconnect();
-            currentSource = null;
+        // Replace old audio element
+        if (audioElement) {
+            audioElement.pause();
         }
+        audioElement = newAudio;
         
-        audio.currentTime = 0;  // Reset audio position
-        currentSource = audioContext.createMediaElementSource(audio);
-        currentSource.connect(gainNode);
+        const source = audioContext.createMediaElementSource(newAudio);
+        source.connect(gainNode);
         
         gainNode.gain.setValueAtTime(0, audioContext.currentTime);
         gainNode.gain.linearRampToValueAtTime(1, audioContext.currentTime + 0.2);
         
-        audio.addEventListener('timeupdate', function() {
-            if (audio.duration - audio.currentTime <= 0.2) {
+        newAudio.addEventListener('timeupdate', function() {
+            if (newAudio.duration - newAudio.currentTime <= 0.2) {
                 gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + 0.2);
             }
-        }, { once: true });  // Added once:true to prevent listener buildup
-        
-        audio.play().catch(e => {
-            console.log('Direct play fallback due to:', e);
-            audio.play();
         });
+        
+        newAudio.play();
     } catch (e) {
         console.log('Audio play error:', e);
-        // Last resort fallback
-        audio.play();
+        // Fallback to basic play without fade
+        const fallbackAudio = new Audio(audio.src);
+        fallbackAudio.play();
     }
 }
 
