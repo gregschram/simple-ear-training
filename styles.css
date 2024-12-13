@@ -737,7 +737,7 @@ h2, h3 {
 }
 
 .image-choice img {
-    transform: translateY(10%); 
+    transform: translateY(-20%); 
     width: 100%;
     height: 100%;
     object-fit: cover;

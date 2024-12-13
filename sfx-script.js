@@ -242,14 +242,19 @@ function showEndGame() {
     container.style.transform = 'translateY(10px)';
     
     setTimeout(() => {
+        // Remove any grid-specific classes/styles
+        container.classList.remove('image-grid');
+        // Reset any grid-specific styles
+        container.style.display = 'block';
+        container.style.width = '100%';
+        container.style.maxWidth = 'none';
+        
         container.innerHTML = `
-            <div class="end-game" style="width: 100%;">  /* Added width: 100% */
+            <div class="end-game">
                 <h2>Complete!</h2>
                 <p>⭐ ${firstTryCorrect}/10 correct on the first try! ⭐</p>
-                <div style="width: 100%; display: flex; flex-direction: column; gap: 10px;">
-                    <button onclick="window.location.reload()" class="choice">New Round</button>
-                    <button onclick="window.location.href='/index.html'" class="choice">Main Menu</button>
-                </div>
+                <button onclick="window.location.reload()" class="choice">New Round</button>
+                <button onclick="window.location.href='/index.html'" class="choice">Main Menu</button>
             </div>
         `;
         
