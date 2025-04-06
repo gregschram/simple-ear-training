@@ -1,4 +1,4 @@
-export const airTravelExercises = {
+export const airtravelExercises = {
   name: "Air Travel",
   sentences: [
     {

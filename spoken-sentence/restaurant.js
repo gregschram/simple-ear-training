@@ -172,17 +172,6 @@ export const restaurantExercises = {
       sentence: "The salad has fresh tomatoes.",
       options: [
         "The salad has fresh tomatoes.",
-        "The soup comes with crackers.",
-        "Today's special is seafood pasta.",
-        "The dessert has fresh berries."
-      ]
-    },
-    {
-      id: 16,
-      audioPath: '/audio/sentences/restaurant/restaurant-16.mp3',
-      sentence: "The salad has fresh tomatoes.",
-      options: [
-        "The salad has fresh tomatoes.",
         "The dessert looks really tasty.",
         "The sauce tastes slightly spicy.",
         "Our drinks arrived quickly."

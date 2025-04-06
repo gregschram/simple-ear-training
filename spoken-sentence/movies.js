@@ -1,4 +1,4 @@
-export const movieExercises = {
+export const moviesExercises = {
   name: "At the Movies",
   sentences: [
     {
