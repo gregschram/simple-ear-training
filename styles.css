@@ -1,4 +1,4 @@
-/* Basic reset and layout */
+/* Base styles */
 body, html {
     margin: 0;
     padding: 0;
@@ -6,9 +6,9 @@ body, html {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #1a1a2e;
-    color: #fff;
-    font-family: Arial, sans-serif;
+    background-color: #F2F2F2;
+    color: #36594F;
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, Arial, sans-serif;
     overflow: hidden; /* Prevent scrolling */
 }
 
@@ -24,27 +24,62 @@ body, html {
 .container {
     text-align: center;
     width: 90%;
-    max-width: 400px;
+    max-width: 800px;
     margin: auto;
     min-height: 500px;
-    padding: 20px;
+    padding: 40px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
 }
 
 h2, h3 {
     margin: 3px 0;
+    font-weight: 600;
+    line-height: 1.2;
+    color: #36594F;
 }
 
-.header-controls {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+h2 {
+    font-size: 1.8rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.2rem;
+}
+
+h3 {
     margin: 5px 0;
+    font-size: 1.2rem;
+    color: #5D7F75;
 }
 
 /* Navigation and control buttons */
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #5DA698;
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-bottom: 16px;
+}
+
+.back-button:hover {
+    background-color: #69BFAF;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 #home-button {
     display: inline-block;
     background-color: transparent;
@@ -60,460 +95,495 @@ h2, h3 {
 }
 
 #next-button {
-    background-color: transparent;
-    color: #ffffff;
-    border: 2px solid #ffffff;
-    padding: 8px 16px;
+    display: inline-block;
+    background-color: #5DA698;
+    color: white;
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 12px 32px;
+    border-radius: 30px;
+    border: none;
     cursor: pointer;
-    font-size: 0.9em;
-    border-radius: 5px;
-    margin: 5px auto;
-    transition: background-color 0.3s, color 0.3s;
-    height: 40px;
-    visibility: hidden;
-    display: block !important;
+    transition: all 0.2s ease;
+    text-align: center;
+    min-width: 120px;
+    margin: 15px auto;
 }
 
-#next-button[style*="inline-block"] {
-    visibility: visible;
+#next-button:hover {
+    background-color: #69BFAF;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-#home-button:hover, #next-button:hover {
+#home-button:hover {
     background-color: #ffffff;
     color: #1a1a2e;
 }
-/* Add the new purple styles here */
-.start-exercise[onclick*="Word"] {
-    background-color: #7952b3;
+
+/* Exercise header - Redesigned for cohesion */
+.exercise-header {
+    position: relative;
+    margin-bottom: 24px;
 }
 
-.start-exercise[onclick*="Word"]:hover {
-    background-color: #563d7c;
-}
-
-.start-exercise[onclick*="startSfxExercise"] {
-    background-color: #cd7f32;
-}
-
-.start-exercise[onclick*="startSfxExercise"]:hover {
-    background-color: #b26d2b;
-}
-
-.modal .sub-option {
-    background-color: #7952b3;
-}
-
-.modal .sub-option:hover {
-    background-color: #563d7c;
-}
-
-.exercise-group {
-    width: 100%;
-    margin: 10px 0;
-}
-
-.word-options {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-top: 8px;
-}
-
-.sub-option {
-    background-color: #0d6efd;
-    color: #fff;
-    padding: 15px 30px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1.2em;
-    transition: background-color 0.3s, transform 0.2s;
-}
-
-.sub-option:hover {
-    background-color: #084298;
-    transform: scale(1.03);
-}
-
-
-/* Status displays */
-#score, #round-tracker {
-    font-size: 0.9em;
-    margin: 3px 0;
-    opacity: 0.8;
-    min-height: 1.5em;
-}
-
-/* Main action button */
-.play-sound {
-    background-color: #0d6efd;
-    color: #fff;
-    padding: 15px 30px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1.2em;
-    margin: 10px 0;
-    transition: background-color 0.3s, transform 0.2s;
-}
-
-.play-sound:hover {
-    background-color: #084298;
-    transform: scale(1.03);
-}
-
-/* Speed control */
-.audio-controls {
+.breadcrumb {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 4px;
+    margin-bottom: 16px;
+}
+
+.title-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 8px;
+}
+
+.exercise-title {
+    flex: 1;
+}
+
+.exercise-title h2 {
+    margin-bottom: 4px;
+}
+
+/* Round indicator styled more discreetly */
+#round-tracker, .round-indicator {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #5D7F75;
+    display: inline-flex;
+    align-items: center;
+    padding-bottom: 4px;
+}
+
+.round-indicator::before, #round-tracker::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #5DA698;
+    margin-right: 4px;
+}
+
+/* Instruction Card */
+.instruction-card, .instruction-text {
+    background-color: rgba(180, 217, 189, 0.2);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.instruction-card::before, .instruction-text::before {
+    content: '';
+    width: 4px;
+    height: calc(100% - 32px);
+    background-color: #5DA698;
+    position: absolute;
+    left: 0;
+    top: 16px;
+    border-radius: 0 2px 2px 0;
+}
+
+.instruction-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #69BFAF;
+    display: flex;
+    align-items: center;
     justify-content: center;
+    margin-right: 16px;
+    flex-shrink: 0;
+}
+
+.instruction-text {
+    font-weight: 500;
+    font-size: 1em;
+    line-height: 1.5;
+    text-align: left;
+    padding-left: 20px;
+}
+
+/* Divider after instructions, before play button */
+.divider {
+    height: 1px;
+    background-color: #E9ECEF;
+    margin: 0 0 32px;
+}
+
+/* Audio controls */
+.audio-control-container, .audio-controls {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 32px;
+}
+
+.play-sound, .play-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    background-color: #5DA698;
+    color: white;
+    padding: 12px 28px;
+    border-radius: 40px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.play-sound svg, .play-button svg {
+    width: 28px;
+    height: 28px;
+    margin-right: -4px;
+}
+
+.play-sound:hover, .play-button:hover {
+    background-color: #69BFAF;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05), 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
 .speed-checkbox {
     display: flex;
     align-items: center;
-    gap: 5px;
-    font-size: 0.9em;
-}
-
-.icon {
-    margin-right: 5px;
-}
-/* instructions */
-.instruction-text {
-    font-weight: bold;
-    font-size: 0.9em;
-    margin: 5px 0;
-}
-
-/* Choices section */
-#choices {
-    display: flex;
-    flex-direction: column;
     gap: 8px;
-    margin-top: 15px;
-    min-height: 220px;
+    font-size: 0.9em;
+    color: #5D7F75;
+    font-weight: 500;
+}
+
+.speed-checkbox input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 40px;
+    height: 22px;
+    border-radius: 11px;
+    background-color: #e1e1e6;
+    position: relative;
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+
+.speed-checkbox input[type="checkbox"]::before {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: white;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.2s;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.speed-checkbox input[type="checkbox"]:checked {
+    background-color: #5DA698;
+}
+
+.speed-checkbox input[type="checkbox"]:checked::before {
+    transform: translateX(18px);
+}
+
+/* Option choices */
+#choices {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto 25px;
+}
+
+.choice-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
 }
 
 .choice {
-    background-color: #3a3a3a;
-    color: #fff;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 5px;
+    background-color: #FFFFFF;
+    border: 1px solid #E9ECEF;
+    border-radius: 12px;
+    padding: 16px;
+    text-align: left;
+    font-size: 1.05em;
+    font-weight: 500;
     cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.3s;
-    min-height: 40px;
-    height: auto;
-    white-space: normal;
+    transition: all 0.2s ease;
+    min-height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transform: scale(1);  /* Add this */
+    color: #36594F;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .choice:hover {
-    background-color: #555;
-    transform: scale(1.02);
+    border-color: #5DA698;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
 }
 
 .choice.correct {
-    background-color: #4CAF50;
-    transform: scale(1) !important;  /* Add this to prevent shift */
+    background-color: #69BFAF;
+    color: white;
+    border-color: #69BFAF;
+    box-shadow: 0 0 0 2px #69BFAF, 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .choice.incorrect {
-    background-color: #E54545;
+    background-color: #E57E7E;
+    color: white;
+    border-color: #E57E7E;
+    opacity: 0.85;
+    box-shadow: 0 0 0 2px #E57E7E, 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.choice:disabled {
-    cursor: not-allowed;
-    opacity: 0.3;  /* Make incorrect answers more dim */
+/* Sound effect grid */
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin: 0 auto 32px;
+    width: 100%;
+    max-width: 600px;
 }
 
-.choice.correct:disabled {
-    opacity: 1;    /* Keep correct answer bright */
-}
-
-/* Feedback area */
-#feedback {
-    font-size: 1.5em;
-    min-height: 1.5em;
-    margin: 10px 0;
-    font-weight: bold;
-    color: #fff;
-    visibility: hidden;
-}
-
-#feedback:not(:empty) {
-    visibility: visible;
-}
-
-#feedback.correct {
-    color: #7fff7f;
-}
-
-#feedback.incorrect {
-    color: #E54545;
-}
-
-#feedback.fade-in {
-    animation: fadeIn 0.3s ease-in-out;
-}
-
-/* Start screen button */
-.start-exercise {
-    background-color: #0d6efd;
-    color: #fff;
-    padding: 15px 30px;
-    border: none;
-    border-radius: 5px;
+.image-choice {
+    aspect-ratio: 1;
+    background-color: #FFFFFF;
+    border: 1px solid #E9ECEF;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    font-size: 1.2em;
-    margin: 20px 0;
-    transition: background-color 0.3s, transform 0.2s;
+    transition: all 0.2s ease;
+    padding: 20px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-.start-exercise:hover {
-    background-color: #084298;
+.image-choice:hover {
+    border-color: #5DA698;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.image-choice.correct {
+    background-color: #69BFAF;
+    border-color: #69BFAF;
+    box-shadow: 0 0 0 2px #69BFAF, 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.image-choice.incorrect {
+    background-color: #E57E7E;
+    border-color: #E57E7E;
+    opacity: 0.85;
+    box-shadow: 0 0 0 2px #E57E7E, 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.image-choice img {
+    max-width: 70%;
+    max-height: 70%;
+    transition: all 0.2s ease;
+    filter: invert(27%) sepia(15%) saturate(848%) hue-rotate(118deg) brightness(94%) contrast(88%);
+}
+
+.image-choice:hover img {
     transform: scale(1.05);
 }
 
-/* End game screen */
-.end-game {
-    text-align: center;
-    margin: 20px 0;
-    min-height: 220px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;  /* Make sure this is here */
-    overflow: visible;   /* Make sure this is here */
+.image-choice.correct img,
+.image-choice.incorrect img {
+    filter: brightness(0) invert(1);
 }
 
-.end-game button {
-    margin: 10px;
-}
-
-/* Written prompt display */
-.written-prompt {
-    font-size: 1.2em;
+/* Audio choice pairs for written exercise */
+.audio-choice-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    width: 100%;
     margin: 15px 0;
-    padding: 15px;
-    background-color: #2a2a4a;
-    border-radius: 5px;
-    color: #fff;
 }
 
-/* Audio choice pair container */
 .audio-choice-pair {
     display: flex;
     gap: 10px;
     align-items: center;
-    margin: 8px 0;
+    background-color: #FFFFFF;
+    border: 1px solid #E9ECEF;
+    border-radius: 8px;
+    padding: 10px;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-/* Play button for audio samples */
+.audio-choice-pair:hover {
+    border-color: #5DA698;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
 .play-audio-button {
-    background-color: #0d6efd;
-    color: #fff;
-    width: 48px;    /* Increased from 40px */
-    height: 48px;   /* Increased from 40px */
+    background-color: #5DA698;
+    color: white;
+    width: 44px;
+    height: 44px;
     border: none;
-    border-radius: 5px;
+    border-radius: 22px;
     cursor: pointer;
     font-size: 1.2em;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    transition: background-color 0.3s, transform 0.2s;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(126, 158, 126, 0.3);
 }
 
 .play-audio-button:hover {
-    background-color: #084298;
-    transform: scale(1.05);
+    background-color: #69BFAF;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(126, 158, 126, 0.4);
 }
 
-/* Adjust choice buttons when in a pair */
 .audio-choice-pair .choice {
     flex-grow: 1;
     margin: 0;
-    height: 40px;   /* Reduced from 45px */
-    font-size: 0.9em;  /* Slightly smaller font */
+    height: 44px;
+    min-height: unset;
+    box-shadow: none;
+    background-color: transparent;
 }
 
-/* Add to existing mobile styles */
-@media screen and (max-width: 480px) {
-    .written-prompt {
-        font-size: 1.1em;
-        padding: 10px;
-        margin: 10px 0;
-    }
-
-    .audio-choice-pair {
-        gap: 8px;
-        margin: 6px 0;
-    }
-
-    .play-audio-button {
-        width: 42px;    /* Slightly smaller on mobile but still bigger than original */
-        height: 42px;
-        font-size: 1.1em;
-    }
+/* Feedback area */
+.feedback-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 24px;
 }
 
-/* Lightbox effect for word game syllables choice */
-.modal {
-    display: none;
-    position: fixed;
+#feedback {
+    font-size: 1.5em;
+    min-height: 1.5em;
+    margin: 10px 0;
+    font-weight: bold;
+    text-align: center;
+}
+
+#feedback.correct {
+    color: #69BFAF;
+}
+
+#feedback.incorrect {
+    color: #E57E7E;
+}
+
+/* Written prompt */
+.written-prompt {
+    font-size: 1.4em;
+    margin: 20px 0;
+    padding: 20px;
+    background-color: rgba(180, 217, 189, 0.2);
+    border-radius: 12px;
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+    color: #36594F;
+    font-weight: 600;
+}
+
+/* Exercise choices */
+.exercise-choices {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 30px;
+    width: 100%;
+}
+
+.start-exercise {
+    background-color: #f5f5f7;
+    color: #1d1d1f;
+    padding: 25px 30px;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    font-size: 1.3em;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.start-exercise::before {
+    content: '';
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
+    background: linear-gradient(135deg, #5DA698, #69BFAF);
     opacity: 0;
-    transition: opacity 0.2s ease;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+    border-radius: 16px;
 }
 
-.modal.show {
+.start-exercise:hover {
+    transform: translateY(-5px);
+    color: white;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.start-exercise:hover::before {
     opacity: 1;
 }
 
-.modal-content {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #1a1a2e;
-    padding: 25px;
-    border-radius: 10px;
-    min-width: 280px;
-    max-width: 90%;
+.start-exercise[onclick*="Word"]::before {
+    background: linear-gradient(135deg, #5DA698, #B4D9BD);
 }
 
-.close-button {
-    position: absolute;
-    right: 15px;
-    top: 15px;
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 24px;
-    cursor: pointer;
-    padding: 5px;
-    line-height: 1;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
+.start-exercise[onclick*="startSfxExercise"]::before {
+    background: linear-gradient(135deg, #69BFAF, #5DA698);
 }
 
-.close-button:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+.start-exercise[onclick*="startSfxExercise"] {
+    grid-column: span 2;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.modal h2 {
-    margin-top: 0;
-    margin-bottom: 20px;
-    padding-right: 40px;
+/* Add the new purple styles here */
+.start-exercise[onclick*="Word"] {
+    background-color: #f5f5f7;
 }
 
-
-/* Responsive design */
-/* For phones */
-@media screen and (max-width: 480px) {
-    .container {
-        width: 95%;
-        height: 100vh;
-        padding: 10px;
-        justify-content: flex-start;
-        overflow: hidden;
-    }
-
-    .container:only-child {
-        justify-content: center;
-        height: 100vh;
-    }
-
-    .choice {
-        padding: 8px 12px;
-        font-size: 0.85em;
-        min-height: 40px;
-    }
-
-    #feedback {
-        font-size: 1.1em;
-        margin: 8px 0;
-    }
-
-    h2 {
-        font-size: 1.2em;
-    }
-
-    h3 {
-        font-size: 1em;
-    }
-
-    #score, #round-tracker {
-        margin: 3px 0;
-        font-size: 0.85em;
-    }
-
-    .play-sound {
-        padding: 10px 20px;
-        margin: 8px 0;
-        font-size: 1.1em;
-    }
-
-    #home-button, .toggle-speed {
-        padding: 6px 12px;
-        margin: 5px;
-        font-size: 0.85em;
-    }
-
-    #choices {
-        gap: 6px;
-        margin-top: 10px;
-        min-height: 200px;
-    }
+.start-exercise[onclick*="startSfxExercise"] {
+    background-color: #f5f5f7;
 }
 
-/* For tablets */
-@media screen and (min-width: 481px) and (max-width: 768px) {
-    .container {
-        width: 90%;
-        min-height: 90vh;
-    }
-}
-
-/* For landscape orientation on phones */
-@media screen and (max-height: 480px) and (orientation: landscape) {
-    body {
-        align-items: flex-start;
-    }
-
-    .container {
-        min-height: auto;
-        padding: 10px;
-    }
-
-    #choices {
-        min-height: 180px;
-    }
-}
-
-/* ANIMATIONS FOR PAGE TRANSITION ADDED HERE */
-/* Base page transition */
-.container {
-    opacity: 0;
-    transform: translateY(10px);
-    animation: fadeIn 0.4s ease-out forwards;
+/* Animations */
+@keyframes successPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+    100% { transform: scale(1); }
 }
 
 @keyframes fadeIn {
@@ -527,120 +597,11 @@ h2, h3 {
     }
 }
 
-/* stagger effect for sfx images coming in */
-@keyframes fadeInStagger {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.container {
+    animation: fadeIn 0.4s ease-out forwards;
 }
 
-.image-choice {
-    opacity: 0;
-    animation: fadeInStagger 0.3s ease-out forwards;
-}
-
-.image-choice:nth-child(1) { animation-delay: 0.0s; }
-.image-choice:nth-child(2) { animation-delay: 0.1s; }
-.image-choice:nth-child(3) { animation-delay: 0.2s; }
-.image-choice:nth-child(4) { animation-delay: 0.3s; }
-
-/* Cascade effect for choice buttons */
-.choice, .audio-choice-pair {
-    opacity: 0;
-    transform: translateY(5px);
-    animation: cascadeIn 0.4s ease-out forwards;
-}
-
-.choice:nth-child(1), .audio-choice-pair:nth-child(1) { animation-delay: 0.1s; }
-.choice:nth-child(2), .audio-choice-pair:nth-child(2) { animation-delay: 0.15s; }
-.choice:nth-child(3), .audio-choice-pair:nth-child(3) { animation-delay: 0.2s; }
-.choice:nth-child(4), .audio-choice-pair:nth-child(4) { animation-delay: 0.25s; }
-
-@keyframes cascadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(5px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* @keyframes successPulse {
-    0% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
-    }
-    15% {
-        transform: scale(0.95);
-        box-shadow: 0 0 15px 0 rgba(76, 175, 80, 0.3);
-    }
-    30% {
-        transform: scale(1.2);
-        box-shadow: 0 0 30px 10px rgba(76, 175, 80, 0.5);
-    }
-    45% {
-        transform: scale(0.98);
-        box-shadow: 0 0 20px 5px rgba(76, 175, 80, 0.3);
-    }
-    65% {
-        transform: scale(1.05);
-        box-shadow: 0 0 10px 2px rgba(76, 175, 80, 0.2);
-    }
-    85% {
-        transform: scale(0.99);
-    }
-    100% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
-    }
-}
-
-.choice.correct {
-    animation: successPulse 0.7s cubic-bezier(0.4, 0.0, 0.2, 1) !important;
-    transform: scale(1) !important;
-    background: radial-gradient(circle at center, #4CAF50 0%, #45a049 100%);
-}
-*/
-
-@keyframes glowPulse {
-    0% {
-        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
-        background: radial-gradient(circle at center, #4CAF50 100%, #45a049 100%);
-    }
-    8% {
-        /* Quicker, subtler tension */
-        box-shadow: 0 0 2px 0 rgba(76, 175, 80, 0.1);
-        background: radial-gradient(circle at center, #45a049 100%, #409945 100%);
-    }
-    20% {
-        /* Gentler release */
-        box-shadow: 0 0 25px 10px rgba(76, 175, 80, 0.4);
-        background: radial-gradient(circle at center, #4CAF50 0%, #45a049 100%);
-    }
-    60% {
-        /* Soft fade */
-        box-shadow: 0 0 10px 5px rgba(76, 175, 80, 0.2);
-        background: radial-gradient(circle at center, #4CAF50 50%, #45a049 100%);
-    }
-    100% {
-        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
-        background: radial-gradient(circle at center, #4CAF50 100%, #45a049 100%);
-    }
-}
-
-.choice.correct {
-    animation: glowPulse 1.2s cubic-bezier(0.4, 0.0, 0.2, 1) !important;
-    transform: scale(1) !important;
-}
-
-/* Celebration effect */
+/* CELEBRATION ANIMATIONS */
 .celebration {
     position: fixed;
     pointer-events: none;
@@ -706,65 +667,205 @@ h2, h3 {
     animation: sparkleWave 4s ease-in-out;
 }
 
-/* Image grid layout */
-.image-grid {
-    display: grid !important;  /* Override any flex settings */
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 15px;
-    margin: 20px auto;
+/* Modal and word game styling */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    min-height: unset !important;  /* Remove inherited min-height */
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    opacity: 0;
+    transition: opacity 0.2s ease;
 }
 
-.image-choice {
-    position: relative;
-    aspect-ratio: 1;
-    border-radius: 8px;
-    background-color: #3a3a3a;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    padding: 15px;
+.modal.show {
+    opacity: 1;
+}
+
+.modal-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #FFFFFF;
+    padding: 25px;
+    border-radius: 16px;
+    min-width: 280px;
+    max-width: 90%;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.close-button {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    background: none;
     border: none;
+    color: #36594F;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px;
+    line-height: 1;
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-sizing: border-box;
+    border-radius: 50%;
 }
 
-.image-choice:hover {
-    background-color: #555;
-    transform: scale(1.02);
+.close-button:hover {
+    background-color: rgba(126, 158, 126, 0.1);
 }
 
-.image-choice img {
-    transform: translateY(-20%); 
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(0) invert(1);
-    transform: scale(1.2);  /* Additional scaling */
-    transform-origin: center;
+.modal h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-right: 40px;
 }
 
-.image-choice.correct {
-    background-color: #4CAF50;
+/* Responsive design */
+@media screen and (max-width: 768px) {
+    .container {
+        max-width: 100%;
+        padding: 20px;
+    }
+    
+    .choice-container, .audio-choice-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .exercise-choices {
+        grid-template-columns: 1fr;
+    }
+    
+    .start-exercise[onclick*="startSfxExercise"] {
+        grid-column: span 1;
+    }
+    
+    .title-area {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .round-indicator {
+        margin-top: 4px;
+    }
+    
+    .play-button, .play-sound {
+        flex-direction: column;
+        padding: 16px;
+        border-radius: 100px;
+        width: 160px;
+        height: 160px;
+    }
+    
+    .play-button svg, .play-sound svg {
+        width: 48px;
+        height: 48px;
+        margin-right: 0;
+        margin-bottom: 8px;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
 }
 
-.image-choice.incorrect {
-    background-color: #E54545;
-}
-
-/* Responsive adjustments */
 @media screen and (max-width: 480px) {
-    .image-grid {
-        gap: 10px;
+    .container {
+        width: 95%;
+        height: 100vh;
+        padding: 10px;
+        justify-content: flex-start;
+        overflow: hidden;
+    }
+
+    .container:only-child {
+        justify-content: center;
+        height: 100vh;
+    }
+
+    .choice {
+        padding: 8px 12px;
+        font-size: 0.85em;
+        min-height: 40px;
+    }
+
+    #feedback {
+        font-size: 1.1em;
+        margin: 8px 0;
+    }
+
+    h2 {
+        font-size: 1.2em;
+    }
+
+    h3 {
+        font-size: 1em;
+    }
+
+    #score, #round-tracker {
+        margin: 3px 0;
+        font-size: 0.85em;
+    }
+
+    .play-sound, .play-button {
+        padding: 10px 20px;
+        margin: 8px 0;
+        font-size: 1.1em;
+        flex-direction: row;
+        width: auto;
+        height: auto;
+    }
+
+    .play-sound svg, .play-button svg {
+        margin-bottom: 0;
+    }
+
+    #home-button, .toggle-speed {
+        padding: 6px 12px;
+        margin: 5px;
+        font-size: 0.85em;
+    }
+
+    #choices {
+        gap: 6px;
+        margin-top: 10px;
+        min-height: 200px;
     }
 }
 
-/* Handle wide screens */
-@media screen and (min-width: 768px) {
-    .image-grid {
-        width: 80%;
-        max-width: 600px;
+/* For tablets */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .container {
+        width: 90%;
+        min-height: 90vh;
     }
 }
+
+/* For landscape orientation on phones */
+@media screen and (max-height: 480px) and (orientation: landscape) {
+    body {
+        align-items: flex-start;
+    }
+
+    .container {
+        min-height: auto;
+        padding: 10px;
+    }
+
+    #choices {
+        min-height: 180px;
+    }
+}
+
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
