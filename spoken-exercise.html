@@ -31,4 +31,35 @@
             <div class="instruction-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="12" cy="12" r="10"></circle>
-                    <line x
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+            </div>
+            <p>Press the sentence that matches what you hear. Press "Play Sound" to listen again.</p>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="audio-control-container">
+            <button id="play-sound" class="play-button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+                Press to play sound
+            </button>
+            <label class="speed-checkbox">
+                <input type="checkbox" id="toggle-speed">
+                Slow audio
+            </label>
+        </div>
+
+        <div id="choices" class="choice-container"></div>
+
+        <div class="feedback-container">
+            <div id="feedback"></div>
+            <button id="next-button" style="display: none;">Next</button>
+        </div>
+    </div>
+    <script type="module" src="spoken-script.js"></script>
+</body>
+</html>
