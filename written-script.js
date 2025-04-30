@@ -139,27 +139,27 @@ function preloadNextRound() {
 }
 
 function loadAudioWithRetry(path, maxRetries = 3) {
-  return new Promise((resolve, reject) => {
-    const audio = new Audio();
-    
-    audio.addEventListener('canplaythrough', () => {
-      console.log(`Successfully loaded audio: ${path}`);  // Added debug log
-      resolve(audio);
-    }, { once: true });
-    
-    audio.addEventListener('error', (e) => {
-      console.error(`Failed to load audio ${path}:`, e);  // Added debug log
-      if (maxRetries > 0) {
-        console.warn(`Retrying ${path}, ${maxRetries} attempts left`);
-        setTimeout(() => loadAudioWithRetry(path, maxRetries - 1), 1000);
-      } else {
-        reject(new Error(`Failed to load audio: ${path}`));
-      }
-    }, { once: true });
+    return new Promise((resolve, reject) => {
+        const audio = new Audio();
+        
+        audio.addEventListener('canplaythrough', () => {
+            console.log(`Successfully loaded audio: ${path}`);  // Added debug log
+            resolve(audio);
+        }, { once: true });
+        
+        audio.addEventListener('error', (e) => {
+            console.error(`Failed to load audio ${path}:`, e);  // Added debug log
+            if (maxRetries > 0) {
+                console.warn(`Retrying ${path}, ${maxRetries} attempts left`);
+                setTimeout(() => loadAudioWithRetry(path, maxRetries - 1), 1000);
+            } else {
+                reject(new Error(`Failed to load audio: ${path}`));
+            }
+        }, { once: true });
 
-    audio.src = path;
-    audio.load(); // Explicitly trigger load
-  });
+        audio.src = path;
+        audio.load(); // Explicitly trigger load
+    });
 }
 
 // Update the createChoices function to handle the new layout
@@ -234,177 +234,48 @@ function loadRound() {
                 pairContainer.appendChild(playButton);
                 pairContainer.appendChild(answerButton);
                 choicesContainer.appendChild(pairContainer);
-                });
             });
         })
-        .catch(error => {
-            console.error("Error in audio preload:", error);
-            document.getElementById("feedback").textContent = "Error loading audio files. Please reload the page.";
+        .catch((error) => {
+            console.error("Error preloading audio files:", error);
+            document.getElementById("feedback").textContent = "Error loading audio. Please try again.";
         });
-    setTimeout(() => preloadNextRound(), 500);
 }
 
 function checkAnswer(button, isCorrect, option) {
     attemptsInCurrentRound++;
+    const feedback = document.getElementById("feedback");
+    
     if (isCorrect) {
-        if (attemptsInCurrentRound === 1) {
-            firstTryCorrect++;
-            answerHistory[currentRound] = true;
-        } else {
-            answerHistory[currentRound] = false;
-        }
-        score++;
         button.classList.add("correct");
-        button.classList.add("fade-in");
-        button.textContent = option.sentence;  // Add this line
-        document.getElementById("feedback").textContent = "Correct!";
-        document.getElementById("feedback").className = "correct";
-        document.getElementById("next-button").style.display = "inline-block";
-        disableAllChoices();
-        createCelebration();
+        feedback.textContent = "Correct! 🎉";
+        score++;
     } else {
         button.classList.add("incorrect");
-        button.disabled = true;
-        button.classList.add("fade-in");
-        button.textContent = option.sentence;  // Replace the "Audio X" text with the actual sentence
-        document.getElementById("feedback").textContent = "That's not quite it. Try again.";
-        document.getElementById("feedback").className = "incorrect";
+        feedback.textContent = "Incorrect. Try again! ❌";
+        attempts++;
     }
+    
+    answerHistory.push({ option, isCorrect });
+    if (attemptsInCurrentRound >= 3) {
+        document.getElementById("next-button").style.display = "block";
+    }
+    
+    console.log(answerHistory);
 }
 
-function disableAllChoices() {
-    document.querySelectorAll(".choice").forEach(button => {
-        button.disabled = true;
-    });
-}
-
-document.getElementById("toggle-speed").onchange = (e) => {
-    isSlowSpeed = e.target.checked;
-    audioSpeed = isSlowSpeed ? 0.65 : 1.0;
-    audio.playbackRate = audioSpeed;
-};
-
-function loadNextRound() {
-    console.log("Loading the next round");
+document.getElementById("next-button").onclick = () => {
     currentRound++;
     if (currentRound < totalRounds) {
         loadRound();
     } else {
-        showEndGame();
+        endGame();
     }
-}
+};
 
-function showEndGame() {
-    const container = document.getElementById("choices");
-    container.style.opacity = '0';
-    container.style.transform = 'translateY(10px)';
-    
-    setTimeout(() => {
-        container.innerHTML = `
-            <div class="end-game">
-                <h2>Complete!</h2>
-                <p>⭐ ${firstTryCorrect}/10 correct on the first try! ⭐</p>
-                <button onclick="window.location.reload()" class="choice">New Round</button>
-                <button onclick="window.location.href='/index.html'" class="choice">Main Menu</button>
-            </div>
-        `;
-        
-        const endGameDiv = container.querySelector('.end-game');
-        addSparkleEffect(endGameDiv);
-        
-        container.style.opacity = '1';
-        container.style.transform = 'translateY(0)';
-        container.style.transition = 'opacity 0.3s, transform 0.3s';
-    }, 300);
+document.getElementById("toggle-speed").onchange = () => {
+    isSlowSpeed = !isSlowSpeed;
+    loadRound();
+};
 
-    document.getElementById("feedback").textContent = "";
-    document.getElementById("next-button").style.display = "none";
-    document.getElementById("play-sound").style.display = "none";
-    document.getElementById("toggle-speed").style.display = "none";
-    document.querySelector(".instruction-text").style.display = "none";
-    document.querySelector(".speed-checkbox").style.display = "none";
-}
-
-document.getElementById("next-button").onclick = loadNextRound;
-
-function createCelebration() {
-    const celebration = document.createElement('div');
-    celebration.className = 'celebration';
-    document.body.appendChild(celebration);
-    
-    // Create particles in a circular pattern
-    for (let i = 0; i < 20; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'celebration-particle';
-        
-        // Calculate position around the center
-        const angle = (i / 20) * Math.PI * 2;
-        const x = 50 + Math.cos(angle) * 30;
-        const y = 50 + Math.sin(angle) * 30;
-        
-        particle.style.left = `${x}%`;
-        particle.style.top = `${y}%`;
-        particle.style.backgroundColor = ['#4CAF50', '#2196F3', '#FFC107'][Math.floor(Math.random() * 3)];
-        
-        celebration.appendChild(particle);
-    }
-    
-    setTimeout(() => celebration.remove(), 1000);
-}
-
-function addSparkleEffect(container) {
-   function createSparkle() {
-       const sparkle = document.createElement('div');
-       sparkle.className = 'sparkle';
-       document.body.appendChild(sparkle);
-    
-       const sparkleEmoji = document.createElement('span');
-       sparkleEmoji.textContent = '✨';
-    
-       // Random size (3 distinct sizes)
-       const sizes = ['16px', '20px', '24px'];
-       const size = sizes[Math.floor(Math.random() * sizes.length)];
-       sparkleEmoji.style.fontSize = size;
-    
-       // Position within viewport with padding from edges
-       const viewportWidth = window.innerWidth;
-       const viewportHeight = window.innerHeight;
-       sparkleEmoji.style.left = (Math.random() * (viewportWidth - 40) + 20) + 'px';
-       sparkleEmoji.style.top = (Math.random() * (viewportHeight - 40) + 20) + 'px';
-    
-       sparkle.appendChild(sparkleEmoji);
-    
-       setTimeout(() => sparkle.remove(), 4000);
-    }
-
-    // Create initial set of sparkles
-    for(let i = 0; i < 5; i++) {
-        createSparkle();
-    }
-    
-    // Continuously maintain 3-5 sparkles
-    const interval = setInterval(() => {
-        const currentSparkles = document.getElementsByClassName('sparkle').length;
-        if (currentSparkles < 3) {
-            for(let i = 0; i < 2; i++) {
-                createSparkle();
-            }
-        }
-    }, 1000);
-
-    return () => clearInterval(interval);
-}
-function goHome() {
-    window.location.href = "/index.html";
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    if (exerciseType === 'word') {
-        loadCategoryData();  // No category needed for word exercises
-    } else if (category) {
-        loadCategoryData(category);
-    } else {
-        console.error("No valid exercise type or category specified");
-        goHome();
-    }
-});
+loadCategoryData(category);
