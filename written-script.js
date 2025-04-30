@@ -13,6 +13,11 @@ const audio = new Audio();
 audio.preload = "auto";
 audio.playbackRate = audioSpeed;
 
+// graceful fallback now that the button is an <a>
+const homeBtn = document.getElementById('home-button') || document.querySelector('.back-link');
+if (homeBtn) homeBtn.onclick = () => location.href = '/index.html';
+
+
 document.getElementById("home-button").onclick = () => {
     window.location.href = "/index.html";
 };

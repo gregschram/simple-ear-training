@@ -13,6 +13,10 @@ let audio = new Audio();  // We'll keep this one instead of audioElement
 let audioContext = null;
 let gainNode = null;
 
+// graceful fallback now that the button is an <a>
+const homeBtn = document.getElementById('home-button') || document.querySelector('.back-link');
+if (homeBtn) homeBtn.onclick = () => location.href = '/index.html';
+
 // Update play button and feedback display
 document.getElementById("play-sound").textContent = "▶";
 

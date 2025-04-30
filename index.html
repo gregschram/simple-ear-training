@@ -4,15 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ear Training Exercises</title>
-
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <!---- top bar --------------------------------------------------------- -->
+  <!-- ───────── header ───────── -->
   <header class="site-header">
     <div class="header-inner">
-      <img class="logo-img" src="/images/ep-logo-v1-white.png" alt="Ear-Practice logo">
+      <img class="logo-img" src="/images/ep-logo-v1-white.png" alt="Ear Practice logo">
       <nav>
         <a href="about.html">About</a>
         <a href="donate.html" class="donate-btn">Donate to support</a>
@@ -20,42 +19,22 @@
     </div>
   </header>
 
-  <!---- main card ------------------------------------------------------- -->
+  <!-- ───────── menu card ───────── -->
   <main class="page-wrap">
     <div class="container">
       <h1>Ear Training Exercises</h1>
 
-      <!-- NEW wrapper gives equal spacing via CSS -->
       <div class="exercise-choices">
-        <button class="btn spoken"
-                onclick="showWordOptions('spoken')">
-          Identify the Spoken Word
-        </button>
-
-        <button class="btn spoken"
-                onclick="location.href='spoken-exercise.html?category=haircut'">
-          Identify the Spoken Sentence
-        </button>
-
-        <button class="btn written"
-                onclick="showWordOptions('written')">
-          Identify the Written Word
-        </button>
-
-        <button class="btn written"
-                onclick="startWrittenExercise()">
-          Identify the Written Sentence
-        </button>
-
-        <button class="btn sfx"
-                onclick="startSfxExercise()">
-          Identify the Sound Effect
-        </button>
+        <button class="btn spoken"  onclick="showWordOptions('spoken')">Identify the Spoken Word</button>
+        <button class="btn spoken"  onclick="location.href='spoken-exercise.html?category=haircut'">Identify the Spoken Sentence</button>
+        <button class="btn written" onclick="showWordOptions('written')">Identify the Written Word</button>
+        <button class="btn written" onclick="startWrittenExercise()">Identify the Written Sentence</button>
+        <button class="btn sfx"     onclick="startSfxExercise()">Identify the Sound Effect</button>
       </div>
     </div>
   </main>
 
-  <!---- word-type modal ------------------------------------------------- -->
+  <!-- ───────── word-type modal ───────── -->
   <div id="word-modal" class="modal">
     <div class="modal-content">
       <button class="close-button" onclick="hideModal()">×</button>
@@ -70,15 +49,14 @@
     </div>
   </div>
 
-  <!---- minimal helper (keeps old index.js if you have one) -------------- -->
+  <!-- ───────── helper ───────── -->
   <script>
-    /* page navigation -------------------------------------------------- */
     const go = f => () => location.href = f;
     window.startSpokenExercise  ||= go('spoken-exercise.html');
     window.startWrittenExercise ||= go('written-exercise.html');
     window.startSfxExercise     ||= go('sfx-exercise.html');
 
-    /* modal helpers ---------------------------------------------------- */
+    /* modal */
     let currentType='spoken';
     function showWordOptions(t){
       currentType=t;
@@ -93,7 +71,6 @@
       const file = type==='spoken' ? 'spoken-exercise.html' : 'written-exercise.html';
       location.href = `${file}?type=word&syllables=${syll}`;
     }
-
   </script>
 </body>
 </html>
