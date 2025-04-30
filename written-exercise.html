@@ -22,7 +22,7 @@
   <main class="page-wrap">
     <div class="container exercise">
       <div class="header-controls">
-        <button id="home-button" onclick="location.href='index.html'">Main Menu</button>
+        <a href="index.html" class="back-link">Main menu</a>
         <div id="round-tracker">Round 1/10</div>
       </div>
 
@@ -34,8 +34,9 @@
       </p>
 
       <label class="speed-checkbox">
-        <input type="checkbox" id="toggle-speed"> Slow audio
-      </label>
+          <input type="checkbox" id="toggle-speed"><span>Slow audio</span>
+        </label>
+
 
       <!-- choices (audio-button pairs) injected by JS -->
       <div id="choices" class="audio-choices"></div>

@@ -1,5 +1,5 @@
 /* =====================================================
-   EAR-PRACTICE �  sage / terracotta palette (2025-05)
+   EAR-PRACTICE —  sage / terracotta palette (2025-05)
    ===================================================== */
 
 /* ----------  COLOR SCALE  ---------- */
@@ -71,9 +71,10 @@ h3{font-size:1.1rem;font-weight:500;text-align:center}
 #round-tracker{font-size:.85rem;font-weight:500;opacity:.75}
 
 /* ----------  PRIMARY ACTION BUTTON  ---------- */
-.play-sound{padding:18px 60px;font-size:1.3rem;border-radius:50px;background:var(--green-md);color:#fff;border:none;cursor:pointer;transition:.25s;box-shadow:var(--shadow)}
-.play-sound:hover{background:var(--green-dk);transform:scale(1.03)}
+.play-sound{background:var(--tc-dk);color:#fff; padding:18px 60px;font-size:1.3rem;border-radius:50px;background:var(--green-md);color:#fff;border:none;cursor:pointer;transition:.25s;box-shadow:var(--shadow)}
+.play-sound:hover{background:var(--tc-lt);color:var(--text);transform:scale(1.03)}
 .play-sound{opacity:1!important}
+
 
 /* ----------  GRID CHOICES  ---------- */
 .choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%}
@@ -118,15 +119,15 @@ h3{font-size:1.1rem;font-weight:500;text-align:center}
 .sub-option:hover{background:var(--green-dk);color:#fff}
 
 /* ----------  TOGGLE  ---------- */
-.speed-checkbox{cursor:pointer}
-..speed-checkbox input{display:none}
+.speed-checkbox{display:inline-flex;align-items:center;gap:6px;font-size:.9rem;cursor:pointer}
+.speed-checkbox input{display:none}
 .speed-checkbox::before{
-  content:'';width:34px;height:18px;border-radius:9px;
-  background:#ccc;display:inline-block;transition:.25s;position:relative;
+  content:'';width:34px;height:18px;border-radius:9px;background:#ccc;
+  display:inline-block;transition:.25s;position:relative;
 }
 .speed-checkbox::after{
-  content:'';width:14px;height:14px;border-radius:50%;
-  background:#fff;position:absolute;left:2px;top:2px;transition:.25s;
+  content:'';width:14px;height:14px;border-radius:50%;background:#fff;
+  position:absolute;left:2px;top:2px;transition:.25s;
 }
 .speed-checkbox input:checked + *::before{background:var(--green-md)}
 .speed-checkbox input:checked + *::after{left:18px}
@@ -184,3 +185,12 @@ h3{font-size:1.1rem;font-weight:500;text-align:center}
   gap:18px;
   margin-bottom:10px;
 }
+
+.back-link{
+  display:inline-flex;align-items:center;gap:4px;
+  font-size:.9rem;font-weight:600;color:var(--green-dk);
+  text-decoration:none;border:2px solid var(--green-dk);
+  padding:6px 14px;border-radius:6px;transition:.25s;
+}
+.back-link:hover{background:var(--green-dk);color:#fff}
+.back-link::before{content:""←"";font-weight:700}

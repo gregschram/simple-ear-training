@@ -90,9 +90,10 @@
       document.getElementById('word-modal').classList.remove('show');
     }
     function startWordExercise(type,syll){
-      location.href = (type==='spoken'?'spoken-exercise.html':'written-exercise.html')
-                    + `?type=word&syllables=${syll}`;
+      const file = type==='spoken' ? 'spoken-exercise.html' : 'written-exercise.html';
+      location.href = `${file}?type=word&syllables=${syll}`;
     }
+
   </script>
 </body>
 </html>
