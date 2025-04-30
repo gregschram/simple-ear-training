@@ -1,55 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Identify the Sound Effect</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
-    <meta name="description" content="Practice identifying everyday sounds to improve environmental awareness">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Identify the Sound Effect</title>
+
+  <link rel="stylesheet" href="styles-old.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Site Header -->
-    <header>
-        <div class="header-container">
-            <a href="/index.html" class="logo-link">
-                <img src="/images/ep-logo-v1.png" alt="Ear Training Logo" class="site-logo">
-            </a>
-            <div class="header-right">
-                <a href="#" class="about-link">About</a>
-                <button class="donate-button">Donate to support</button>
-            </div>
-        </div>
-    </header>
+  <div class="container">
 
-    <!-- Main Content -->
-    <main>
-        <div class="container">
-            <div class="header-controls">
-                <button id="home-button">← Main Menu</button>
-                <div id="round-tracker">Round 1/10</div>
-            </div>
+    <!-- HEADER BAR -->
+    <div class="header-controls">
+      <button id="home-button">Main Menu</button>
+      <div id="round-tracker">Round 1/10</div>
+    </div>
 
-            <h2>Identify the Sound Effect</h2>
+    <h2 id="exercise-title">Identify the Sound Effect</h2>
 
-            <p class="instruction-text">Press "Play Sound" then select the matching image.</p>
+    <p class="instruction-text">
+      Press “Play Sound” then select the matching image.
+    </p>
 
-            <div class="audio-controls">
-                <button id="play-sound" class="play-sound">
-                    <span class="play-icon">▶</span>
-                    Play Sound
-                </button>
-            </div>
+    <div class="audio-controls">
+      <button id="play-sound" class="play-sound">▶ Play Sound</button>
+    </div>
 
-            <!-- Image choices will appear here -->
-            <div id="choices" class="image-grid"></div>
-            
-            <!-- Feedback and next button -->
-            <div id="feedback"></div>
-            <button id="next-button" style="display: none;">Next</button>
-        </div>
-    </main>
+    <div id="choices" class="image-grid"></div>
 
-    <script type="module" src="sfx-script.js"></script>
+    <div id="feedback"></div>
+    <button id="next-button" style="display:none;" onclick="loadNextRound()">Next</button>
+  </div>
+
+  <script type="module" src="sfx-script.js"></script>
 </body>
 </html>

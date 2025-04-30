@@ -200,6 +200,7 @@ function loadRound() {
             // Create choices after audio is loaded
             const choicesContainer = document.getElementById("choices");
             choicesContainer.innerHTML = "";
+            choicesContainer.classList.add('choice-grid');
             
             const shuffledOptions = [...round.options]
                 .sort(() => Math.random() - 0.5);

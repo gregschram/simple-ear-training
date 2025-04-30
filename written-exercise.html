@@ -1,58 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Identify the Written Sentence</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
-    <meta name="description" content="Practice matching audio to written sentences to improve hearing comprehension">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Identify the Written Sentence</title>
+
+  <link rel="stylesheet" href="styles-old.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Site Header -->
-    <header>
-        <div class="header-container">
-            <a href="/index.html" class="logo-link">
-                <img src="/images/ep-logo-v1.png" alt="Ear Training Logo" class="site-logo">
-            </a>
-            <div class="header-right">
-                <a href="#" class="about-link">About</a>
-                <button class="donate-button">Donate to support</button>
-            </div>
-        </div>
-    </header>
+  <div class="container">
 
-    <!-- Main Content -->
-    <main>
-        <div class="container">
-            <div class="header-controls">
-                <button id="home-button">← Main Menu</button>
-                <div id="round-tracker">Round 1/10</div>
-            </div>
+    <!-- HEADER BAR -->
+    <div class="header-controls">
+      <button id="home-button">Main Menu</button>
+      <div id="round-tracker">Round 1/10</div>
+    </div>
 
-            <h2 id="exercise-title">Identify the Written Sentence</h2>
-            <h3 id="category-title">Loading category...</h3>
+    <h2 id="exercise-title">Identify the Written Sentence</h2>
+    <h3 id="category-title">Loading category...</h3>
 
-            <p class="instruction-text">Play each audio clip ▶, then pick the clip that matches the sentence below.</p>
+    <p class="instruction-text">
+      Play each audio clip ▶, then pick the clip that matches the sentence below.
+    </p>
 
-            <!-- Written prompt will appear here -->
-            <div id="written-prompt" class="written-prompt"></div>
+    <div id="written-prompt" class="written-prompt"></div>
 
-            <!-- Speed control -->
-            <label class="speed-checkbox">
-                <input type="checkbox" id="toggle-speed">
-                Slow audio
-            </label>
+    <label class="speed-checkbox">
+      <input type="checkbox" id="toggle-speed"> Slow audio
+    </label>
 
-            <!-- Audio choices will appear here -->
-            <div id="choices" class="audio-choices"></div>
-            
-            <!-- Feedback and next button -->
-            <div id="feedback"></div>
-            <button id="next-button" style="display: none;">Next</button>
-        </div>
-    </main>
+    <div id="choices" class="audio-choices"></div>
 
-    <script type="module" src="written-script.js"></script>
+    <div id="feedback"></div>
+    <button id="next-button" style="display:none;">Next</button>
+  </div>
+
+  <script type="module" src="written-script.js"></script>
 </body>
 </html>

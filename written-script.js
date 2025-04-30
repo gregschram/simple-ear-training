@@ -226,7 +226,7 @@ function loadRound() {
                 // Create answer button
                 const answerButton = document.createElement("button");
                 answerButton.className = "choice";
-                answerButton.textContent = `Audio ${index + 1}`;
+                answerButton.textContent = `Choose Audio ${index + 1}`;
                 answerButton.onclick = () => checkAnswer(answerButton, option === round, option);
     
                 pairContainer.appendChild(playButton);
