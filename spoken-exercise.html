@@ -7,59 +7,46 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <div class="exercise-header">
-            <div class="breadcrumb">
-                <button id="home-button" class="back-button">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M19 12H5M12 19l-7-7 7-7"></path>
-                    </svg>
-                    Main Menu
-                </button>
-            </div>
-            
-            <div class="title-area">
-                <div class="exercise-title">
-                    <h2 id="exercise-title">Identify the Spoken Sentence</h2>
-                    <h3 id="category-title">Loading category...</h3>
-                </div>
+    <!-- Site Header -->
+    <header id="site-header">
+        <div class="header-container">
+            <a href="/index.html" class="logo-link">
+                <img src="/images/ep-logo-v1.png" alt="Ear Training Logo" class="site-logo">
+                <span class="site-title">Ear Training Exercises</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <h2 id="exercise-title">Identify the Spoken Sentence</h2>
+            <h3 id="category-title">Loading category...</h3>
+            <div class="header-controls">
+                <button id="home-button">Main Menu</button>
                 <div id="round-tracker">Round 1/10</div>
             </div>
-        </div>
-
-        <div class="instruction-card">
-            <div class="instruction-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <line x1="12" y1="16" x2="12" y2="12"></line>
-                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                </svg>
+            <p class="instruction-text">Press the sentence that matches what you hear. Press "▶" to listen again.</p>
+            <div class="audio-controls">
+                <button id="play-sound" class="play-sound">▶</button>
+                <label class="speed-checkbox">
+                    <input type="checkbox" id="toggle-speed">
+                    Slow audio
+                </label>
             </div>
-            <p>Press the sentence that matches what you hear. Press "Play Sound" to listen again.</p>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="audio-control-container">
-            <button id="play-sound" class="play-button">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                </svg>
-                Press to play sound
-            </button>
-            <label class="speed-checkbox">
-                <input type="checkbox" id="toggle-speed">
-                Slow audio
-            </label>
-        </div>
-
-        <div id="choices" class="choice-container"></div>
-
-        <div class="feedback-container">
+            <div id="choices"></div>
             <div id="feedback"></div>
             <button id="next-button" style="display: none;">Next</button>
         </div>
-    </div>
+    </main>
+
+    <!-- Site Footer -->
+    <footer id="site-footer">
+        <div class="footer-container">
+            <p>&copy; 2025 Ear Training Program</p>
+        </div>
+    </footer>
+
     <script type="module" src="spoken-script.js"></script>
 </body>
 </html>

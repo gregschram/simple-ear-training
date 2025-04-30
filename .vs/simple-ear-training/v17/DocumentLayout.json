@@ -1,12 +1,113 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\kigam\\source\\repos\\simple-ear-training\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\kigam\\source\\repos\\simple-ear-training\\spoken-exercise.html||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:spoken-exercise.html||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\kigam\\source\\repos\\simple-ear-training\\index.html||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:index.html||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\kigam\\source\\repos\\simple-ear-training\\styles.css||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:styles.css||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\kigam\\source\\repos\\simple-ear-training\\written-exercise.html||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:written-exercise.html||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\kigam\\source\\repos\\simple-ear-training\\sfx-exercise.html||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:sfx-exercise.html||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "index.html",
+              "DocumentMoniker": "C:\\Users\\kigam\\source\\repos\\simple-ear-training\\index.html",
+              "RelativeDocumentMoniker": "index.html",
+              "ToolTip": "C:\\Users\\kigam\\source\\repos\\simple-ear-training\\index.html",
+              "RelativeToolTip": "index.html",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHIAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-04-29T07:37:58.363Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "written-exercise.html",
+              "DocumentMoniker": "C:\\Users\\kigam\\source\\repos\\simple-ear-training\\written-exercise.html",
+              "RelativeDocumentMoniker": "written-exercise.html",
+              "ToolTip": "C:\\Users\\kigam\\source\\repos\\simple-ear-training\\written-exercise.html",
+              "RelativeToolTip": "written-exercise.html",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAAADoAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-04-29T07:37:48.491Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "spoken-exercise.html",
+              "DocumentMoniker": "C:\\Users\\kigam\\source\\repos\\simple-ear-training\\spoken-exercise.html",
+              "RelativeDocumentMoniker": "spoken-exercise.html",
+              "ToolTip": "C:\\Users\\kigam\\source\\repos\\simple-ear-training\\spoken-exercise.html",
+              "RelativeToolTip": "spoken-exercise.html",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAADAAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-04-29T07:10:45.183Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "sfx-exercise.html",
+              "DocumentMoniker": "C:\\Users\\kigam\\source\\repos\\simple-ear-training\\sfx-exercise.html",
+              "RelativeDocumentMoniker": "sfx-exercise.html",
+              "ToolTip": "C:\\Users\\kigam\\source\\repos\\simple-ear-training\\sfx-exercise.html",
+              "RelativeToolTip": "sfx-exercise.html",
+              "ViewState": "AgIAABoAAAAAAAAAAAAAADsAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-04-29T07:10:33.956Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "styles.css",
+              "DocumentMoniker": "C:\\Users\\kigam\\source\\repos\\simple-ear-training\\styles.css",
+              "RelativeDocumentMoniker": "styles.css",
+              "ToolTip": "C:\\Users\\kigam\\source\\repos\\simple-ear-training\\styles.css",
+              "RelativeToolTip": "styles.css",
+              "ViewState": "AgIAAM8DAAAAAAAAAAAAAPADAABoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-04-29T07:09:39.683Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

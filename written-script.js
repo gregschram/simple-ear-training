@@ -162,6 +162,7 @@ function loadAudioWithRetry(path, maxRetries = 3) {
   });
 }
 
+// Update the createChoices function to handle the new layout
 function loadRound() {
     attemptsInCurrentRound = 0;
     audio.playbackRate = audioSpeed;
@@ -178,6 +179,9 @@ function loadRound() {
     document.getElementById("next-button").style.display = "none";
     document.getElementById("round-tracker").textContent = `Round ${currentRound + 1}/${totalRounds}`;
     
+    // Debug log
+    console.log("Attempting to preload audio files for options");
+
     // Get 3 random different audio paths from roundData
     const otherOptions = roundData
         .filter(r => r !== round)
@@ -188,39 +192,36 @@ function loadRound() {
     const allOptions = [round, ...otherOptions]
         .sort(() => 0.5 - Math.random());
 
-    // Debug log
-    console.log("Attempting to preload audio files for paths:", allOptions.map(opt => opt.audioPath));
-
     // Create all audio preload promises
     const preloadPromises = allOptions.map(option => loadAudioWithRetry(option.audioPath));
 
     Promise.all(preloadPromises)
-    .then(() => {
-        console.log("All audio files loaded successfully");
-        // Clear loading message
-        document.getElementById("feedback").textContent = "";
-        
-        // Create four audio-button pairs
-        const choicesContainer = document.getElementById("choices");
-        choicesContainer.innerHTML = "";
-        
-        // Create audio-button pairs
-        allOptions.forEach((option, index) => {
-            const pairContainer = document.createElement("div");
-            pairContainer.className = "audio-choice-pair";
+        .then(() => {
+            console.log("All audio files loaded successfully");
+            // Clear loading message
+            document.getElementById("feedback").textContent = "";
             
-            // Create play button
-            const playButton = document.createElement("button");
-            playButton.className = "play-audio-button";
-            playButton.textContent = "▶";
-            playButton.onclick = () => {
-                audio.src = option.audioPath;
-                audio.playbackRate = isSlowSpeed ? 0.65 : 1.0;
-                audio.play().catch(error => {
-                    console.error("Play error for", option.audioPath, error);
-                    document.getElementById("feedback").textContent = "Error playing audio. Please try again.";
-                });
-            };
+            // Create choices after audio is loaded
+            const choicesContainer = document.getElementById("choices");
+            choicesContainer.innerHTML = "";
+            
+            // Create audio-button pairs
+            allOptions.forEach((option, index) => {
+                const pairContainer = document.createElement("div");
+                pairContainer.className = "audio-choice-pair";
+                
+                // Create play button
+                const playButton = document.createElement("button");
+                playButton.className = "play-audio-button";
+                playButton.textContent = "▶";
+                playButton.onclick = () => {
+                    audio.src = option.audioPath;
+                    audio.playbackRate = isSlowSpeed ? 0.65 : 1.0;
+                    audio.play().catch(error => {
+                        console.error("Play error for", option.audioPath, error);
+                        document.getElementById("feedback").textContent = "Error playing audio. Please try again.";
+                    });
+                };
                 
                 // Create answer button
                 const answerButton = document.createElement("button");

@@ -221,6 +221,7 @@ function loadRound() {
     setTimeout(() => preloadNextRound(), 500);
 }
 
+// Align feedback and next button layout to prevent shifting
 function checkAnswer(button, isCorrect) {
     attemptsInCurrentRound++;
     if (isCorrect) {
@@ -234,9 +235,9 @@ function checkAnswer(button, isCorrect) {
         button.classList.add("correct");
         document.getElementById("feedback").textContent = "Correct!";
         document.getElementById("feedback").className = "correct";
-        document.getElementById("next-button").style.display = "inline-block";
+        document.getElementById("next-button").style.display = "block";  // Changed from inline-block to block
         disableAllChoices();
-        createCelebration();  // Add celebration here
+        createCelebration();
     } else {
         button.classList.add("incorrect");
         button.disabled = true;
@@ -244,6 +245,7 @@ function checkAnswer(button, isCorrect) {
         document.getElementById("feedback").className = "incorrect";
     }
 }
+
 // CELEBRATION ANIMATIONS ADDED HERE
 function createCelebration() {
     const celebration = document.createElement('div');
@@ -387,7 +389,15 @@ function goHome() {
     window.location.href = "/index.html";
 }
 
+// Update the instruction text with triangle icon
 document.addEventListener('DOMContentLoaded', () => {
+    // Update the instruction text with the play icon
+    if (exerciseType === 'word') {
+        document.querySelector(".instruction-text").textContent = "Press the word that matches what you hear. Press \"▶\" to listen again.";
+    } else {
+        document.querySelector(".instruction-text").textContent = "Press the sentence that matches what you hear. Press \"▶\" to listen again.";
+    }
+    
     if (exerciseType === 'word') {
         loadCategoryData();  // No category needed for word exercises
     } else if (category) {

@@ -13,6 +13,9 @@ let audio = new Audio();  // We'll keep this one instead of audioElement
 let audioContext = null;
 let gainNode = null;
 
+// Update play button and feedback display
+document.getElementById("play-sound").textContent = "▶";
+
 function initAudio() {
     audioContext = new (window.AudioContext || window.webkitAudioContext)();
     gainNode = audioContext.createGain();
@@ -68,6 +71,7 @@ async function loadCategoryData() {
     }
 }
 
+// Improve image rendering
 function loadRound() {
     attemptsInCurrentRound = 0;
     const round = roundData[currentRound];
@@ -95,7 +99,7 @@ function loadRound() {
         button.className = "image-choice";
         button.onclick = () => checkAnswer(button, option === round);
         
-        // Create an img element for the SVG
+        // Create an img element for the image
         const img = document.createElement("img");
         img.src = option.imagePath;
         img.alt = option.name;
@@ -114,6 +118,7 @@ function loadRound() {
     }
 }
 
+// Align feedback and next button layout to prevent shifting
 function checkAnswer(element, isCorrect) {
     console.log("checkAnswer called", { isCorrect });
     attemptsInCurrentRound++;
@@ -133,7 +138,7 @@ function checkAnswer(element, isCorrect) {
         element.classList.add("correct");
         feedback.textContent = "Correct!";
         feedback.className = "correct";
-        nextButton.style.display = "inline-block";
+        nextButton.style.display = "block";  // Changed from inline-block to block
         disableAllChoices();
         createCelebration();
         console.log("Correct answer processed");
@@ -145,6 +150,7 @@ function checkAnswer(element, isCorrect) {
         console.log("Incorrect answer processed");
     }
 }
+
 
 // ... rest of the shared functions (createCelebration, showEndGame, etc.) remain the same ...
 // CELEBRATION ANIMATIONS ADDED HERE

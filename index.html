@@ -3,20 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ear Practice Exercises</title>
+    <title>Ear Training Exercises</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Ear Practice Exercises</h1>
-        <div class="exercise-choices">
-            <button class="start-exercise" onclick="startSpokenExercise()">Identify the Spoken Sentence</button>
-            <button class="start-exercise" onclick="startWrittenExercise()">Identify the Written Sentence</button>
-            <button class="start-exercise" onclick="showWordOptions('spoken')">Identify the Spoken Word</button>
-            <button class="start-exercise" onclick="showWordOptions('written')">Identify the Written Word</button>
-            <button class="start-exercise" onclick="startSfxExercise()">Identify the Sound Effect</button>
+    <!-- Site Header -->
+    <header id="site-header">
+        <div class="header-container">
+            <a href="/index.html" class="logo-link">
+                <img src="/images/ep-logo-v1.png" alt="Ear Training Logo" class="site-logo">
+                <span class="site-title">Ear Training Exercises</span>
+            </a>
         </div>
-    </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container home-container">
+            <h1>Ear Training Exercises</h1>
+            <div class="exercise-choices">
+                <button class="start-exercise" onclick="startSpokenExercise()">Identify the Spoken Sentence</button>
+                <button class="start-exercise" onclick="startWrittenExercise()">Identify the Written Sentence</button>
+                <button class="start-exercise" onclick="showWordOptions('spoken')">Identify the Spoken Word</button>
+                <button class="start-exercise" onclick="showWordOptions('written')">Identify the Written Word</button>
+                <button class="start-exercise" onclick="startSfxExercise()">Identify the Sound Effect</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Site Footer -->
+    <footer id="site-footer">
+        <div class="footer-container">
+            <p>&copy; 2025 Ear Training Program</p>
+        </div>
+    </footer>
 
     <!-- Modal for word options -->
     <div id="word-modal" class="modal">
@@ -36,13 +56,51 @@
         const categories = ["grocery", "doctor", "restaurant", "movies", "airtravel", "gym", "haircut", "office", "movingday", "museum"];
         let currentType = '';
         
+        // Track recently used categories to avoid repetition
+        function getRecentCategories() {
+            const recentCats = localStorage.getItem('recentCategories');
+            return recentCats ? JSON.parse(recentCats) : [];
+        }
+
+        function addToRecentCategories(category) {
+            const recentCats = getRecentCategories();
+            
+            // Add current category to the front of the array
+            recentCats.unshift(category);
+            
+            // Keep only the last 3 categories (to avoid repeating the 3 most recent)
+            const limitedList = recentCats.slice(0, 3);
+            
+            // Save back to local storage
+            localStorage.setItem('recentCategories', JSON.stringify(limitedList));
+        }
+
+        function selectRandomCategory() {
+            const recentCats = getRecentCategories();
+            
+            // Filter out recent categories from available options
+            const availableCategories = categories.filter(cat => !recentCats.includes(cat));
+            
+            // If all categories have been used recently, pick a random one
+            // Otherwise pick from the non-recent categories
+            const categoryPool = availableCategories.length > 0 ? availableCategories : categories;
+            
+            // Select a random category from the available pool
+            const selectedCategory = categoryPool[Math.floor(Math.random() * categoryPool.length)];
+            
+            // Add to recent categories
+            addToRecentCategories(selectedCategory);
+            
+            return selectedCategory;
+        }
+
         function startSpokenExercise() {
-            const selectedCategory = categories[Math.floor(Math.random() * categories.length)];
+            const selectedCategory = selectRandomCategory();
             window.location.href = `spoken-exercise.html?category=${selectedCategory}`;
         }
 
         function startWrittenExercise() {
-            const selectedCategory = categories[Math.floor(Math.random() * categories.length)];
+            const selectedCategory = selectRandomCategory();
             window.location.href = `written-exercise.html?category=${selectedCategory}`;
         }
 
