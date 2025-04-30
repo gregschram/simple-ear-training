@@ -184,18 +184,14 @@ h3 {
 }
 
 #home-button {
-    background-color: #5DA698;
-    color: white;
-    padding: 10px 15px;
-    border-radius: 8px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: 500;
-    cursor: pointer;
+    background-color: #4CAF50;
+    color: #ffffff;
     border: none;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: all 0.2s ease;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 0.9em;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
 #next-button {
@@ -221,9 +217,8 @@ h3 {
 }
 
 #home-button:hover {
-    background-color: #69BFAF;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    background-color: #3c9f40;
+    transform: scale(1.05);
 }
 
 /* Exercise header - Redesigned for cohesion */
@@ -516,11 +511,10 @@ h3 {
 }
 
 .image-choice img {
-    max-width: 80%;
-    max-height: 80%;
+    width: 85%;
+    height: 85%;
     object-fit: contain;
-    transition: all 0.2s ease;
-    filter: invert(27%) sepia(15%) saturate(848%) hue-rotate(118deg) brightness(94%) contrast(88%);
+    filter: brightness(0) invert(1);
 }
 
 .image-choice:hover img {
