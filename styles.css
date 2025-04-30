@@ -1,17 +1,15 @@
 /* =====================================================
-   EAR-PRACTICE UI  –  sage / rust palette + soft UI
+   EAR-PRACTICE —  sage / terracotta palette (2025-05)
    ===================================================== */
 
-/* ----------  COLOR VARS  ---------- */
+/* ----------  COLOR SCALE  ---------- */
 :root{
-  --sage-dk:   #3F6F5C;   /* Spoken buttons             */
-  --sage-dk-h: #56846F;
-  --sage-lt:   #508971;   /* Written buttons            */
-  --sage-lt-h: #6FA98E;
-  --rust:      #9F412C;   /* SFX                        */
-  --rust-h:    #BC5D47;
+  --green-dk:  #679C6C;   /* primary fills, hover text white        */
+  --green-md:  #B8E0C0;   /* default button bg, borders, hovers     */
+  --green-lt:  #E2F8E7;   /* card tint, choice hover bg             */
 
-  --primary-light: var(--sage-lt-h);   /* alias so old rules still work */
+  --tc-dk:     #BA594A;   /* accent (SFX)                           */
+  --tc-lt:     #FFCEC4;   /* accent hover                           */
 
   --header-bg: #20202F;
   --bg:        #F7F6F3;
@@ -22,95 +20,88 @@
 
 /* ----------  RESET  ---------- */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{
-  font:16px/1.4 "Inter",Arial,sans-serif;
-  color:var(--text);
-  background:var(--bg);
-}
+body{font:16px/1.4 "Inter",Arial,sans-serif;color:var(--text);background:var(--bg)}
 
 /* ----------  TOP BAR  ---------- */
 .site-header{height:60px;background:var(--header-bg);display:flex;align-items:center;position:fixed;inset:0 0 auto 0;z-index:1000}
 .header-inner{width:100%;max-width:1200px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center}
-.logo-img{height:26px;display:block}
-body.light .site-header{background:#fff}
-body.light .logo-img{content:url("/images/ep-logo-v1.png")}
-body:not(.light) .logo-img{content:url("/images/ep-logo-v1-white.png")}
+.logo-img{height:26px}
 .site-header nav a{color:#fff;text-decoration:none;margin-left:28px;font-weight:600}
-.donate-btn{background:var(--sage-lt);padding:7px 16px;border-radius:6px}
-.donate-btn:hover{background:var(--sage-lt-h)}
+.donate-btn{background:var(--green-md);padding:7px 16px;border-radius:6px}
+.donate-btn:hover{background:var(--green-dk)}
 
-/* ----------  MAIN LAYOUT  ---------- */
+/* ----------  LAYOUT  ---------- */
 .page-wrap{min-height:calc(100vh - 60px);display:flex;justify-content:center;align-items:center;padding:40px 20px}
 .container{width:620px;max-width:90vw;background:var(--card);border-radius:12px;padding:26px 30px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:14px}
-h1,h2{color:var(--sage-dk);font-weight:700;text-align:center}
+h1,h2{color:var(--green-dk);font-weight:700;text-align:center}
 h1{font-size:1.9rem}h2{font-size:1.5rem}
-h3{font-size:1.1rem;font-weight:500;color:var(--text);text-align:center}
+h3{font-size:1.1rem;font-weight:500;text-align:center}
 .instruction-text{font-size:.9rem;font-weight:600;text-align:center}
 
-/* ----------  BUTTONS  ---------- */
-.btn{cursor:pointer;border:none;border-radius:6px;color:#fff;transition:.2s;box-shadow:var(--shadow)}
-.btn.spoken {background:var(--sage-dk)}
-.btn.spoken:hover{background:var(--sage-dk-h)}
-.btn.written{background:var(--sage-lt)}
-.btn.written:hover{background:var(--sage-lt-h)}
-.btn.sfx{background:var(--rust)}
-.btn.sfx:hover{background:var(--rust-h)}
-/* 2-A  give every button real size                              */
-.btn{padding:14px 24px;font-size:1.05rem;display:block;width:100%}
-
-/* 2-B  vertical rhythm on the menu card                         */
+/* ----------  MENU BUTTON GROUP  ---------- */
 .exercise-choices{display:flex;flex-direction:column;gap:14px;margin-top:18px}
+.btn{
+  cursor:pointer;display:block;width:100%;
+  border:none;border-radius:6px;color:#fff;font-size:1.05rem;
+  padding:14px 24px;transition:.2s;box-shadow:var(--shadow);
+}
+.btn.spoken,.btn.written{background:var(--green-md)}
+.btn.spoken:hover,.btn.written:hover{background:var(--green-dk)}
+.btn.sfx{background:var(--tc-dk)}
+.btn.sfx:hover{background:var(--tc-lt);color:var(--text)}
 
-/* 2-C  full-size Play-Sound pill (you already set opacity)      */
-.play-sound{padding:18px 60px;font-size:1.3rem;border-radius:50px}
-
-/* 2-D  slimmer green outline on chosen SFX tile                 */
-.image-choice.selected{box-shadow:0 0 0 2px var(--sage-lt)}
-
-/* 2-E  centre “Correct!” text & keep it off scrollbar           */
-#feedback{margin-top:18px;text-align:center}
-
-
-/* soft hover shimmer */
+/* subtle shimmer */
 @keyframes wave{0%{background-position:0 50%}100%{background-position:200% 50%}}
 .btn:hover{
   background-image:linear-gradient(120deg,
-      rgba(255,255,255,.06) 0%,
+      rgba(255,255,255,.08) 0%,
       rgba(255,255,255,0)   50%,
-      rgba(255,255,255,.06) 100%);
+      rgba(255,255,255,.08) 100%);
   background-size:200% 100%;animation:wave 1.4s ease-in-out forwards;
 }
 
-/* PLAY SOUND etc. inherit .btn shadow via class in HTML */
-.play-sound,.play-audio-button,#home-button,#next-button,.choice,.sub-option{box-shadow:var(--shadow)}
-
-/* ----------  HEADER CONTROLS INSIDE EXERCISE  ---------- */
+/* ----------  EXERCISE HEADER CONTROLS  ---------- */
 .header-controls{display:flex;justify-content:space-between;margin-bottom:4px}
-#home-button{background:none;border:2px solid var(--sage-dk);color:var(--sage-dk);padding:6px 14px;border-radius:6px;font-size:.85rem;cursor:pointer;transition:.25s}
-#home-button:hover{background:var(--sage-dk);color:#fff}
+#home-button{
+  background:none;border:2px solid var(--green-dk);color:var(--green-dk);
+  padding:6px 14px;border-radius:6px;font-size:.85rem;cursor:pointer;transition:.25s;
+  box-shadow:var(--shadow)
+}
+#home-button:hover{background:var(--green-dk);color:#fff}
 #round-tracker{font-size:.85rem;font-weight:500;opacity:.75}
 
-/* ----------  CHOICE GRIDS  ---------- */
-.choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%}
-.choice{background:#ECECEC;border-radius:6px;padding:14px 10px;font-weight:600;display:flex;justify-content:center;align-items:center;cursor:pointer;transition:.15s}
-.choice:hover{box-shadow:0 0 0 2px var(--sage-lt);transform:translateY(-1px)}
-.choice.correct{background:#4CAF50;color:#fff;pointer-events:none}
-.choice.incorrect{background:#E04545;color:#fff;pointer-events:none}
-#next-button{margin-top:6px;padding:8px 16px;font-size:.9rem;border:2px solid var(--sage-dk);background:none;color:var(--sage-dk);border-radius:6px;visibility:hidden;transition:.25s}
-#next-button.visible{visibility:visible}
-#next-button:hover{background:var(--sage-dk);color:#fff}
+/* ----------  PRIMARY ACTION BUTTON  ---------- */
+.play-sound{padding:18px 60px;font-size:1.3rem;border-radius:50px;background:var(--green-md);color:#fff;border:none;cursor:pointer;transition:.25s;box-shadow:var(--shadow)}
+.play-sound:hover{background:var(--green-dk);transform:scale(1.03)}
+.play-sound{opacity:1!important}
 
-/* ----------  AUDIO CHOICE ROW (written)  ---------- */
+/* ----------  GRID CHOICES  ---------- */
+.choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%}
+.choice{
+  background:#fff;color:var(--green-dk);border:2px solid var(--green-md);
+  border-radius:8px;padding:14px 10px;font-weight:600;
+  display:flex;justify-content:center;align-items:center;cursor:pointer;transition:.15s;
+}
+.choice:hover{background:var(--green-lt);color:#000;border-color:var(--green-dk)}
+.choice.correct{background:var(--green-dk);color:#fff;border-color:var(--green-dk)}
+.choice.incorrect{background:var(--tc-dk);color:#fff;border-color:var(--tc-dk)}
+#next-button{margin-top:6px;padding:8px 16px;font-size:.9rem;border:2px solid var(--green-dk);background:none;color:var(--green-dk);border-radius:6px;visibility:hidden;transition:.25s}
+#next-button.visible{visibility:visible}
+#next-button:hover{background:var(--green-dk);color:#fff}
+
+/* ----------  WRITTEN (audio) CHOICES  ---------- */
 .audio-choice-pair{display:flex;gap:10px;margin:8px 0}
-.play-audio-button{width:52px;height:52px;font-size:1.3rem;background:var(--sage-dk);border:none;border-radius:6px;color:#fff}
-.play-audio-button:hover{background:var(--sage-dk-h);transform:scale(1.03)}
+.play-audio-button{width:52px;height:52px;font-size:1.3rem;background:var(--green-md);border:none;border-radius:6px;color:#fff;box-shadow:var(--shadow)}
+.play-audio-button:hover{background:var(--green-dk);transform:scale(1.05)}
 
 /* ----------  SFX IMAGE GRID  ---------- */
 .image-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;width:100%;max-width:520px;margin:0 auto}
-.image-choice{aspect-ratio:1;background:#F2F2F2;border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:10%;transition:.2s;box-shadow:var(--shadow)}
+.image-choice{aspect-ratio:1;background:#F2F2F2;border:2px solid transparent;border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:10%;transition:.2s;box-shadow:var(--shadow)}
 .image-choice img{width:100%;height:100%;object-fit:contain;filter:grayscale(1)}
-.image-choice:hover{box-shadow:0 0 0 2px var(--sage-lt);transform:translateY(-2px)}
-.image-choice.selected{box-shadow:0 0 0 3px var(--sage-lt);}
+.image-choice:hover{border-color:var(--green-md);transform:translateY(-2px)}
+.image-choice.selected{border-color:var(--green-dk)}
+
+#feedback{margin-top:18px;text-align:center;font-weight:600}
 
 /* ----------  MODAL  ---------- */
 .modal{position:fixed;inset:0;display:none;justify-content:center;align-items:center;background:rgba(0,0,0,.45);z-index:1200}
@@ -118,22 +109,50 @@ h3{font-size:1.1rem;font-weight:500;color:var(--text);text-align:center}
 .modal-content{background:var(--card);padding:20px 30px;border-radius:10px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px;max-width:90vw}
 .close-button{align-self:flex-end;width:26px;height:26px;border-radius:50%;border:1px solid var(--text);font-size:.9rem;line-height:24px;text-align:center;padding:0;cursor:pointer;background:none}
 .word-options{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
-.sub-option{background:var(--sage-lt);padding:12px 20px;font-size:1rem;color:#fff;border:none;border-radius:6px}
-.sub-option:hover{background:var(--sage-lt-h)}
+.sub-option{background:var(--green-md);padding:12px 20px;font-size:1rem;color:#fff;border:none;border-radius:6px}
+.sub-option:hover{background:var(--green-dk)}
 
-/* ----------  TOGGLE (Slow audio)  ---------- */
+/* ----------  TOGGLE  ---------- */
 .speed-checkbox{cursor:pointer}
 .speed-checkbox input{display:none}
 .speed-checkbox::before{content:'';display:inline-block;width:34px;height:18px;border-radius:9px;background:#ccc;margin-right:6px;vertical-align:-3px;transition:.25s}
 .speed-checkbox input:checked + label::before,
-.speed-checkbox input:checked + *::before{background:var(--sage-lt)}
-
-/* keep Play-Sound button fully visible even before audio loads */
-.play-sound{opacity:1!important}
+.speed-checkbox input:checked + *::before{background:var(--green-md)}
 
 /* ----------  MOBILE  ---------- */
 @media(max-width:480px){
   html{font-size:14px}
   .container{width:95vw}
   .choice-grid{grid-template-columns:1fr}
+}
+
+/* ===== Spoken/Written page polish ==================================== */
+.container.exercise{                /* 1-A  elevate card */
+  padding:32px 40px;
+  border:1px solid var(--green-md);
+  box-shadow:0 6px 20px rgba(0,0,0,.06);
+  gap:24px;               /* 24 px rhythm for every direct child */
+}
+
+/* 1-B instruction card */
+.instruction-card{
+  background:var(--green-lt);
+  border-left:6px solid var(--green-md);
+  padding:12px 18px;
+  border-radius:6px;
+  line-height:1.45;
+}
+
+/* 1-C  choices + main buttons get same soft shadow */
+.choice,.play-sound,.play-audio-button,#home-button,#next-button{
+  box-shadow:var(--shadow);
+}
+.choice{background:#fff;color:var(--green-dk);border:2px solid var(--green-md)}
+.choice:hover{background:var(--green-lt);border-color:var(--green-dk)}
+.choice.correct{background:var(--green-dk);border-color:var(--green-dk);color:#fff}
+.choice.incorrect{background:var(--tc-dk);border-color:var(--tc-dk);color:#fff}
+
+/* 1-D  a little lift on hover */
+.play-sound:hover,.play-audio-button:hover,#next-button:hover{
+  transform:translateY(-1px);
 }
