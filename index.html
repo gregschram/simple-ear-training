@@ -5,38 +5,83 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ear Training Exercises</title>
 
-  <!-- keep every legacy rule alive, then override -->
+  <!-- keep your original heavy sheet first -->
   <link rel="stylesheet" href="styles-old.css">
+  <!-- lightweight override with new layout/colors -->
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Ear Training Exercises</h1>
 
-    <div class="exercise-choices">
-      <button class="start-exercise" onclick="startSpokenExercise()">Identify the Spoken Sentence</button>
-      <button class="start-exercise" onclick="startWrittenExercise()">Identify the Written Sentence</button>
-      <button class="start-exercise" onclick="showWordOptions('spoken')">Identify the Spoken Word</button>
-      <button class="start-exercise" onclick="showWordOptions('written')">Identify the Written Word</button>
-      <button class="start-exercise" onclick="startSfxExercise()">Identify the Sound Effect</button>
+  <!-- top bar ----------------------------------------------------------- -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo" style="font-weight:700">🎧</div>
+      <nav>
+        <a href="about.html">About</a>
+        <a href="donate.html" class="donate-btn">Donate to support</a>
+      </nav>
     </div>
-  </div>
+  </header>
 
-  <!--  WORD-CHOICE MODAL ------------------------------------------------ -->
+  <!-- main card --------------------------------------------------------- -->
+  <main class="page-wrap">
+    <div class="container">
+      <h1>Ear Training Exercises</h1>
+
+      <button class="start-exercise btn" onclick="startSpokenExercise()">
+        Identify the Spoken Sentence
+      </button>
+
+      <button class="start-exercise btn" onclick="startWrittenExercise()">
+        Identify the Written Sentence
+      </button>
+
+      <button class="start-exercise btn" onclick="showWordOptions('spoken')">
+        Identify the Spoken Word
+      </button>
+
+      <button class="start-exercise btn" onclick="showWordOptions('written')">
+        Identify the Written Word
+      </button>
+
+      <button class="start-exercise btn accent" onclick="startSfxExercise()">
+        Identify the Sound Effect
+      </button>
+    </div>
+  </main>
+
+  <!-- modal ------------------------------------------------------------- -->
   <div id="word-modal" class="modal">
     <div class="modal-content">
       <button class="close-button" onclick="hideModal()">×</button>
       <h2 id="modal-title"></h2>
 
       <div class="word-options">
-        <button class="sub-option" onclick="startWordExercise(currentType, 'all')">All Words</button>
-        <button class="sub-option" onclick="startWordExercise(currentType, 'one')">One Syllable</button>
-        <button class="sub-option" onclick="startWordExercise(currentType, 'two')">Two Syllables</button>
-        <button class="sub-option" onclick="startWordExercise(currentType, 'three')">Three Syllables</button>
+        <button class="sub-option" onclick="startWordExercise(currentType,'all')">All Words</button>
+        <button class="sub-option" onclick="startWordExercise(currentType,'one')">One Syllable</button>
+        <button class="sub-option" onclick="startWordExercise(currentType,'two')">Two Syllables</button>
+        <button class="sub-option" onclick="startWordExercise(currentType,'three')">Three Syllables</button>
       </div>
     </div>
   </div>
 
   <script src="index.js"></script>
+  <!-- quick shim so buttons work no matter what was in the old script -->
+  <script>
+    // simple fall-backs if original functions didn't exist
+    const go = f => () => window.location.href = f;
+    window.startSpokenExercise  ||= go("spoken-exercise.html");
+    window.startWrittenExercise ||= go("written-exercise.html");
+    window.startSfxExercise     ||= go("sfx-exercise.html");
+
+    // modal helpers if not already present
+    let currentType="spoken";
+    window.showWordOptions ||= type=>{
+      currentType=type; document.getElementById("modal-title").textContent =
+        `Identify the ${type==="spoken"?"Spoken":"Written"} Word`;
+      document.getElementById("word-modal").classList.add("show");
+    };
+    window.hideModal ||= ()=>document.getElementById("word-modal").classList.remove("show");
+  </script>
 </body>
 </html>

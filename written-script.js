@@ -204,6 +204,7 @@ function loadRound() {
             const choicesContainer = document.getElementById("choices");
             choicesContainer.innerHTML = "";
             choicesContainer.classList.add("written-exercise");
+            choicesContainer.classList.add("choice-grid");
             
             // Create audio-button pairs
             allOptions.forEach((option, index) => {
