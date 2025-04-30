@@ -10,10 +10,9 @@
 </head>
 <body>
 
-  <!-- Top bar ---------------------------------------------------------- -->
+  <!---- top bar --------------------------------------------------------- -->
   <header class="site-header">
     <div class="header-inner">
-      <!-- give the IMG a real src; CSS may swap it later if you like -->
       <img class="logo-img" src="/images/ep-logo-v1-white.png" alt="Ear-Practice logo">
       <nav>
         <a href="about.html">About</a>
@@ -22,34 +21,42 @@
     </div>
   </header>
 
-  <!-- Main card -------------------------------------------------------- -->
+  <!---- main card ------------------------------------------------------- -->
   <main class="page-wrap">
     <div class="container">
       <h1>Ear Training Exercises</h1>
 
-      <button class="btn spoken"  onclick="showWordOptions('spoken')">
-        Identify the Spoken Word
-      </button>
+      <!-- NEW wrapper gives equal spacing via CSS -->
+      <div class="exercise-choices">
+        <button class="btn spoken"
+                onclick="showWordOptions('spoken')">
+          Identify the Spoken Word
+        </button>
 
-      <button class="btn spoken"  onclick="startSpokenExercise()">
-        Identify the Spoken Sentence
-      </button>
+        <button class="btn spoken"
+                onclick="startSpokenExercise()">
+          Identify the Spoken Sentence
+        </button>
 
-      <button class="btn written" onclick="showWordOptions('written')">
-        Identify the Written Word
-      </button>
+        <button class="btn written"
+                onclick="showWordOptions('written')">
+          Identify the Written Word
+        </button>
 
-      <button class="btn written" onclick="startWrittenExercise()">
-        Identify the Written Sentence
-      </button>
+        <button class="btn written"
+                onclick="startWrittenExercise()">
+          Identify the Written Sentence
+        </button>
 
-      <button class="btn sfx"     onclick="startSfxExercise()">
-        Identify the Sound Effect
-      </button>
+        <button class="btn sfx"
+                onclick="startSfxExercise()">
+          Identify the Sound Effect
+        </button>
+      </div>
     </div>
   </main>
 
-  <!-- Word-type modal -------------------------------------------------- -->
+  <!---- word-type modal ------------------------------------------------- -->
   <div id="word-modal" class="modal">
     <div class="modal-content">
       <button class="close-button" onclick="hideModal()">×</button>
@@ -64,28 +71,28 @@
     </div>
   </div>
 
-  <!-- Minimal helper JS (replaces the duplicated blocks) --------------- -->
+  <!---- minimal helper (keeps old index.js if you have one) -------------- -->
   <script>
-    /* navigation stubs if original index.js isn’t present */
-    const go = file => () => location.href = file;
+    /* page navigation -------------------------------------------------- */
+    const go = f => () => location.href = f;
     window.startSpokenExercise  ||= go('spoken-exercise.html');
     window.startWrittenExercise ||= go('written-exercise.html');
     window.startSfxExercise     ||= go('sfx-exercise.html');
 
-    /* modal helpers */
-    let currentType = 'spoken';
-    function showWordOptions(type){
-      currentType = type;
+    /* modal helpers ---------------------------------------------------- */
+    let currentType='spoken';
+    function showWordOptions(t){
+      currentType=t;
       document.getElementById('modal-title').textContent =
-        `Identify the ${type==='spoken' ? 'Spoken':'Written'} Word`;
+        `Identify the ${t==='spoken'?'Spoken':'Written'} Word`;
       document.getElementById('word-modal').classList.add('show');
     }
     function hideModal(){
       document.getElementById('word-modal').classList.remove('show');
     }
     function startWordExercise(type,syll){
-      location.href = (type==='spoken'?'spoken-exercise.html':'written-exercise.html') +
-                      '?syllables=' + syll;
+      location.href = (type==='spoken'?'spoken-exercise.html':'written-exercise.html')
+                    + `?type=word&syllables=${syll}`;
     }
   </script>
 </body>

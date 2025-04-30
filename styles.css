@@ -55,6 +55,21 @@ h3{font-size:1.1rem;font-weight:500;color:var(--text);text-align:center}
 .btn.written:hover{background:var(--sage-lt-h)}
 .btn.sfx{background:var(--rust)}
 .btn.sfx:hover{background:var(--rust-h)}
+/* 2-A  give every button real size                              */
+.btn{padding:14px 24px;font-size:1.05rem;display:block;width:100%}
+
+/* 2-B  vertical rhythm on the menu card                         */
+.exercise-choices{display:flex;flex-direction:column;gap:14px;margin-top:18px}
+
+/* 2-C  full-size Play-Sound pill (you already set opacity)      */
+.play-sound{padding:18px 60px;font-size:1.3rem;border-radius:50px}
+
+/* 2-D  slimmer green outline on chosen SFX tile                 */
+.image-choice.selected{box-shadow:0 0 0 2px var(--sage-lt)}
+
+/* 2-E  centre “Correct!” text & keep it off scrollbar           */
+#feedback{margin-top:18px;text-align:center}
+
 
 /* soft hover shimmer */
 @keyframes wave{0%{background-position:0 50%}100%{background-position:200% 50%}}

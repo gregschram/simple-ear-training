@@ -149,6 +149,7 @@ function checkAnswer(element, isCorrect) {
         console.log("Incorrect answer processed");
     }
     element.classList.add("selected");
+    document.getElementById("next-button").style.display = "inline-block";
 }
 
 
