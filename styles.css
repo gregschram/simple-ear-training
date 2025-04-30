@@ -6,7 +6,7 @@
 :root{
   --green-dk:  #679C6C;   /* primary fills, hover text white        */
   --green-md:  #B8E0C0;   /* default button bg, borders, hovers     */
-  --green-lt:  #EBF9EE;   /* card tint, choice hover bg             */
+  --green-lt:  #F2FCF5;   /* card tint, choice hover bg             */
 
   --tc-dk:     #BA594A;   /* accent (SFX)                           */
   --tc-lt:     #FFCEC4;   /* accent hover                           */
@@ -107,10 +107,15 @@ h3{font-size:1.1rem;font-weight:500;text-align:center}
 .modal{position:fixed;inset:0;display:none;justify-content:center;align-items:center;background:rgba(0,0,0,.45);z-index:1200}
 .modal.show{display:flex}
 .modal-content{background:var(--card);padding:20px 30px;border-radius:10px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px;max-width:90vw}
+.modal-content h2{margin-top:4px}
 .close-button{align-self:flex-end;width:26px;height:26px;border-radius:50%;border:1px solid var(--text);font-size:.9rem;line-height:24px;text-align:center;padding:0;cursor:pointer;background:none}
 .word-options{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
-.sub-option{background:var(--green-md);padding:12px 20px;font-size:1rem;color:#fff;border:none;border-radius:6px}
-.sub-option:hover{background:var(--green-dk)}
+.sub-option{
+  background:var(--green-md);
+  color:var(--text);
+  padding:12px 20px;border:none;border-radius:6px;
+}
+.sub-option:hover{background:var(--green-dk);color:#fff}
 
 /* ----------  TOGGLE  ---------- */
 .speed-checkbox{cursor:pointer}
@@ -132,6 +137,11 @@ h3{font-size:1.1rem;font-weight:500;text-align:center}
   border:1px solid var(--green-md);
   box-shadow:0 6px 20px rgba(0,0,0,.06);
 }
+
+.container:has(.container.exercise){
+  border:none;box-shadow:none;padding:0;background:transparent;
+}
+
 
 /* instruction ribbon */
 .instruction-card{

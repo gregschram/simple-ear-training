@@ -135,6 +135,7 @@ function checkAnswer(element, isCorrect) {
         }
         score++;
         element.classList.add("correct");
+        element.classList.add("selected");
         feedback.textContent = "Correct!";
         feedback.className = "correct";
         nextButton.style.display = "block";
@@ -148,7 +149,6 @@ function checkAnswer(element, isCorrect) {
         feedback.className = "incorrect";
         console.log("Incorrect answer processed");
     }
-    element.classList.add("selected");
     document.getElementById("next-button").style.display = "inline-block";
 }
 

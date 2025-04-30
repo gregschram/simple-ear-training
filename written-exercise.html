@@ -4,19 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Identify the Written Sentence</title>
-  <link rel="stylesheet" href="styles-old.css"><link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <!-- ───── fixed header ───── -->
   <header class="site-header">
     <div class="header-inner">
-      <a href="index.html" class="logo">🎧</a>
-      <nav><a href="about.html">About</a><a href="donate.html" class="donate-btn">Donate</a></nav>
+      <a href="index.html"><img class="logo-img" src="/images/ep-logo-v1-white.png" alt="Ear-Practice logo"></a>
+      <nav>
+        <a href="about.html">About</a>
+        <a href="donate.html" class="donate-btn">Donate</a>
+      </nav>
     </div>
   </header>
 
+  <!-- ───── exercise card ───── -->
   <main class="page-wrap">
-    <div class="container">
-      <div class="container exercise">
+    <div class="container exercise">
       <div class="header-controls">
         <button id="home-button" onclick="location.href='index.html'">Main Menu</button>
         <div id="round-tracker">Round 1/10</div>
@@ -25,16 +29,15 @@
       <h2>Identify the Written Sentence</h2>
       <h3 id="category-title">Loading…</h3>
 
-      <<p class="instruction-text instruction-card">
+      <p class="instruction-text instruction-card">
         Play each audio clip ▶, then pick the clip that matches the sentence below.
       </p>
-
-      <div id="written-prompt" class="written-prompt"></div>
 
       <label class="speed-checkbox">
         <input type="checkbox" id="toggle-speed"> Slow audio
       </label>
 
+      <!-- choices (audio-button pairs) injected by JS -->
       <div id="choices" class="audio-choices"></div>
 
       <div id="feedback"></div>
