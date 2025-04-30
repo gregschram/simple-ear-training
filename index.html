@@ -15,7 +15,7 @@
   <!-- top bar ----------------------------------------------------------- -->
   <header class="site-header">
     <div class="header-inner">
-      <div class="logo" style="font-weight:700">🎧</div>
+      <div class="logo" style="font-weight:700"><img class="logo-img" alt="Ear Practice logo"></div>
       <nav>
         <a href="about.html">About</a>
         <a href="donate.html" class="donate-btn">Donate to support</a>
@@ -28,23 +28,23 @@
     <div class="container">
       <h1>Ear Training Exercises</h1>
 
-      <button class="start-exercise btn" onclick="startSpokenExercise()">
-        Identify the Spoken Sentence
-      </button>
-
-      <button class="start-exercise btn" onclick="startWrittenExercise()">
-        Identify the Written Sentence
-      </button>
-
-      <button class="start-exercise btn" onclick="showWordOptions('spoken')">
+      <button class="start-exercise btn spoken"  onclick="showWordOptions('spoken')">
         Identify the Spoken Word
       </button>
 
-      <button class="start-exercise btn" onclick="showWordOptions('written')">
-        Identify the Written Word
+      <button class="start-exercise btn spoken"  onclick="startSpokenExercise()">
+        Identify the Spoken Sentence
       </button>
 
-      <button class="start-exercise btn accent" onclick="startSfxExercise()">
+       button class="start-exercise btn written" onclick="showWordOptions('written')">
+        Identify the Written Word
+       /button>
+
+      <button class="start-exercise btn written" onclick="startWrittenExercise()">
+        Identify the Written Sentence
+      </button>
+
+      <button class="start-exercise btn sfx"     onclick="startSfxExercise()">
         Identify the Sound Effect
       </button>
     </div>
@@ -83,5 +83,22 @@
     };
     window.hideModal ||= ()=>document.getElementById("word-modal").classList.remove("show");
   </script>
+  <script>
+  let currentType="spoken";
+  function showWordOptions(t){
+    currentType=t;
+    document.getElementById('modal-title').textContent =
+      `Identify the ${t==='spoken'?'Spoken':'Written'} Word`;
+    document.getElementById('word-modal').classList.add('show');
+  }
+  function hideModal(){
+    document.getElementById('word-modal').classList.remove('show');
+  }
+  function startWordExercise(type,syl){
+    location.href = (type==='spoken'?'spoken-exercise.html':'written-exercise.html')
+                    + '?syllables='+syl;
+  }
+</script>
+
 </body>
 </html>

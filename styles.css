@@ -1,127 +1,121 @@
-/* ==========  COLOR PALETTE  ========== */
+/* =====================================================
+   EAR-PRACTICE UI  –  sage / rust palette + soft UI
+   ===================================================== */
+
+/* ----------  COLOR VARS  ---------- */
 :root{
-  /* sages */
-  --primary:        #4F8B72;   /* dark sage          */
-  --primary-light:  #79B496;   /* light sage (hover) */
-  /* rust-red accent */
-  --accent:         #B5482A;   /* rust               */
-  --accent-light:   #D46C4D;   /* lighter hover      */
+  --sage-dk:   #3F6F5C;   /* Spoken buttons             */
+  --sage-dk-h: #56846F;
+  --sage-lt:   #508971;   /* Written buttons            */
+  --sage-lt-h: #6FA98E;
+  --rust:      #9F412C;   /* SFX                        */
+  --rust-h:    #BC5D47;
 
-  /* neutrals */
-  --bg:   #F7F6F3;
-  --card: #FFFFFF;
-  --text: #24322E;
-  --shadow: 0 2px 10px rgba(0,0,0,.06);
+  --primary-light: var(--sage-lt-h);   /* alias so old rules still work */
+
+  --header-bg: #20202F;
+  --bg:        #F7F6F3;
+  --card:      #FFFFFF;
+  --text:      #24322E;
+  --shadow:    0 1px 3px rgba(0,0,0,.08);
 }
 
-/* ==========  GLOBAL RESET  ========== */
+/* ----------  RESET  ---------- */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
 body{
-  font:16px/1.4 "Inter",Arial,sans-serif;color:var(--text);background:var(--bg);
+  font:16px/1.4 "Inter",Arial,sans-serif;
+  color:var(--text);
+  background:var(--bg);
 }
 
-/* ==========  FIXED TOP BAR  ========== */
-.site-header{
-  position:fixed;inset:0 0 auto 0;height:60px;z-index:1000;
-  background:#1E1E2C;color:#fff;display:flex;align-items:center;
-}
-.header-inner{width:100%;max-width:1200px;margin:0 auto;padding:0 24px;
-              display:flex;justify-content:space-between;align-items:center}
+/* ----------  TOP BAR  ---------- */
+.site-header{height:60px;background:var(--header-bg);display:flex;align-items:center;position:fixed;inset:0 0 auto 0;z-index:1000}
+.header-inner{width:100%;max-width:1200px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center}
+.logo-img{height:26px;display:block}
+body.light .site-header{background:#fff}
+body.light .logo-img{content:url("/images/ep-logo-v1.png")}
+body:not(.light) .logo-img{content:url("/images/ep-logo-v1-white.png")}
 .site-header nav a{color:#fff;text-decoration:none;margin-left:28px;font-weight:600}
-.donate-btn{background:var(--primary);padding:7px 16px;border-radius:6px}
-.donate-btn:hover{background:var(--primary-light)}
+.donate-btn{background:var(--sage-lt);padding:7px 16px;border-radius:6px}
+.donate-btn:hover{background:var(--sage-lt-h)}
 
-/* ==========  MAIN WRAPPER  ========== */
-.page-wrap{min-height:calc(100vh - 60px);display:flex;justify-content:center;
-           align-items:center;padding:40px 20px}
-
-/* ==========  EXERCISE CARD  ========== */
-.container{
-  width:620px;max-width:90vw;background:var(--card);border-radius:12px;
-  padding:26px 30px;box-shadow:var(--shadow);display:flex;flex-direction:column;
-  gap:14px;
-}
-h1,h2{color:var(--primary);text-align:center;font-weight:700}
+/* ----------  MAIN LAYOUT  ---------- */
+.page-wrap{min-height:calc(100vh - 60px);display:flex;justify-content:center;align-items:center;padding:40px 20px}
+.container{width:620px;max-width:90vw;background:var(--card);border-radius:12px;padding:26px 30px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:14px}
+h1,h2{color:var(--sage-dk);font-weight:700;text-align:center}
 h1{font-size:1.9rem}h2{font-size:1.5rem}
 h3{font-size:1.1rem;font-weight:500;color:var(--text);text-align:center}
-
 .instruction-text{font-size:.9rem;font-weight:600;text-align:center}
 
-/* ==========  HEADER CONTROLS  ========== */
-.header-controls{display:flex;justify-content:space-between;margin-bottom:4px}
-#home-button{
-  background:none;border:2px solid var(--primary);color:var(--primary);
-  padding:6px 14px;border-radius:6px;font-size:.85rem;cursor:pointer;transition:.25s;
+/* ----------  BUTTONS  ---------- */
+.btn{cursor:pointer;border:none;border-radius:6px;color:#fff;transition:.2s;box-shadow:var(--shadow)}
+.btn.spoken {background:var(--sage-dk)}
+.btn.spoken:hover{background:var(--sage-dk-h)}
+.btn.written{background:var(--sage-lt)}
+.btn.written:hover{background:var(--sage-lt-h)}
+.btn.sfx{background:var(--rust)}
+.btn.sfx:hover{background:var(--rust-h)}
+
+/* soft hover shimmer */
+@keyframes wave{0%{background-position:0 50%}100%{background-position:200% 50%}}
+.btn:hover{
+  background-image:linear-gradient(120deg,
+      rgba(255,255,255,.06) 0%,
+      rgba(255,255,255,0)   50%,
+      rgba(255,255,255,.06) 100%);
+  background-size:200% 100%;animation:wave 1.4s ease-in-out forwards;
 }
-#home-button:hover{background:var(--primary);color:#fff}
+
+/* PLAY SOUND etc. inherit .btn shadow via class in HTML */
+.play-sound,.play-audio-button,#home-button,#next-button,.choice,.sub-option{box-shadow:var(--shadow)}
+
+/* ----------  HEADER CONTROLS INSIDE EXERCISE  ---------- */
+.header-controls{display:flex;justify-content:space-between;margin-bottom:4px}
+#home-button{background:none;border:2px solid var(--sage-dk);color:var(--sage-dk);padding:6px 14px;border-radius:6px;font-size:.85rem;cursor:pointer;transition:.25s}
+#home-button:hover{background:var(--sage-dk);color:#fff}
 #round-tracker{font-size:.85rem;font-weight:500;opacity:.75}
 
-/* ==========  BUTTONS  ========== */
-.btn{cursor:pointer;border:none;border-radius:6px;color:#fff;transition:.2s}
-.start-exercise{background:var(--primary);padding:16px 24px;font-size:1.05rem;width:100%}
-.start-exercise:hover{background:var(--primary-light);transform:translateY(-1px)}
-.start-exercise.accent{background:var(--accent)}
-.start-exercise.accent:hover{background:var(--accent-light)}
-
-.play-sound{background:var(--primary);padding:12px 26px;font-size:1.1rem}
-.play-sound:hover{background:var(--primary-light);transform:scale(1.03)}
-
-.play-audio-button{width:52px;height:52px;font-size:1.3rem;background:var(--primary)}
-.play-audio-button:hover{background:var(--primary-light);transform:scale(1.03)}
-
-#next-button{
-  margin-top:6px;padding:8px 16px;font-size:.9rem;border:2px solid var(--primary);
-  background:none;color:var(--primary);border-radius:6px;visibility:hidden;
-}
-#next-button.visible{visibility:visible}
-#next-button:hover{background:var(--primary);color:#fff}
-
-/* ==========  CHOICES  ========== */
+/* ----------  CHOICE GRIDS  ---------- */
 .choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%}
-.choice{
-  background:#ECECEC;border-radius:6px;padding:14px 10px;font-weight:600;
-  display:flex;justify-content:center;align-items:center;cursor:pointer;
-  transition:.15s;
-}
-.choice:hover{box-shadow:0 0 0 2px var(--primary-light);transform:translateY(-1px)}
+.choice{background:#ECECEC;border-radius:6px;padding:14px 10px;font-weight:600;display:flex;justify-content:center;align-items:center;cursor:pointer;transition:.15s}
+.choice:hover{box-shadow:0 0 0 2px var(--sage-lt);transform:translateY(-1px)}
 .choice.correct{background:#4CAF50;color:#fff;pointer-events:none}
 .choice.incorrect{background:#E04545;color:#fff;pointer-events:none}
+#next-button{margin-top:6px;padding:8px 16px;font-size:.9rem;border:2px solid var(--sage-dk);background:none;color:var(--sage-dk);border-radius:6px;visibility:hidden;transition:.25s}
+#next-button.visible{visibility:visible}
+#next-button:hover{background:var(--sage-dk);color:#fff}
 
-/*  audio choice row  */
+/* ----------  AUDIO CHOICE ROW (written)  ---------- */
 .audio-choice-pair{display:flex;gap:10px;margin:8px 0}
+.play-audio-button{width:52px;height:52px;font-size:1.3rem;background:var(--sage-dk);border:none;border-radius:6px;color:#fff}
+.play-audio-button:hover{background:var(--sage-dk-h);transform:scale(1.03)}
 
-/* ==========  SFX IMAGE GRID  ========== */
-.image-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;width:100%}
-.image-choice{
-  aspect-ratio:1;background:#ECECEC;border-radius:10px;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;padding:10%;transition:.2s
-}
+/* ----------  SFX IMAGE GRID  ---------- */
+.image-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;width:100%;max-width:520px;margin:0 auto}
+.image-choice{aspect-ratio:1;background:#F2F2F2;border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:10%;transition:.2s;box-shadow:var(--shadow)}
 .image-choice img{width:100%;height:100%;object-fit:contain;filter:grayscale(1)}
-.image-choice:hover{box-shadow:0 0 0 2px var(--primary-light);transform:translateY(-2px)}
-.image-choice.incorrect{background:#E04545;opacity:.45}
+.image-choice:hover{box-shadow:0 0 0 2px var(--sage-lt);transform:translateY(-2px)}
+.image-choice.selected{box-shadow:0 0 0 3px var(--sage-lt);}
 
-/* ==========  MODAL  ========== */
-.modal{
-  position:fixed;inset:0;display:none;justify-content:center;align-items:center;
-  background:rgba(0,0,0,.45);z-index:1200;
-}
+/* ----------  MODAL  ---------- */
+.modal{position:fixed;inset:0;display:none;justify-content:center;align-items:center;background:rgba(0,0,0,.45);z-index:1200}
 .modal.show{display:flex}
-.modal-content{
-  background:var(--card);padding:24px 30px;border-radius:10px;box-shadow:var(--shadow);
-  display:flex;flex-direction:column;gap:18px;max-width:90vw
-}
-.close-button{align-self:flex-end;font-size:1.4rem;background:none;border:none;
-              cursor:pointer;color:var(--text)}
-
-/*  sub-option buttons inside modal  */
+.modal-content{background:var(--card);padding:20px 30px;border-radius:10px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px;max-width:90vw}
+.close-button{align-self:flex-end;width:26px;height:26px;border-radius:50%;border:1px solid var(--text);font-size:.9rem;line-height:24px;text-align:center;padding:0;cursor:pointer;background:none}
 .word-options{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
-.sub-option{background:var(--primary);padding:12px 20px;font-size:1rem;color:#fff}
-.sub-option:hover{background:var(--primary-light)}
+.sub-option{background:var(--sage-lt);padding:12px 20px;font-size:1rem;color:#fff;border:none;border-radius:6px}
+.sub-option:hover{background:var(--sage-lt-h)}
 
-/* ==========  MOBILE TWEAKS  ========== */
+/* ----------  TOGGLE (Slow audio)  ---------- */
+.speed-checkbox{cursor:pointer}
+.speed-checkbox input{display:none}
+.speed-checkbox::before{content:'';display:inline-block;width:34px;height:18px;border-radius:9px;background:#ccc;margin-right:6px;vertical-align:-3px;transition:.25s}
+.speed-checkbox input:checked + label::before,
+.speed-checkbox input:checked + *::before{background:var(--sage-lt)}
+
+/* ----------  MOBILE  ---------- */
 @media(max-width:480px){
   html{font-size:14px}
   .container{width:95vw}
-  .choice-grid{grid-template-columns:1fr}  /* fallback to 1x4 on very small screens */
+  .choice-grid{grid-template-columns:1fr}
 }

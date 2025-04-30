@@ -203,6 +203,7 @@ function loadRound() {
             // Create choices after audio is loaded
             const choicesContainer = document.getElementById("choices");
             choicesContainer.innerHTML = "";
+            choicesContainer.classList.add("choice-grid");  
             choicesContainer.classList.add("written-exercise");
             choicesContainer.classList.add("choice-grid");
             
