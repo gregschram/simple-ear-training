@@ -148,6 +148,7 @@ function checkAnswer(element, isCorrect) {
         feedback.className = "incorrect";
         console.log("Incorrect answer processed");
     }
+    element.classList.add("selected");
 }
 
 

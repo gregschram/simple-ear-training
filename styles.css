@@ -113,6 +113,9 @@ h3{font-size:1.1rem;font-weight:500;color:var(--text);text-align:center}
 .speed-checkbox input:checked + label::before,
 .speed-checkbox input:checked + *::before{background:var(--sage-lt)}
 
+/* keep Play-Sound button fully visible even before audio loads */
+.play-sound{opacity:1!important}
+
 /* ----------  MOBILE  ---------- */
 @media(max-width:480px){
   html{font-size:14px}
