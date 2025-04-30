@@ -68,8 +68,8 @@ async function loadCategoryData(category) {
                 availableWords = audioFilesList.audioFiles[folderName].map(word => ({ word, type: syllables }));
                 getSyllableType = () => syllables;
             }
-
-            // Create round data using actual audio files
+           
+            // Create round data using actual audio  
             roundData = availableWords.map(({ word, type }) => {
                 const folderName = `${type}-syllable`;
                 // Get wrong answers from the same syllable type
@@ -206,38 +206,38 @@ function loadRound() {
             
             // Create audio-button pairs
             allOptions.forEach((option, index) => {
-                // Only create the audio button, not a container
-                const playButton = document.createElement("button");
-                playButton.className = "choice";
-                
-                // Create play icon element
-                const playIcon = document.createElement("span");
-                playIcon.className = "play-audio-button";
-                playIcon.innerHTML = "▶";
-                
-                // Create text node for the audio label
-                const labelText = document.createTextNode(` Audio ${index + 1}`);
-                
-                // Add click handler
-                playButton.onclick = () => checkAnswer(playButton, option === round, option);
-                
-                // Add the play icon and label to the button
-                playButton.appendChild(playIcon);
-                playButton.appendChild(labelText);
-                
-                // Add a separate click handler for just the play icon
-                playIcon.addEventListener('click', (e) => {
-                    e.stopPropagation(); // Prevent the button's click handler from firing
-                    audio.src = option.audioPath;
-                    audio.playbackRate = isSlowSpeed ? 0.65 : 1.0;
-                    audio.play().catch(error => {
-                        console.error("Play error for", option.audioPath, error);
-                        document.getElementById("feedback").textContent = "Error playing audio. Please try again.";
-                    });
-                });
-                
-                choicesContainer.appendChild(playButton);
-            });
+                 // Only create the audio button, not a container
+                 const playButton = document.createElement("button");
+                 playButton.className = "choice";
+     
+                 // Create play icon element
+                 const playIcon = document.createElement("span");
+                 playIcon.className = "play-audio-button";
+                 playIcon.innerHTML = "▶";
+     
+                 // Create text node for the audio label
+                 const labelText = document.createTextNode(` Audio ${index + 1}`);
+     
+                 // Add click handler
+                 playButton.onclick = () => checkAnswer(playButton, option === round, option);
+     
+                 // Add the play icon and label to the button
+                 playButton.appendChild(playIcon);
+                 playButton.appendChild(labelText);
+     
+                 // Add a separate click handler for just the play icon
+                 playIcon.addEventListener('click', (e) => {
+                     e.stopPropagation(); // Prevent the button's click handler from firing
+                     audio.src = option.audioPath;
+                     audio.playbackRate = isSlowSpeed ? 0.65 : 1.0;
+                     audio.play().catch(error => {
+                         console.error("Play error for", option.audioPath, error);
+                         document.getElementById("feedback").textContent = "Error playing audio. Please try again.";
+                     });
+                 });
+     
+                 choicesContainer.appendChild(playButton);
+             });
         })
         .catch(error => {
             console.error("Error in audio preload:", error);
