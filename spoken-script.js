@@ -235,7 +235,7 @@ function checkAnswer(button, isCorrect) {
         button.classList.add("correct");
         document.getElementById("feedback").textContent = "Correct!";
         document.getElementById("feedback").className = "correct";
-        document.getElementById("next-button").style.display = "block";  // Changed from inline-block to block
+        document.getElementById("next-button").style.display = "block";
         disableAllChoices();
         createCelebration();
     } else {
@@ -389,13 +389,19 @@ function goHome() {
     window.location.href = "/index.html";
 }
 
-// Update the instruction text with triangle icon
+// Update to make "Play Sound" button show both icon and text
 document.addEventListener('DOMContentLoaded', () => {
-    // Update the instruction text with the play icon
+    // Make sure the play button has both icon and text
+    const playButton = document.getElementById('play-sound');
+    if (playButton && playButton.innerHTML.trim() === '▶') {
+        playButton.innerHTML = '<span class="play-icon">▶</span> Play Sound';
+    }
+    
+    // Update the instruction text with proper wording
     if (exerciseType === 'word') {
-        document.querySelector(".instruction-text").textContent = "Press the word that matches what you hear. Press \"▶\" to listen again.";
+        document.querySelector(".instruction-text").textContent = "Press the word that matches what you hear. Press \"Play Sound\" to listen again.";
     } else {
-        document.querySelector(".instruction-text").textContent = "Press the sentence that matches what you hear. Press \"▶\" to listen again.";
+        document.querySelector(".instruction-text").textContent = "Press the sentence that matches what you hear. Press \"Play Sound\" to listen again.";
     }
     
     if (exerciseType === 'word') {

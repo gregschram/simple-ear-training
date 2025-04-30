@@ -72,6 +72,7 @@ async function loadCategoryData() {
 }
 
 // Improve image rendering
+// Ensure the image choices display properly
 function loadRound() {
     attemptsInCurrentRound = 0;
     const round = roundData[currentRound];
@@ -93,6 +94,7 @@ function loadRound() {
     // Create image grid
     const choicesContainer = document.getElementById("choices");
     choicesContainer.innerHTML = "";
+    choicesContainer.className = "image-grid";
     
     allOptions.forEach((option) => {
         const button = document.createElement("button");
@@ -117,15 +119,12 @@ function loadRound() {
         setTimeout(() => playWithFade(), 750);
     }
 }
-
 // Align feedback and next button layout to prevent shifting
 function checkAnswer(element, isCorrect) {
     console.log("checkAnswer called", { isCorrect });
     attemptsInCurrentRound++;
     const feedback = document.getElementById("feedback");
     const nextButton = document.getElementById("next-button");
-    
-    console.log("Elements found:", { feedback, nextButton });
     
     if (isCorrect) {
         if (attemptsInCurrentRound === 1) {
@@ -138,7 +137,7 @@ function checkAnswer(element, isCorrect) {
         element.classList.add("correct");
         feedback.textContent = "Correct!";
         feedback.className = "correct";
-        nextButton.style.display = "block";  // Changed from inline-block to block
+        nextButton.style.display = "block";
         disableAllChoices();
         createCelebration();
         console.log("Correct answer processed");
@@ -284,6 +283,12 @@ function goHome() {
     window.location.href = "/index.html";
 }
 document.addEventListener('DOMContentLoaded', () => {
+    // Make sure the play button has both icon and text
+    const playButton = document.getElementById('play-sound');
+    if (playButton && playButton.innerHTML.trim() === '▶') {
+        playButton.innerHTML = '<span class="play-icon">▶</span> Play Sound';
+    }
+    
     initAudio();
     loadCategoryData();
 });

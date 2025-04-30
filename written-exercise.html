@@ -12,8 +12,11 @@
         <div class="header-container">
             <a href="/index.html" class="logo-link">
                 <img src="/images/ep-logo-v1.png" alt="Ear Training Logo" class="site-logo">
-                <span class="site-title">Ear Training Exercises</span>
             </a>
+            <div class="header-right">
+                <a href="#" class="about-link">About</a>
+                <button class="donate-button">Donate to support</button>
+            </div>
         </div>
     </header>
 
@@ -41,9 +44,12 @@
 
             <!-- Audio choices will appear here -->
             <div id="choices" class="audio-choices"></div>
-
-            <div id="feedback"></div>
-            <button id="next-button" style="display: none;">Next</button>
+            
+            <!-- Fixed area for feedback and next button -->
+            <div class="feedback-container">
+                <div id="feedback"></div>
+                <button id="next-button" style="display: none;">Next</button>
+            </div>
         </div>
     </main>
 

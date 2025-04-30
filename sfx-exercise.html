@@ -12,8 +12,11 @@
         <div class="header-container">
             <a href="/index.html" class="logo-link">
                 <img src="/images/ep-logo-v1.png" alt="Ear Training Logo" class="site-logo">
-                <span class="site-title">Ear Training Exercises</span>
             </a>
+            <div class="header-right">
+                <a href="#" class="about-link">About</a>
+                <button class="donate-button">Donate to support</button>
+            </div>
         </div>
     </header>
 
@@ -30,14 +33,20 @@
             <p class="instruction-text">Press "Play Sound" then select the matching image.</p>
 
             <div class="audio-controls">
-                <button id="play-sound" class="play-sound">▶</button>
+                <button id="play-sound" class="play-sound">
+                    <span class="play-icon">▶</span>
+                    Play Sound
+                </button>
             </div>
 
             <!-- Image choices will appear here -->
             <div id="choices" class="image-grid"></div>
-
-            <div id="feedback"></div>
-            <button id="next-button" style="display: none;" onclick="loadNextRound()">Next</button>
+            
+            <!-- Fixed area for feedback and next button -->
+            <div class="feedback-container">
+                <div id="feedback"></div>
+                <button id="next-button" style="display: none;" onclick="loadNextRound()">Next</button>
+            </div>
         </div>
     </main>
 

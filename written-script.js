@@ -174,8 +174,7 @@ function loadRound() {
     document.getElementById("written-prompt").textContent = round.sentence;
     
     // Reset UI elements
-    document.getElementById("feedback").textContent = "Loading audio...";
-    document.getElementById("feedback").className = "";
+    document.getElementById("feedback").textContent = "";
     document.getElementById("next-button").style.display = "none";
     document.getElementById("round-tracker").textContent = `Round ${currentRound + 1}/${totalRounds}`;
     
@@ -207,31 +206,37 @@ function loadRound() {
             
             // Create audio-button pairs
             allOptions.forEach((option, index) => {
-                const pairContainer = document.createElement("div");
-                pairContainer.className = "audio-choice-pair";
-                
-                // Create play button
+                // Only create the audio button, not a container
                 const playButton = document.createElement("button");
-                playButton.className = "play-audio-button";
-                playButton.textContent = "▶";
-                playButton.onclick = () => {
+                playButton.className = "choice";
+                
+                // Create play icon element
+                const playIcon = document.createElement("span");
+                playIcon.className = "play-audio-button";
+                playIcon.innerHTML = "▶";
+                
+                // Create text node for the audio label
+                const labelText = document.createTextNode(` Audio ${index + 1}`);
+                
+                // Add click handler
+                playButton.onclick = () => checkAnswer(playButton, option === round, option);
+                
+                // Add the play icon and label to the button
+                playButton.appendChild(playIcon);
+                playButton.appendChild(labelText);
+                
+                // Add a separate click handler for just the play icon
+                playIcon.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Prevent the button's click handler from firing
                     audio.src = option.audioPath;
                     audio.playbackRate = isSlowSpeed ? 0.65 : 1.0;
                     audio.play().catch(error => {
                         console.error("Play error for", option.audioPath, error);
                         document.getElementById("feedback").textContent = "Error playing audio. Please try again.";
                     });
-                };
+                });
                 
-                // Create answer button
-                const answerButton = document.createElement("button");
-                answerButton.className = "choice";
-                answerButton.textContent = `Audio ${index + 1}`;
-                answerButton.onclick = () => checkAnswer(answerButton, option === round, option);
-                
-                pairContainer.appendChild(playButton);
-                pairContainer.appendChild(answerButton);
-                choicesContainer.appendChild(pairContainer);
+                choicesContainer.appendChild(playButton);
             });
         })
         .catch(error => {
