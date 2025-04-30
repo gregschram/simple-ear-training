@@ -6,12 +6,12 @@
 :root{
   --green-dk:  #679C6C;   /* primary fills, hover text white        */
   --green-md:  #B8E0C0;   /* default button bg, borders, hovers     */
-  --green-lt:  #E2F8E7;   /* card tint, choice hover bg             */
+  --green-lt:  #EBF9EE;   /* card tint, choice hover bg             */
 
   --tc-dk:     #BA594A;   /* accent (SFX)                           */
   --tc-lt:     #FFCEC4;   /* accent hover                           */
 
-  --header-bg: #20202F;
+  --header-bg: var(--green-dk);
   --bg:        #F7F6F3;
   --card:      #FFFFFF;
   --text:      #24322E;
@@ -41,13 +41,13 @@ h3{font-size:1.1rem;font-weight:500;text-align:center}
 /* ----------  MENU BUTTON GROUP  ---------- */
 .exercise-choices{display:flex;flex-direction:column;gap:14px;margin-top:18px}
 .btn{
-  cursor:pointer;display:block;width:100%;
-  border:none;border-radius:6px;color:#fff;font-size:1.05rem;
-  padding:14px 24px;transition:.2s;box-shadow:var(--shadow);
+  cursor:pointer;border:none;border-radius:6px;
+  background:var(--green-md);color:var(--text);        /* text now dark  */
+  padding:14px 24px;font-size:1.05rem;width:100%;
+  transition:.2s;box-shadow:var(--shadow);
 }
-.btn.spoken,.btn.written{background:var(--green-md)}
-.btn.spoken:hover,.btn.written:hover{background:var(--green-dk)}
-.btn.sfx{background:var(--tc-dk)}
+.btn:hover{background:var(--green-dk);color:#fff}
+.btn.sfx{background:var(--tc-dk);color:#fff}
 .btn.sfx:hover{background:var(--tc-lt);color:var(--text)}
 
 /* subtle shimmer */
@@ -127,32 +127,43 @@ h3{font-size:1.1rem;font-weight:500;text-align:center}
 }
 
 /* ===== Spoken/Written page polish ==================================== */
-.container.exercise{                /* 1-A  elevate card */
-  padding:32px 40px;
+.container.exercise{
+  padding:32px 40px;gap:24px;
   border:1px solid var(--green-md);
   box-shadow:0 6px 20px rgba(0,0,0,.06);
-  gap:24px;               /* 24 px rhythm for every direct child */
 }
 
-/* 1-B instruction card */
+/* instruction ribbon */
 .instruction-card{
   background:var(--green-lt);
   border-left:6px solid var(--green-md);
   padding:12px 18px;
   border-radius:6px;
-  line-height:1.45;
 }
 
 /* 1-C  choices + main buttons get same soft shadow */
 .choice,.play-sound,.play-audio-button,#home-button,#next-button{
   box-shadow:var(--shadow);
 }
+/*
 .choice{background:#fff;color:var(--green-dk);border:2px solid var(--green-md)}
 .choice:hover{background:var(--green-lt);border-color:var(--green-dk)}
-.choice.correct{background:var(--green-dk);border-color:var(--green-dk);color:#fff}
+.choice.correct{background:varf(--green-dk);border-color:var(--green-dk);color:#fff}
 .choice.incorrect{background:var(--tc-dk);border-color:var(--tc-dk);color:#fff}
+*/
 
 /* 1-D  a little lift on hover */
 .play-sound:hover,.play-audio-button:hover,#next-button:hover{
   transform:translateY(-1px);
+}
+
+/* threw this in here cuz I don't know where else */'
+.audio-controls{display:flex;align-items:center;gap:18px;margin-bottom:10px}
+
+/* gap between Play Sound and Slow-audio toggle */
+.audio-controls{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  margin-bottom:10px;
 }

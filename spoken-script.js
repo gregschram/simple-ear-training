@@ -33,19 +33,6 @@ if (exerciseType === "word"){
     `Category: ${category.charAt(0).toUpperCase()+category.slice(1)}`;
 }
 
-/*  COLOUR SWAP FOR WORD MODE  */
-if (exerciseType === "word"){
-  document.querySelectorAll(".play-sound, .choice").forEach(btn=>{
-    btn.style.backgroundColor = "#7952b3";
-  });
-  const style = document.createElement("style");
-  style.textContent = `
-    .play-sound:hover,.choice:hover{background-color:#563d7c!important}
-    .choice.correct{background:#4CAF50!important}
-    .choice.incorrect{background:#F44336!important}`;
-  document.head.appendChild(style);
-}
-
 /*  ----------------  DATA LOADING  ----------------- */
 async function loadCategoryData(){
   try{
