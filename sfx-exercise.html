@@ -5,13 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Identify the Sound Effect</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+    <meta name="description" content="Practice identifying everyday sounds to improve environmental awareness">
 </head>
 <body>
     <!-- Site Header -->
-    <header id="site-header">
+    <header>
         <div class="header-container">
             <a href="/index.html" class="logo-link">
-                <img src="/images/ep-logo-v1.png" alt="Ear Practice Logo" class="site-logo">
+                <img src="/images/ep-logo-v1.png" alt="Ear Training Logo" class="site-logo">
             </a>
             <div class="header-right">
                 <a href="#" class="about-link">About</a>
@@ -23,7 +25,7 @@
     <!-- Main Content -->
     <main>
         <div class="container">
-            <h2 id="exercise-title">Identify the Sound Effect</h2>
+            <h2>Identify the Sound Effect</h2>
 
             <div class="header-controls">
                 <button id="home-button">Main Menu</button>
@@ -42,18 +44,16 @@
             <!-- Image choices will appear here -->
             <div id="choices" class="image-grid"></div>
             
-            <!-- Fixed area for feedback and next button -->
-            <div class="feedback-container">
-                <div id="feedback"></div>
-                <button id="next-button" style="display: none;" onclick="loadNextRound()">Next</button>
-            </div>
+            <!-- Feedback and next button -->
+            <div id="feedback"></div>
+            <button id="next-button" style="display: none;">Next</button>
         </div>
     </main>
 
     <!-- Site Footer -->
-    <footer id="site-footer">
+    <footer>
         <div class="footer-container">
-            <p>&copy; 2025 earpractice.com</p>
+            <p>&copy; 2025 Ear Training Program</p>
         </div>
     </footer>
 
