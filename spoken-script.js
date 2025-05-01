@@ -146,6 +146,7 @@ function loadRound() {
         if (!currentRound) setTimeout(() => audio.play(), 750);
 
         const box = document.getElementById("choices");
+        document.getElementById("feedback").style.minHeight = "24px";
         box.innerHTML = "";
         box.classList.add("choice-grid"); // 2×2 grid
 
@@ -207,13 +208,13 @@ function loadNextRound() {
         loadRound();
         setTimeout(() => { audio.currentTime = 0; audio.play(); }, 750);
     } else {
-        showEndGame();
+        endGame();
     }
 }
 document.getElementById("next-button").onclick = loadNextRound;
 
 /*  ----------  END GAME  ---------- */
-function showEndGame() { /* unchanged … */ }
+function endGame() { /* unchanged … */ }
 
 /*  ----------  INIT  ---------- */
 function goHome() {

@@ -32,10 +32,6 @@ if (exerciseType === 'word') {
     document.getElementById("category-title").textContent = `Category: ${category.charAt(0).toUpperCase() + category.slice(1)}`;
 }
 
-const exTitle = document.getElementById('exercise-title');
-if (exTitle && exerciseType === 'word') exTitle.textContent = 'Identify the Written Word';
-
-
 if (exerciseType === 'word') {
     document.querySelectorAll('.play-audio-button, .choice').forEach(button => {
         button.style.backgroundColor = '#7952b3';
@@ -189,11 +185,14 @@ function loadRound() {
     
     // Display the written sentence prompt
     document.getElementById("written-prompt").textContent = round.sentence;
+    document.getElementById("written-prompt").style.color = "var(--tc-dk)";
     
     // Reset UI elements
     document.getElementById("feedback").textContent = "";
     document.getElementById("next-button").style.display = "none";
     document.getElementById("round-tracker").textContent = `Round ${currentRound + 1}/${totalRounds}`;
+    document.getElementById("feedback").style.minHeight = "24px";
+
     
     // Debug log
     console.log("Attempting to preload audio files for options");
@@ -228,6 +227,8 @@ function loadRound() {
             allOptions.forEach((option, index) => {
                 const pairContainer = document.createElement("div");
                 pairContainer.className = "audio-choice-pair";
+                pairContainer.style.display = "flex";
+                pairContainer.style.gap = "10px";
     
                 // Create play button
                 const playButton = document.createElement("button");
@@ -265,17 +266,13 @@ function checkAnswer(button, isCorrect, option) {
     
     if (isCorrect) {
         button.classList.add("correct");
-        feedback.textContent = "Correct! 🎉";
+        feedback.textContent = "Correct!";
+        document.getElementById("next-button").style.display = "block";
         score++;
     } else {
         button.classList.add("incorrect");
-        feedback.textContent = "Incorrect. Try again! ❌";
+        feedback.textContent = "Not quite - try again!";
         attempts++;
-    }
-    
-    answerHistory.push({ option, isCorrect });
-    if (attemptsInCurrentRound >= 3) {
-        document.getElementById("next-button").style.display = "block";
     }
     
     console.log(answerHistory);

@@ -23,8 +23,8 @@
   .header-inner{width:100%;max-width:1200px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center}
   .logo-img{height:26px}
   .site-header nav a{color:#fff;text-decoration:none;margin-left:28px;font-weight:600}
-  .donate-btn{background:var(--green-md);padding:7px 16px;border-radius:6px}
-  .donate-btn:hover{background:var(--green-dk)}
+  .donate-btn{background:#fff;color:var(--tc-dk);padding:7px 16px;border:2px solid var(--tc-dk);border-radius:6px}
+  .donate-btn:hover{background:var(--tc-dk);color:#fff}
   
   /* ---------- layout ---------- */
   .page-wrap{min-height:calc(100vh - 60px);display:flex;justify-content:center;align-items:center;padding:40px 20px}
@@ -45,9 +45,15 @@
   .btn.sfx:hover{background:var(--tc-lt);color:var(--text)}
   
   /* ---------- back arrow link ---------- */
-  .back-link{display:inline-flex;align-items:center;gap:4px;font-size:.9rem;font-weight:600;color:var(--green-dk);text-decoration:none;border:2px solid var(--green-dk);padding:6px 14px;border-radius:6px;transition:.25s}
-  .back-link:hover{background:var(--green-dk);color:#fff}
+  .back-link{
+    font-size:.9rem;font-weight:600;
+    color:var(--tc-dk);text-decoration:none;
+    display:inline-flex;align-items:center;gap:4px;
+    transition:color .2s;
+  }
   .back-link::before{content:"←";font-weight:700}
+  .back-link:hover{color:var(--tc-lt)}
+
   
   /* ---------- top-of-exercise controls ---------- */
   .header-controls{display:flex;justify-content:space-between;margin-bottom:4px}
@@ -73,15 +79,15 @@
   .choice.incorrect{background:var(--tc-dk);color:#fff;border-color:var(--tc-dk)}
   
   /* ---------- next btn ---------- */
-  #next-button{margin-top:6px;padding:8px 16px;font-size:.9rem;border:2px solid var(--green-dk);background:none;color:var(--green-dk);border-radius:6px;visibility:hidden;transition:.25s}
+  #next-button{margin-top:6px;padding:8px 16px;font-size:.9rem;border:2px solid var(--tc-dk);background:none;color:var(--tc-dk);border-radius:6px;visibility:hidden;transition:.25s}
   #next-button.visible{visibility:visible}
-  #next-button:hover{background:var(--green-dk);color:#fff}
+  #next-button:hover{background:var(--tc-dk);color:#fff}
   
   #feedback{margin-top:18px;text-align:center;font-weight:600}
   
   /* ---------- sfx image grid ---------- */
   .image-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;width:100%;max-width:520px;margin:0 auto}
-  .image-choice{aspect-ratio:1;background:#F2F2F2;border:2px solid transparent;border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:10%;transition:.2s;box-shadow:var(--shadow)}
+  .image-choice{aspect-ratio:1;background:#F9F9F9;border:2px solid transparent;border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:10%;transition:.2s;box-shadow:var(--shadow)}
   .image-choice img{width:100%;height:100%;object-fit:contain;filter:grayscale(1)}
   .image-choice:hover{border-color:var(--green-md);transform:translateY(-2px)}
   .image-choice.selected{border-color:var(--green-dk)}
@@ -108,7 +114,7 @@
 .chk-wrapper .cbx{user-select:none;cursor:pointer;padding:4px 6px;border-radius:6px;display:inline-flex;align-items:center;gap:6px;transition:background .2s}
 .chk-wrapper .cbx:hover{background:rgba(104,156,108,.08)}
 .chk-wrapper .cbx span:first-child{position:relative;width:18px;height:18px;border-radius:4px;border:1px solid var(--green-md);transition:.2s}
-.chk-wrapper .cbx span:first-child svg{position:absolute;top:1px;left:2px;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;fill:none;stroke-dasharray:16;stroke-dashoffset:16;transition:.3s .1s}
+.chk-wrapper .cbx span:first-child svg{position:absolute;top:3px;left:2px;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;fill:none;stroke-dasharray:16;stroke-dashoffset:16;transition:.3s .1s}
 .chk-wrapper input{position:absolute;visibility:hidden}
 .chk-wrapper input:checked + .cbx span:first-child{background:var(--green-dk);border-color:var(--green-dk);animation:chk-wave .4s}
 .chk-wrapper input:checked + .cbx span:first-child svg{stroke-dashoffset:0}

@@ -146,12 +146,13 @@ function checkAnswer(element, isCorrect) {
         console.log("Correct answer processed");
     } else {
         element.classList.add("incorrect");
+        element.classList.add("selected");
         element.style.pointerEvents = "none";
         feedback.textContent = "Not quite. Have another listen.";
         feedback.className = "incorrect";
         console.log("Incorrect answer processed");
     }
-    document.getElementById("next-button").style.display = "inline-block";
+    document.getElementById("next-button").style.display = "block";
 }
 
 
@@ -241,11 +242,11 @@ function loadNextRound() {
             playWithFade();
         }, 750);
     } else {
-        showEndGame();
+        endGame();
     }
 }
 
-function showEndGame() {
+function endGame() {
     const container = document.getElementById("choices");
     container.style.opacity = '0';
     container.style.transform = 'translateY(10px)';
