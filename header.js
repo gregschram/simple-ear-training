@@ -5,8 +5,8 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="header-inner">
       <a href="index.html"><img class="logo-img" src="/images/ep-logo-v1-white.png" alt="Ear-Practice logo"></a>
       <nav>
-        <a href="about.html">About</a>
-        <a href="donate.html" class="donate-btn">Donate</a>
+        // <a href="about.html">About</a>
+        <a href="donate.html" class="donate-btn tc-text">Donate to support</a>
       </nav>
     </div>
   `;

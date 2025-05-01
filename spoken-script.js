@@ -194,6 +194,7 @@ function checkAnswer(btn, correct) {
         btn.classList.add("correct");
         document.getElementById("feedback").textContent = "Correct!";
         document.getElementById("feedback").className = "correct";
+        document.getElementById("feedback").style.marginBottom = "20px";
         document.getElementById("next-button").style.display = "block";
         document.getElementById("next-button").classList.add("visible");
         disableAllChoices();

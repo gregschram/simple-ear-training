@@ -25,6 +25,7 @@
   .site-header nav a{color:#fff;text-decoration:none;margin-left:28px;font-weight:600}
   .donate-btn{background:#fff;color:#BA594A;padding:7px 16px;border-radius:6px;transition:background .18s ease;font-weight:600;}
   .donate-btn:hover{background:var(--tc-lt);color:#BA594A;}
+  .tc-text {color: #BA594A !important;}
   
   /* ---------- layout ---------- */
   .page-wrap{min-height:calc(100vh - 60px);display:flex;justify-content:center;align-items:center;padding:40px 20px}
@@ -86,8 +87,32 @@
   .choice.incorrect{background:var(--tc-dk);color:#fff;border-color:var(--tc-dk)}
   
   /* ---------- next btn ---------- */
-  #next-button{margin-top:15px;margin-left:auto;margin-right:auto;padding:8px 16px;font-size:.9rem;font-weight:700;border:2px solid var(--tc-dk);background:none;color:var(--tc-dk);border-radius:6px;visibility:hidden;transition:.25s;width:auto;display:inline-block;}  #next-button.visible{visibility:visible}
-  #next-button:hover{background:var(--tc-dk);color:#fff}
+  #next-button {
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 8px 16px;
+    font-size: .9rem;
+    font-weight: 700;
+    border: none;
+    background: var(--tc-dk);
+    color: white;
+    border-radius: 6px;
+    visibility: hidden;
+    transition: .25s;
+    width: auto;
+    display: inline-block;
+  }
+  
+  #next-button.visible {
+    visibility: visible;
+  }
+  
+  #next-button:hover {
+    background: var(--tc-lt);
+    color: var(--tc-dk);
+  }
+  
   #feedback + #next-button{margin-top:10px}
   
   #feedback{margin-top:18px;text-align:center;font-weight:600}
@@ -133,13 +158,17 @@
     font-weight: 600;
   }
 
-  #next-button {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: auto;
-    display: inline-block;
+  #next-button{
+    margin-top:15px;  /* Increase from 6px */
+    padding:8px 16px;
+    font-size:.9rem;
+    font-weight:700;
+    border:2px solid var(--tc-dk);
+    background:none;
+    color:var(--tc-dk);
+    border-radius:6px;
+    visibility:hidden;
+    transition:.25s
   }
   
   /* ---------- sfx image grid ---------- */
@@ -217,8 +246,13 @@
 }
 
 .container.exercise {
+  min-height: 500px; /* Adjust this value based on your content */
   display: flex;
   flex-direction: column;
+}
+
+.choice {
+  min-height: 50px; /* Adjust this value based on your content */
 }
 
 .choice-grid, .image-grid, .audio-choices {

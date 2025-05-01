@@ -275,6 +275,7 @@ function checkAnswer(button, isCorrect, option) {
   if (isCorrect) {
       button.classList.add("correct");
       feedback.textContent = "Correct!";
+      feedback.style.marginBottom = "20px"; // Add this line
       document.getElementById("next-button").style.display = "block";
       document.getElementById("next-button").classList.add("visible"); // Add this line
       score++;

@@ -73,8 +73,6 @@ async function loadCategoryData() {
     }
 }
 
-// Improve image rendering
-// Ensure the image choices display properly
 function loadRound() {
     attemptsInCurrentRound = 0;
     const round = roundData[currentRound];
@@ -98,18 +96,27 @@ function loadRound() {
     choicesContainer.innerHTML = "";
     choicesContainer.className = "image-grid";
     
-    allOptions.forEach((option) => {
-        const button = document.createElement("button");
-        button.className = "image-choice";
-        button.onclick = () => checkAnswer(button, option === round);
-        
-        // Create an img element for the image
-        const img = document.createElement("img");
-        img.src = option.imagePath;
-        img.alt = option.name;
-        
-        button.appendChild(img);
-        choicesContainer.appendChild(button);
+    // Add a slight delay to each image for a cascade effect
+    allOptions.forEach((option, index) => {
+        setTimeout(() => {
+            const button = document.createElement("button");
+            button.className = "image-choice";
+            button.style.opacity = "0";
+            button.style.transition = "opacity 0.3s ease";
+            button.onclick = () => checkAnswer(button, option === round);
+            
+            // Create an img element for the image
+            const img = document.createElement("img");
+            img.src = option.imagePath;
+            img.alt = option.name;
+            
+            button.appendChild(img);
+            choicesContainer.appendChild(button);
+            
+            // Trigger a reflow to ensure the transition works
+            void button.offsetWidth;
+            button.style.opacity = "1";
+        }, index * 250); // 250ms delay between each image
     });
     
     // Preload audio
