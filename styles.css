@@ -23,8 +23,8 @@
   .header-inner{width:100%;max-width:1200px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center}
   .logo-img{height:26px}
   .site-header nav a{color:#fff;text-decoration:none;margin-left:28px;font-weight:600}
-  .donate-btn{background:#fff;color:var(--tc-dk);padding:7px 16px;border:2px solid var(--tc-dk);border-radius:6px; border-radius:6px;transition:all .18s ease}
-  .donate-btn:hover{background:var(--tc-lt);color:#fff}
+  .donate-btn{background:#fff;color:var(--tc-dk);padding:7px 16px;border-radius:6px;transition:background .18s ease,color .18s;font-weight:600;}
+  .donate-btn:hover{background:var(--tc-lt);color:var(--tc-dk)}
   
   /* ---------- layout ---------- */
   .page-wrap{min-height:calc(100vh - 60px);display:flex;justify-content:center;align-items:center;padding:40px 20px}
@@ -79,8 +79,7 @@
   .choice.incorrect{background:var(--tc-dk);color:#fff;border-color:var(--tc-dk)}
   
   /* ---------- next btn ---------- */
-  #next-button{margin-top:6px;padding:8px 16px;font-size:.9rem;font-weight:700;border:2px solid var(--tc-dk);background:none;color:var(--tc-dk);border-radius:6px;visibility:hidden;transition:.25s}
-  #next-button.visible{visibility:visible}
+  #next-button{margin-top:6px;margin-left:auto;margin-right:auto;padding:8px 16px;font-size:.9rem;font-weight:700;border:2px solid var(--tc-dk);background:none;color:var(--tc-dk);border-radius:6px;visibility:hidden;transition:.25s;width:auto;display:inline-block;}  #next-button.visible{visibility:visible}
   #next-button:hover{background:var(--tc-dk);color:#fff}
   #feedback + #next-button{margin-top:10px}
   
@@ -137,3 +136,22 @@
 .play-audio-button:hover{background:var(--tc-lt);color:var(--text)}
 
 
+/* Consistent layout to prevent jumping */
+#feedback {
+  min-height: 24px;
+  display: block;
+}
+
+.container.exercise {
+  display: flex;
+  flex-direction: column;
+}
+
+.choice-grid, .image-grid, .audio-choices {
+  flex: 1;
+  margin-bottom: 20px;
+}
+
+.page-wrap {
+  padding-top: 80px; /* Increased top padding to account for fixed header */
+}

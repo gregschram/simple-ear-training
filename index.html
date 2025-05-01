@@ -26,7 +26,7 @@
 
       <div class="exercise-choices">
         <button class="btn spoken"  onclick="showWordOptions('spoken')">Identify the Spoken Word</button>
-        <button class="btn spoken"  onclick="location.href='spoken-exercise.html?category=haircut'">Identify the Spoken Sentence</button>
+        <button class="btn spoken" onclick="startRandomCategory()">Identify the Spoken Sentence</button>
         <button class="btn written" onclick="showWordOptions('written')">Identify the Written Word</button>
         <button class="btn written" onclick="location.href='written-exercise.html?category=haircut'">Identify the Written Sentence</button>
         <button class="btn sfx"     onclick="startSfxExercise()">Identify the Sound Effect</button>
@@ -70,6 +70,12 @@
     function startWordExercise(type,syll){
       const file = type==='spoken' ? 'spoken-exercise.html' : 'written-exercise.html';
       location.href = `${file}?type=word&syllables=${syll}`;
+    }
+
+    function startRandomCategory() {
+      const categories = ['doctor', 'grocery', 'haircut']; // Add all your categories here
+      const randomIndex = Math.floor(Math.random() * categories.length);
+      location.href = 'spoken-exercise.html?category=' + categories[randomIndex];
     }
   </script>
 </body>

@@ -21,9 +21,16 @@ function wireSpeedToggle(){
   if(!tgl) return;
   tgl.onchange = () => {
     isSlowSpeed = tgl.checked;
-    audioSpeed  = isSlowSpeed ? 0.65 : 1.0;
+    audioSpeed = isSlowSpeed ? 0.65 : 1.0;
     audio.playbackRate = audioSpeed;
-    if(typeof loadRound === 'function') loadRound();
+    
+    // Apply speed change to current audio if it's already loaded
+    if (audio.src) {
+      const wasPlaying = !audio.paused;
+      const currentTime = audio.currentTime;
+      audio.playbackRate = audioSpeed;
+      if (wasPlaying) audio.play();
+    }
   };
 }
 wireSpeedToggle();          // call once when the script loads

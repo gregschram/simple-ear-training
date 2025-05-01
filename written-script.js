@@ -40,9 +40,10 @@ if (exerciseType === 'word') {
     // Update hover state via CSS
     const style = document.createElement('style');
     style.textContent = `
-        .play-audio-button:hover, .choice:hover { background-color: #563d7c !important; }
-        .choice.correct { background-color: #4CAF50 !important; }
-        .choice.incorrect { background-color: #F44336 !important; }
+        .play-audio-button:hover { background-color: var(--green-lt) !important; color: var(--green-dk) !important; }
+        .choice:hover { background-color: var(--green-lt) !important; border-color: var(--green-dk) !important; }
+        .choice.correct { background-color: var(--green-dk) !important; color: white !important; }
+        .choice.incorrect { background-color: var(--tc-dk) !important; color: white !important; }
     `;
     document.head.appendChild(style);
 }
@@ -169,9 +170,16 @@ function wireSpeedToggle(){
   if(!tgl) return;
   tgl.onchange = () => {
     isSlowSpeed = tgl.checked;
-    audioSpeed  = isSlowSpeed ? 0.65 : 1.0;
+    audioSpeed = isSlowSpeed ? 0.65 : 1.0;
     audio.playbackRate = audioSpeed;
-    if(typeof loadRound === 'function') loadRound();
+    
+    // Apply speed change to current audio if it's already loaded
+    if (audio.src) {
+      const wasPlaying = !audio.paused;
+      const currentTime = audio.currentTime;
+      audio.playbackRate = audioSpeed;
+      if (wasPlaying) audio.play();
+    }
   };
 }
 wireSpeedToggle();          // call once when the script loads
@@ -260,22 +268,33 @@ function loadRound() {
 }
 
 function checkAnswer(button, isCorrect, option) {
-    attemptsInCurrentRound++;
-    const feedback = document.getElementById("feedback");
-    
-    if (isCorrect) {
-        button.classList.add("correct");
-        feedback.textContent = "Correct!";
-        document.getElementById("next-button").style.display = "block";
-        score++;
-    } else {
-        button.classList.add("incorrect");
-        button.disabled = true;
-        feedback.textContent = "Not quite - try again!";
-        attempts++;
-    }
-    
-    console.log(answerHistory);
+  attemptsInCurrentRound++;
+  const feedback = document.getElementById("feedback");
+  const nextButton = document.getElementById("next-button");
+  
+  if (isCorrect) {
+      button.classList.add("correct");
+      feedback.textContent = "Correct!";
+      nextButton.style.display = "block";
+      score++;
+      
+      // Disable all choices after correct answer
+      document.querySelectorAll(".choice").forEach(btn => {
+          btn.disabled = true;
+      });
+      
+      if (attemptsInCurrentRound === 1) {
+          firstTryCorrect++;
+          answerHistory[currentRound] = true;
+      } else {
+          answerHistory[currentRound] = false;
+      }
+  } else {
+      button.classList.add("incorrect");
+      button.disabled = true;
+      feedback.textContent = "Not quite - try again!";
+      attempts++;
+  }
 }
 
 document.getElementById("next-button").onclick = () => {

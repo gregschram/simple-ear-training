@@ -152,7 +152,6 @@ function checkAnswer(element, isCorrect) {
         feedback.className = "incorrect";
         console.log("Incorrect answer processed");
     }
-    document.getElementById("next-button").style.display = "block";
 }
 
 
