@@ -174,12 +174,27 @@ function loadRound() {
     setTimeout(preloadNextRound, 500);
 }
 
+function scrollToFeedback() {
+  // Only execute on mobile
+  if (window.innerWidth <= 768) {
+    const feedbackElement = document.getElementById('feedback');
+    if (feedbackElement) {
+      // Add a small delay to ensure DOM updates first
+      setTimeout(() => {
+        feedbackElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
+    }
+  }
+}
+
 /*  ----------  ANSWER CHECKING  ---------- */
 function disableAllChoices() {
     document.querySelectorAll(".choice").forEach(b => b.disabled = true);
 }
 function createCelebration() { /* unchanged … */ }
 function addSparkleEffect() { /* unchanged … */ }
+
+
 
 function checkAnswer(btn, correct) {
     attemptsInCurrentRound++;
@@ -204,6 +219,7 @@ function checkAnswer(btn, correct) {
         document.getElementById("next-button").classList.add("visible");
         disableAllChoices();
         createCelebration();
+        scrollToFeedback(); // ADD THIS LINE
     } else {
         btn.classList.add("incorrect");
         btn.disabled = true;

@@ -121,6 +121,29 @@
   .about-content p:last-child {
     margin-bottom: 0;
   }
+
+  /* ---------- Ko-fi button styling ---------- */
+  .donate-btn-container {
+    display: inline-block;
+  }
+
+  .donate-btn {
+    background: #fff;
+    color: #BA594A !important;
+    padding: 7px 16px;
+    border-radius: 6px;
+    transition: background .18s ease;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .donate-btn:hover {
+    background: var(--tc-lt);
+    color: #BA594A !important;
+    text-decoration: none;
+  }
+
   /* ---------- top-of-exercise controls ---------- */
   .header-controls{display:flex;justify-content:space-between;margin-bottom:4px}
   #round-tracker{font-size:.85rem;font-weight:500;opacity:.75}
@@ -426,4 +449,147 @@
 .audio-choice-pair .choice {
   flex: 1;
   min-height: 50px;
+}
+
+/* Mobile optimizations - add to end of styles.css */
+
+/* General mobile optimizations */
+@media (max-width: 768px) {
+  /* Header responsiveness */
+  .site-header {
+    height: auto;
+    padding: 10px 0;
+  }
+  
+  .header-inner {
+    flex-direction: column;
+    gap: 12px;
+    padding: 0 15px;
+  }
+  
+  .site-header nav {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .site-header nav a {
+    margin-left: 0;
+  }
+  
+  .donate-btn {
+    white-space: nowrap;
+  }
+  
+  /* Exercise container optimizations */
+  .container.exercise {
+    padding: 16px 20px;
+    gap: 14px;
+    min-height: auto; /* Remove fixed height */
+    padding-bottom: 50px; /* Reduce padding for feedback/next button */
+  }
+  
+  /* Reduce title font sizes */
+  h1 { font-size: 1.6rem; }
+  h2 { font-size: 1.3rem; }
+  h3 { font-size: 1rem; }
+  
+  /* Make instructions more compact */
+  .instruction-card {
+    padding: 8px 14px;
+    font-size: 0.95rem;
+  }
+  
+  /* Adjust play button size */
+  .play-sound {
+    padding: 14px 40px;
+    font-size: 1.1rem;
+  }
+  
+  /* Make choices more compact */
+  .choice-grid {
+    gap: 8px;
+  }
+  
+  .choice {
+    padding: 10px 8px;
+    min-height: 40px;
+  }
+  
+  /* Ensure feedback and next button are visible */
+  #feedback {
+    bottom: 30px;
+    font-size: 0.95rem;
+  }
+  
+  #next-button {
+    bottom: 5px;
+    padding: 6px 12px;
+  }
+  
+  /* Adjust page top padding for header */
+  .page-wrap {
+    padding-top: 120px;
+    padding-bottom: 20px;
+  }
+  
+  /* SFX specific adjustments */
+  .image-grid {
+    gap: 8px;
+  }
+  
+  /* For written exercises */
+  .audio-choice-pair {
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  
+  .written-prompt {
+    font-size: 1.6rem;
+    margin: 10px 0;
+  }
+}
+
+/* Extreme mobile optimization */
+@media (max-width: 480px) {
+  /* Further reduce sizes */
+  .container.exercise {
+    padding: 14px 16px;
+    gap: 10px;
+  }
+  
+  h1 { font-size: 1.4rem; }
+  h2 { font-size: 1.2rem; }
+  
+  .play-sound {
+    padding: 12px 30px;
+    font-size: 1rem;
+  }
+  
+  /* Stack all audio controls */
+  .audio-controls {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  /* Auto-scroll to ensure feedback is visible */
+  .page-wrap {
+    padding-top: 150px;
+  }
+  
+  /* Ensure end game content fits */
+  .score-display {
+    font-size: 1.3rem;
+    margin: 20px 0;
+  }
+  
+  .end-buttons {
+    gap: 10px;
+  }
+  
+  .end-btn {
+    padding: 10px 0;
+    width: 120px;
+  }
 }

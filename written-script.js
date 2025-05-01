@@ -267,6 +267,19 @@ function loadRound() {
         });
 }
 
+function scrollToFeedback() {
+  // Only execute on mobile
+  if (window.innerWidth <= 768) {
+    const feedbackElement = document.getElementById('feedback');
+    if (feedbackElement) {
+      // Add a small delay to ensure DOM updates first
+      setTimeout(() => {
+        feedbackElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
+    }
+  }
+}
+
 function checkAnswer(button, isCorrect, option) {
   attemptsInCurrentRound++;
   const feedback = document.getElementById("feedback");
@@ -275,9 +288,10 @@ function checkAnswer(button, isCorrect, option) {
   if (isCorrect) {
       button.classList.add("correct");
       feedback.textContent = "Correct!";
-      feedback.style.marginBottom = "20px"; // Add this line
+      feedback.style.marginBottom = "20px";
       document.getElementById("next-button").style.display = "block";
-      document.getElementById("next-button").classList.add("visible"); // Add this line
+      document.getElementById("next-button").classList.add("visible");
+      scrollToFeedback();
       score++;
       
       // Disable all choices after correct answer

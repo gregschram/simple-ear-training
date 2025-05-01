@@ -138,6 +138,19 @@ function loadRound() {
   }
 }
 
+function scrollToFeedback() {
+  // Only execute on mobile
+  if (window.innerWidth <= 768) {
+    const feedbackElement = document.getElementById('feedback');
+    if (feedbackElement) {
+      // Add a small delay to ensure DOM updates first
+      setTimeout(() => {
+        feedbackElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
+    }
+  }
+}
+
 // Align feedback and next button layout to prevent shifting
 function checkAnswer(element, isCorrect) {
     console.log("checkAnswer called", { isCorrect });
@@ -161,6 +174,7 @@ function checkAnswer(element, isCorrect) {
         document.getElementById("next-button").classList.add("visible"); // Add this line
         disableAllChoices();
         createCelebration();
+        scrollToFeedback();
         console.log("Correct answer processed");
     } else {
         element.classList.add("incorrect");
