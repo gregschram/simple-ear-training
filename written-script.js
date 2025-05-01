@@ -32,6 +32,10 @@ if (exerciseType === 'word') {
     document.getElementById("category-title").textContent = `Category: ${category.charAt(0).toUpperCase() + category.slice(1)}`;
 }
 
+const exTitle = document.getElementById('exercise-title');
+if (exTitle && exerciseType === 'word') exTitle.textContent = 'Identify the Written Word';
+
+
 if (exerciseType === 'word') {
     document.querySelectorAll('.play-audio-button, .choice').forEach(button => {
         button.style.backgroundColor = '#7952b3';
@@ -287,7 +291,4 @@ document.getElementById("next-button").onclick = () => {
 };
 
 loadCategoryData(category);
-  const exTitle = document.getElementById('exercise-title');
-  if(exTitle) exTitle.textContent = 'Identify the Written Word';
-  const catTitle = document.getElementById('category-title');
-  if(catTitle) catTitle.textContent = category;
+
