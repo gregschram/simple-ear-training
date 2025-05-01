@@ -1,3 +1,5 @@
+window.goHome ||= () => location.href = 'index.html';
+
 /*  SPOKEN EXERCISE  – full feature set, 2×2 grid  */
 let score = 0;
 let attempts = 0;
@@ -13,6 +15,19 @@ let isSlowSpeed = false;
 const audio = new Audio();
 audio.preload = "auto";
 audio.playbackRate = audioSpeed;
+
+function wireSpeedToggle(){
+  const tgl = document.getElementById('toggle-speed');
+  if(!tgl) return;
+  tgl.onchange = () => {
+    isSlowSpeed = tgl.checked;
+    audioSpeed  = isSlowSpeed ? 0.65 : 1.0;
+    audio.playbackRate = audioSpeed;
+    if(typeof loadRound === 'function') loadRound();
+  };
+}
+wireSpeedToggle();          // call once when the script loads
+
 
 // graceful fallback now that the button is an <a>
 const homeBtn = document.getElementById('home-button') || document.querySelector('.back-link');
@@ -117,9 +132,6 @@ function loadAudioWithRetry(path, retries = 3) {
 function loadRound() {
     attemptsInCurrentRound = 0;
     audio.playbackRate = audioSpeed;
-    const tgl = document.getElementById("toggle-speed");
-    if (tgl) tgl.checked = isSlowSpeed;
-
 
     const r = roundData[currentRound];
     document.getElementById("feedback").textContent = "Loading audio...";
@@ -186,12 +198,7 @@ function checkAnswer(btn, correct) {
     }
 }
 
-/*  ----------  SPEED TOGGLE  ---------- */
-document.getElementById("toggle-speed").onchange = e => {
-    isSlowSpeed = e.target.checked;
-    audioSpeed = isSlowSpeed ? 0.65 : 1.0;
-    audio.playbackRate = audioSpeed;
-};
+
 
 /*  ----------  ROUND NAV  ---------- */
 function loadNextRound() {

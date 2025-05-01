@@ -1,3 +1,5 @@
+window.goHome ||= () => location.href = 'index.html';
+
 import { soundEffects } from './sound-effects.js';
 let score = 0;
 let attempts = 0;

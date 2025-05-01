@@ -1,3 +1,5 @@
+window.goHome ||= () => location.href = 'index.html';
+
 let score = 0;
 let attempts = 0;
 let audioSpeed = 1.0;
@@ -162,13 +164,23 @@ function loadAudioWithRetry(path, maxRetries = 3) {
     });
 }
 
+function wireSpeedToggle(){
+  const tgl = document.getElementById('toggle-speed');
+  if(!tgl) return;
+  tgl.onchange = () => {
+    isSlowSpeed = tgl.checked;
+    audioSpeed  = isSlowSpeed ? 0.65 : 1.0;
+    audio.playbackRate = audioSpeed;
+    if(typeof loadRound === 'function') loadRound();
+  };
+}
+wireSpeedToggle();          // call once when the script loads
+
 // Update the createChoices function to handle the new layout
 function loadRound() {
     attemptsInCurrentRound = 0;
     audio.playbackRate = audioSpeed;
-    const tgl = document.getElementById("toggle-speed");
-    if (tgl) tgl.checked = isSlowSpeed;
-    
+
     const round = roundData[currentRound];
     
     // Display the written sentence prompt
@@ -274,9 +286,8 @@ document.getElementById("next-button").onclick = () => {
     }
 };
 
-document.getElementById("toggle-speed").onchange = () => {
-    isSlowSpeed = !isSlowSpeed;
-    loadRound();
-};
-
 loadCategoryData(category);
+  const exTitle = document.getElementById('exercise-title');
+  if(exTitle) exTitle.textContent = 'Identify the Written Word';
+  const catTitle = document.getElementById('category-title');
+  if(catTitle) catTitle.textContent = category;
