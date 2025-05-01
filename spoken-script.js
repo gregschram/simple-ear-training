@@ -184,9 +184,14 @@ function addSparkleEffect() { /* unchanged … */ }
 function checkAnswer(btn, correct) {
     attemptsInCurrentRound++;
     if (correct) {
+         // Add animation class
+        if (window.animateButton) {
+            window.animateButton(btn);
+        }
         if (attemptsInCurrentRound === 1) {
             firstTryCorrect++;
             answerHistory[currentRound] = true;
+        
         } else {
             answerHistory[currentRound] = false;
         }

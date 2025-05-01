@@ -74,60 +74,70 @@ async function loadCategoryData() {
 }
 
 function loadRound() {
-    attemptsInCurrentRound = 0;
-    const round = roundData[currentRound];
-    
-    document.getElementById("feedback").textContent = "";
-    document.getElementById("next-button").style.display = "none";
-    document.getElementById("round-tracker").textContent = `Round ${currentRound + 1}/${totalRounds}`;
-    
-    // Get 3 random different options for incorrect choices
-    const otherOptions = roundData
-        .filter(r => r !== round)
-        .sort(() => Math.random() - 0.5)
-        .slice(0, 3);
-    
-    // Combine correct option with random ones and shuffle
-    const allOptions = [round, ...otherOptions]
-        .sort(() => Math.random() - 0.5);
-    
-    // Create image grid
-    const choicesContainer = document.getElementById("choices");
-    choicesContainer.innerHTML = "";
-    choicesContainer.className = "image-grid";
-    
-    // Add a slight delay to each image for a cascade effect
-    allOptions.forEach((option, index) => {
-        setTimeout(() => {
-            const button = document.createElement("button");
-            button.className = "image-choice";
-            button.style.opacity = "0";
-            button.style.transition = "opacity 0.3s ease";
-            button.onclick = () => checkAnswer(button, option === round);
-            
-            // Create an img element for the image
-            const img = document.createElement("img");
-            img.src = option.imagePath;
-            img.alt = option.name;
-            
-            button.appendChild(img);
-            choicesContainer.appendChild(button);
-            
-            // Trigger a reflow to ensure the transition works
-            void button.offsetWidth;
-            button.style.opacity = "1";
-        }, index * 250); // 250ms delay between each image
-    });
-    
-    // Preload audio
-    audio.src = round.audioPath;
-    audio.load();
-    
-    // Play initial sound after a short delay
-    if (currentRound === 0) {
-        setTimeout(() => playWithFade(), 750);
-    }
+  attemptsInCurrentRound = 0;
+  const round = roundData[currentRound];
+  
+  document.getElementById("feedback").textContent = "";
+  document.getElementById("next-button").style.display = "none";
+  document.getElementById("round-tracker").textContent = `Round ${currentRound + 1}/${totalRounds}`;
+  
+  // Get 3 random different options for incorrect choices
+  const otherOptions = roundData
+      .filter(r => r !== round)
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 3);
+  
+  // Combine correct option with random ones and shuffle
+  const allOptions = [round, ...otherOptions]
+      .sort(() => Math.random() - 0.5);
+  
+  // Create image grid
+  const choicesContainer = document.getElementById("choices");
+  choicesContainer.innerHTML = "";
+  choicesContainer.className = "image-grid";
+  
+  // Pre-create all buttons but keep them hidden
+  const buttons = [];
+  
+  allOptions.forEach((option) => {
+      const button = document.createElement("button");
+      button.className = "image-choice";
+      button.style.opacity = "0";
+      button.style.transition = "opacity 0.5s ease";
+      button.onclick = () => checkAnswer(button, option === round);
+      
+      // Create an img element for the image
+      const img = document.createElement("img");
+      img.src = option.imagePath;
+      img.alt = option.name;
+      
+      button.appendChild(img);
+      choicesContainer.appendChild(button);
+      buttons.push(button);
+  });
+  
+  // Define the animation order (clockwise from top-left)
+  const animationOrder = [0, 1, 3, 2]; // top-left, top-right, bottom-right, bottom-left
+  
+  // Animate each button with a delay
+  animationOrder.forEach((index, i) => {
+      setTimeout(() => {
+          if (buttons[index]) {
+              buttons[index].style.opacity = "1";
+          }
+      }, i * 250);
+  });
+  
+  // Preload audio
+  audio.src = round.audioPath;
+  audio.load();
+  
+  // Play initial sound after a short delay
+  if (currentRound === 0) {
+      setTimeout(() => playWithFade(), 750);
+  }
 }
+
 // Align feedback and next button layout to prevent shifting
 function checkAnswer(element, isCorrect) {
     console.log("checkAnswer called", { isCorrect });

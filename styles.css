@@ -45,7 +45,23 @@
   
   .instruction-card{background:var(--green-lt);border-left:6px solid var(--green-md);padding:12px 18px;border-radius:6px}
   
-  /* ---------- menu buttons ---------- */
+  /* ---------- Add shadow to all buttons ---------- */
+  .btn, .choice, .play-sound, .play-audio-button, .end-btn, .sub-option, .donate-btn, .image-choice {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    transition: all 0.25s ease;
+  }
+
+  .btn:hover, .choice:hover, .play-sound:hover, .play-audio-button:hover, 
+  .end-btn:hover, .sub-option:hover, .donate-btn:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+  }
+
+  .image-choice:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+/* ---------- menu buttons ---------- */
   .exercise-choices{display:flex;flex-direction:column;gap:14px;margin-top:18px}
   .btn{cursor:pointer;border:none;border-radius:6px;background:var(--green-md);color:var(--text);padding:14px 24px;font-size:1.05rem;width:100%;transition:.2s;box-shadow:var(--shadow)}
   .btn:hover{background:var(--green-dk);color:#fff}
@@ -87,6 +103,7 @@
   .choice.incorrect{background:var(--tc-dk);color:#fff;border-color:var(--tc-dk)}
   
   /* ---------- next btn ---------- */
+ /* ---------- next btn ---------- */
   #next-button {
     margin-top: 15px;
     margin-left: auto;
@@ -94,25 +111,29 @@
     padding: 8px 16px;
     font-size: .9rem;
     font-weight: 700;
-    border: none;
-    background: var(--tc-dk);
+    border: 2px solid var(--green-dk);
+    background: var(--green-dk);
     color: white;
     border-radius: 6px;
     visibility: hidden;
     transition: .25s;
     width: auto;
-    display: inline-block;
+    display: block;
+    position: absolute;
+    right: 0;
+    bottom: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
   }
-  
+
   #next-button.visible {
     visibility: visible;
   }
-  
+
   #next-button:hover {
-    background: var(--tc-lt);
-    color: var(--tc-dk);
+    background: var(--green-lt);
+    color: var(--green-dk);
   }
-  
+
   #feedback + #next-button{margin-top:10px}
   
   #feedback{margin-top:18px;text-align:center;font-weight:600}
@@ -145,17 +166,19 @@
   /* Reserve space for feedback and next button */
   .container.exercise {
     position: relative;
-    padding-bottom: 80px; /* Reserve space for feedback and next button */
+    min-height: 500px;
+    padding-bottom: 60px;
   }
 
   #feedback {
-    position: absolute;
-    bottom: 50px;
-    left: 0;
-    right: 0;
-    min-height: 24px;
+    min-height: 30px;
     text-align: center;
     font-weight: 600;
+    margin-top: 15px;
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    right: 0;
   }
 
   #next-button{
@@ -203,9 +226,37 @@
   /* ---------- modal ---------- */
   .modal{position:fixed;inset:0;display:none;justify-content:center;align-items:center;background:rgba(0,0,0,.45);z-index:1200}
   .modal.show{display:flex}
-  .modal-content{background:var(--card);padding:20px 30px;border-radius:10px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px;max-width:90vw}
-  .modal-content h2{margin-top:4px}
-  .close-button{align-self:flex-end;width:26px;height:26px;border-radius:50%;border:1px solid var(--text);font-size:.9rem;line-height:24px;text-align:center;padding:0;cursor:pointer;background:none}
+  .modal-content {
+    background: var(--card);
+    padding: 20px 30px 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    max-width: 90vw;
+    position: relative;
+  }  
+  .modal-content h2 {
+    margin-top: 0;
+    padding-top: 0;
+  }
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 1px solid var(--tc-dk);
+    color: var(--tc-dk);
+    background: white;
+    font-size: .9rem;
+    line-height: 24px;
+    text-align: center;
+    padding: 0;
+    cursor: pointer;
+  }  
   .word-options{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
   .sub-option{background:var(--green-md);color:var(--text);padding:12px 20px;border:none;border-radius:6px}
   .sub-option:hover{background:var(--green-dk);color:#fff}
@@ -294,4 +345,18 @@
 
 .end-btn:hover {
   background: var(--tc-lt);
+}
+
+/* Improve written exercise spacing */
+.audio-choice-pair {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.audio-choice-pair .choice {
+  flex: 1;
+  min-height: 50px;
 }

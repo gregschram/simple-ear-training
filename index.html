@@ -74,16 +74,16 @@
     }
 
     function startRandomCategory() {
-      const categories = ['doctor', 'grocery', 'haircut']; // Add all your categories here
-      const randomIndex = Math.floor(Math.random() * categories.length);
-      location.href = 'spoken-exercise.html?category=' + categories[randomIndex];
+      const category = window.getNextCategory('spoken');
+      location.href = 'spoken-exercise.html?category=' + category;
     }
 
     function startRandomWrittenCategory() {
-      const categories = ['doctor', 'grocery', 'haircut']; // Add all your categories here
-      const randomIndex = Math.floor(Math.random() * categories.length);
-      location.href = 'written-exercise.html?category=' + categories[randomIndex];
+      const category = window.getNextCategory('written');
+      location.href = 'written-exercise.html?category=' + category;
     }
   </script>
+  <script src="category-manager.js"></script>
+  <script src="celebration.js"></script>
 </body>
 </html>
