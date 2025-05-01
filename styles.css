@@ -86,11 +86,36 @@
   .choice.incorrect{background:var(--tc-dk);color:#fff;border-color:var(--tc-dk)}
   
   /* ---------- next btn ---------- */
-  #next-button{margin-top:6px;margin-left:auto;margin-right:auto;padding:8px 16px;font-size:.9rem;font-weight:700;border:2px solid var(--tc-dk);background:none;color:var(--tc-dk);border-radius:6px;visibility:hidden;transition:.25s;width:auto;display:inline-block;}  #next-button.visible{visibility:visible}
+  #next-button{margin-top:15px;margin-left:auto;margin-right:auto;padding:8px 16px;font-size:.9rem;font-weight:700;border:2px solid var(--tc-dk);background:none;color:var(--tc-dk);border-radius:6px;visibility:hidden;transition:.25s;width:auto;display:inline-block;}  #next-button.visible{visibility:visible}
   #next-button:hover{background:var(--tc-dk);color:#fff}
   #feedback + #next-button{margin-top:10px}
   
   #feedback{margin-top:18px;text-align:center;font-weight:600}
+
+  /* ---------- Style for the small play buttons in Written modules ---------- */
+  .audio-choice-pair .play-audio-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--tc-dk);
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: .25s;
+    padding: 0;
+  }
+
+  .audio-choice-pair .play-audio-button .play-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .audio-choice-pair .play-audio-button:hover {
+    background: var(--tc-lt);
+  }
 
   /* Reserve space for feedback and next button */
   .container.exercise {
@@ -128,7 +153,24 @@
   .image-choice.correct img,
   .image-choice.incorrect img{filter:invert(1)}
 
-  
+  /* SFX feedback and next button */
+  #sfx-container {
+    position: relative;
+    min-height: 550px; /* Adjust based on your content */
+  }
+  #sfx-container #feedback,
+  #sfx-container #next-button {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  #sfx-container #feedback {
+    bottom: 45px;
+  }
+  #sfx-container #next-button {
+    bottom: 10px;
+  }
+
   /* ---------- modal ---------- */
   .modal{position:fixed;inset:0;display:none;justify-content:center;align-items:center;background:rgba(0,0,0,.45);z-index:1200}
   .modal.show{display:flex}

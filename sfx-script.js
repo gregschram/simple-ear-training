@@ -256,8 +256,14 @@ function endGame(){
   if (instructionText) instructionText.style.display = "none";
   
   const cont = document.getElementById("choices");
+  cont.style.display = "flex";
+  cont.style.flexDirection = "column";
+  cont.style.alignItems = "center";
+  cont.style.justifyContent = "center";
+  cont.style.padding = "30px 0";
+  
   cont.innerHTML =
-    `<div class="end-game">
+    `<div class="end-game" style="width:100%; text-align:center;">
        <p class="score-display">⭐ ${firstTryCorrect}/10 correct on the first try! ⭐</p>
        <div class="end-buttons">
          <button onclick="window.location.reload()" class="end-btn">New Round</button>
