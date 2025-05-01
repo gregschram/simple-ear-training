@@ -222,18 +222,26 @@ document.getElementById("next-button").onclick = loadNextRound;
 
 /*  ----------  END GAME  ---------- */
 function endGame(){
+  // Hide audio controls
+  const audioControls = document.querySelector(".audio-controls");
+  if (audioControls) audioControls.style.display = "none";
+  
+  // Hide instruction text
+  const instructionText = document.querySelector(".instruction-text");
+  if (instructionText) instructionText.style.display = "none";
+  
   const cont = document.getElementById("choices");
   cont.innerHTML =
     `<div class="end-game">
-       <h2>Complete!</h2>
-       <p>⭐ ${firstTryCorrect}/10 correct on the first try! ⭐</p>
-       <button onclick="window.location.reload()" class="choice">New Round</button>
-       <button onclick="location.href='index.html'" class="choice">Main Menu</button>
+       <p class="score-display">⭐ ${firstTryCorrect}/10 correct on the first try! ⭐</p>
+       <div class="end-buttons">
+         <button onclick="window.location.reload()" class="end-btn">New Round</button>
+         <button onclick="location.href='index.html'" class="end-btn">Main Menu</button>
+       </div>
      </div>`;
   document.getElementById("next-button").style.display = "none";
   document.getElementById("feedback").textContent = "";
 }
-
 /*  ----------  INIT  ---------- */
 function goHome() {
     window.location.href = "/index.html";

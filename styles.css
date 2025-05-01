@@ -3,11 +3,11 @@
    ===================================================== */
 
    :root{
-    --green-dk:#679C6C;   /* header / hover */
-    --green-md:#B8E0C0;   /* buttons / borders */
-    --green-lt:#F2FCF5;   /* card tint        */
-    --tc-dk  :#BA594A;    /* accent           */
-    --tc-lt  :#FFCEC4;
+    --green-dk:#679C6C;   /* "Green" header / hover */
+    --green-md:#B8E0C0;   /* "light sage" buttons / borders */
+    --green-lt:#F2FCF5;   /* "lightest green" card tint        */
+    --tc-dk  :#BA594A;    /* "terra cotta" accent           */
+    --tc-lt  :#FFCEC4;    /* "peach" accent           */
   
     --header-bg:var(--green-dk);
     --bg:#F7F6F3;  --card:#fff; --text:#24322E;
@@ -23,8 +23,8 @@
   .header-inner{width:100%;max-width:1200px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center}
   .logo-img{height:26px}
   .site-header nav a{color:#fff;text-decoration:none;margin-left:28px;font-weight:600}
-  .donate-btn{background:#fff;color:var(--tc-dk);padding:7px 16px;border-radius:6px;transition:background .18s ease,color .18s;font-weight:600;}
-  .donate-btn:hover{background:var(--tc-lt);color:var(--tc-dk)}
+  .donate-btn{background:#fff;color:#BA594A;padding:7px 16px;border-radius:6px;transition:background .18s ease;font-weight:600;}
+  .donate-btn:hover{background:var(--tc-lt);color:#BA594A;}
   
   /* ---------- layout ---------- */
   .page-wrap{min-height:calc(100vh - 60px);display:flex;justify-content:center;align-items:center;padding:40px 20px}
@@ -34,6 +34,13 @@
   
   h1,h2{color:var(--green-dk);font-weight:700;text-align:center}
   h1{font-size:1.9rem}h2{font-size:1.5rem}h3{font-size:1.1rem;font-weight:500;text-align:center}
+  .subtitle {
+    text-align: center;
+    color: var(--text);
+    font-size: 1.1rem;
+    margin-bottom: 24px;
+    font-weight: 500;
+  }
   
   .instruction-card{background:var(--green-lt);border-left:6px solid var(--green-md);padding:12px 18px;border-radius:6px}
   
@@ -84,6 +91,31 @@
   #feedback + #next-button{margin-top:10px}
   
   #feedback{margin-top:18px;text-align:center;font-weight:600}
+
+  /* Reserve space for feedback and next button */
+  .container.exercise {
+    position: relative;
+    padding-bottom: 80px; /* Reserve space for feedback and next button */
+  }
+
+  #feedback {
+    position: absolute;
+    bottom: 50px;
+    left: 0;
+    right: 0;
+    min-height: 24px;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  #next-button {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    display: inline-block;
+  }
   
   /* ---------- sfx image grid ---------- */
   .image-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;width:100%;max-width:520px;margin:0 auto}
@@ -154,4 +186,36 @@
 
 .page-wrap {
   padding-top: 80px; /* Increased top padding to account for fixed header */
+}
+
+/* End game styling */
+.score-display {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--green-dk);
+  text-align: center;
+  margin: 30px 0;
+}
+
+.end-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.end-btn {
+  background: var(--tc-dk);
+  color: white;
+  padding: 12px 0;
+  width: 140px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.end-btn:hover {
+  background: var(--tc-lt);
 }

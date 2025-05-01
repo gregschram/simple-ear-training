@@ -9,20 +9,13 @@
 <body>
 
   <!-- ───────── header ───────── -->
-  <header class="site-header">
-    <div class="header-inner">
-      <img class="logo-img" src="/images/ep-logo-v1-white.png" alt="Ear Practice logo">
-      <nav>
-        <a href="about.html">About</a>
-        <a href="donate.html" class="donate-btn">Donate to support</a>
-      </nav>
-    </div>
-  </header>
+  <script src="header.js"></script>
 
   <!-- ───────── menu card ───────── -->
   <main class="page-wrap">
     <div class="container">
-      <h1>Ear Training Exercises</h1>
+      <h1>Ready to practice?</h1>
+      <p class="subtitle">Audiologist-approved exercises to hone your hearing.</p>
 
       <div class="exercise-choices">
         <button class="btn spoken"  onclick="showWordOptions('spoken')">Identify the Spoken Word</button>
@@ -55,6 +48,14 @@
     window.startSpokenExercise  ||= go('spoken-exercise.html');
     window.startWrittenExercise ||= go('written-exercise.html');
     window.startSfxExercise     ||= go('sfx-exercise.html');
+
+    /* category selection */
+    function startRandomCategory() {
+      // List all available categories
+      const categories = ['doctor', 'grocery', 'haircut'];
+      const randomCategory = categories[Math.floor(Math.random() * categories.length)];
+      window.location.href = 'spoken-exercise.html?category=' + randomCategory;
+    }
 
     /* modal */
     let currentType='spoken';

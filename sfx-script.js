@@ -140,7 +140,8 @@ function checkAnswer(element, isCorrect) {
         element.classList.add("selected");
         feedback.textContent = "Correct!";
         feedback.className = "correct";
-        nextButton.style.display = "block";
+        document.getElementById("next-button").style.display = "block";
+        document.getElementById("next-button").classList.add("visible"); // Add this line
         disableAllChoices();
         createCelebration();
         console.log("Correct answer processed");
@@ -245,40 +246,26 @@ function loadNextRound() {
     }
 }
 
-function endGame() {
-    const container = document.getElementById("choices");
-    container.style.opacity = '0';
-    container.style.transform = 'translateY(10px)';
-    
-    setTimeout(() => {
-        // Remove any grid-specific classes/styles
-        container.classList.remove('image-grid');
-        // Reset any grid-specific styles
-        container.style.display = 'block';
-        container.style.width = '100%';
-        container.style.maxWidth = 'none';
-        
-        container.innerHTML = `
-            <div class="end-game">
-                <h2>Complete!</h2>
-                <p>⭐ ${firstTryCorrect}/10 correct on the first try! ⭐</p>
-                <button onclick="window.location.reload()" class="choice">New Round</button>
-                <button onclick="window.location.href='/index.html'" class="choice">Main Menu</button>
-            </div>
-        `;
-        
-        const endGameDiv = container.querySelector('.end-game');
-        addSparkleEffect(endGameDiv);
-        
-        container.style.opacity = '1';
-        container.style.transform = 'translateY(0)';
-        container.style.transition = 'opacity 0.3s, transform 0.3s';
-    }, 300);
-
-    document.getElementById("feedback").textContent = "";
-    document.getElementById("next-button").style.display = "none";
-    document.getElementById("play-sound").style.display = "none";
-    document.querySelector(".instruction-text").style.display = "none";
+function endGame(){
+  // Hide audio controls
+  const audioControls = document.querySelector(".audio-controls");
+  if (audioControls) audioControls.style.display = "none";
+  
+  // Hide instruction text
+  const instructionText = document.querySelector(".instruction-text");
+  if (instructionText) instructionText.style.display = "none";
+  
+  const cont = document.getElementById("choices");
+  cont.innerHTML =
+    `<div class="end-game">
+       <p class="score-display">⭐ ${firstTryCorrect}/10 correct on the first try! ⭐</p>
+       <div class="end-buttons">
+         <button onclick="window.location.reload()" class="end-btn">New Round</button>
+         <button onclick="location.href='index.html'" class="end-btn">Main Menu</button>
+       </div>
+     </div>`;
+  document.getElementById("next-button").style.display = "none";
+  document.getElementById("feedback").textContent = "";
 }
 
 document.getElementById("next-button").onclick = loadNextRound;
