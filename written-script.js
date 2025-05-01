@@ -166,7 +166,8 @@ function loadAudioWithRetry(path, maxRetries = 3) {
 function loadRound() {
     attemptsInCurrentRound = 0;
     audio.playbackRate = audioSpeed;
-    document.getElementById("toggle-speed").checked = isSlowSpeed;
+    const tgl = document.getElementById("toggle-speed");
+    if (tgl) tgl.checked = isSlowSpeed;
     
     const round = roundData[currentRound];
     

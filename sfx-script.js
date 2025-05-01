@@ -48,10 +48,6 @@ function playWithFade() {
     }
 }
 
-document.getElementById("home-button").onclick = () => {
-    window.location.href = "/index.html";
-};
-
 document.getElementById("play-sound").onclick = () => {
     playWithFade();
 };
