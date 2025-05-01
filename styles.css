@@ -457,27 +457,38 @@
 @media (max-width: 768px) {
   /* Header responsiveness */
   .site-header {
-    height: auto;
-    padding: 10px 0;
+    height: 60px;
   }
   
   .header-inner {
-    flex-direction: column;
-    gap: 12px;
-    padding: 0 15px;
+    /* Keep horizontal layout but optimize spacing */
+    padding: 0 12px;
   }
-  
+
+  .logo-img {
+    height: 30px; /* Smaller logo on mobile */
+  }
+
   .site-header nav {
     display: flex;
     width: 100%;
     justify-content: space-between;
   }
   
+  .site-header nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  }
+
   .site-header nav a {
-    margin-left: 0;
+    margin-left: 15px;
+    font-size: 0.9rem;
   }
   
   .donate-btn {
+    padding: 6px 12px;
+    font-size: 0.9rem;
     white-space: nowrap;
   }
   
@@ -529,7 +540,7 @@
   
   /* Adjust page top padding for header */
   .page-wrap {
-    padding-top: 120px;
+    padding-top: 80px;
     padding-bottom: 20px;
   }
   
@@ -574,8 +585,16 @@
   }
   
   /* Auto-scroll to ensure feedback is visible */
+  .site-header {
+    height: 50px;
+  }
+
+  .logo-img {
+    height: 24px;
+  }
+
   .page-wrap {
-    padding-top: 150px;
+    padding-top: 70px;
   }
   
   /* Ensure end game content fits */
