@@ -64,22 +64,6 @@
   /* ---------- audio controls row ---------- */
   .audio-controls{display:flex;align-items:center;gap:18px;margin-bottom:10px}
   
-  /* ---------- toggle ---------- */
-  .speed-checkbox{display:inline-flex;align-items:center;gap:6px;font-size:.9rem;cursor:pointer}
-  .speed-checkbox input{display:none}
-  .speed-checkbox::before{
-    content:'';width:34px;height:18px;border-radius:9px;background:#ccc;
-    display:inline-block;transition:.25s;position:relative;
-  }
-  .speed-checkbox::after{
-    content:'';width:14px;height:14px;border-radius:50%;background:#fff;
-    position:absolute;left:2px;top:2px;transition:.25s;
-  }
-  .speed-checkbox input:checked + span::before, /* fallback if span missing */
-  .speed-checkbox input:checked + *::before{background:var(--green-md)}
-  .speed-checkbox input:checked + span::after,
-  .speed-checkbox input:checked + *::after{left:18px}
-  
   /* ---------- choice grid ---------- */
   .choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%}
   .choice{background:#fff;color:var(--green-dk);border:2px solid var(--green-md);border-radius:8px;padding:14px 10px;font-weight:600;display:flex;justify-content:center;align-items:center;cursor:pointer;transition:.15s;box-shadow:var(--shadow)}
@@ -118,3 +102,13 @@
     .choice-grid{grid-template-columns:1fr}
   }
   
+  /* ----------  mint tick checkbox ---------- */
+.chk-wrapper{display:inline-block;vertical-align:middle}
+.chk-wrapper .cbx{user-select:none;cursor:pointer;padding:4px 6px;border-radius:6px;display:inline-flex;align-items:center;gap:6px;transition:background .2s}
+.chk-wrapper .cbx:hover{background:rgba(104,156,108,.08)}
+.chk-wrapper .cbx span:first-child{position:relative;width:18px;height:18px;border-radius:4px;border:1px solid var(--green-md);transition:.2s}
+.chk-wrapper .cbx span:first-child svg{position:absolute;top:2px;left:1px;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;fill:none;stroke-dasharray:16;stroke-dashoffset:16;transition:.3s .1s}
+.chk-wrapper input{position:absolute;visibility:hidden}
+.chk-wrapper input:checked + .cbx span:first-child{background:var(--green-dk);border-color:var(--green-dk);animation:chk-wave .4s}
+.chk-wrapper input:checked + .cbx span:first-child svg{stroke-dashoffset:0}
+@keyframes chk-wave{50%{transform:scale(.9)}}

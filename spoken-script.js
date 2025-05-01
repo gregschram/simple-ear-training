@@ -20,7 +20,6 @@ if (homeBtn) homeBtn.onclick = () => location.href = '/index.html';
 
 
 /*  NAV / UI  */
-document.getElementById("home-button").onclick = () => window.location.href = "/index.html";
 document.getElementById("play-sound").onclick = () => {
     audio.currentTime = 0;
     audio.playbackRate = audioSpeed;

@@ -17,11 +17,6 @@ audio.playbackRate = audioSpeed;
 const homeBtn = document.getElementById('home-button') || document.querySelector('.back-link');
 if (homeBtn) homeBtn.onclick = () => location.href = '/index.html';
 
-
-document.getElementById("home-button").onclick = () => {
-    window.location.href = "/index.html";
-};
-
 const urlParams = new URLSearchParams(window.location.search);
 const exerciseType = urlParams.get('type');
 const category = urlParams.get('category');
