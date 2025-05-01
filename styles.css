@@ -19,16 +19,19 @@
   body{font:16px/1.4 "Inter",Arial,sans-serif;color:var(--text);background:var(--bg)}
   
   /* ---------- header ---------- */
-  .site-header{height:60px;background:var(--header-bg);position:fixed;inset:0 0 auto 0;z-index:1000;display:flex;align-items:center}
+  .site-header{height:70px;background:var(--header-bg);position:fixed;inset:0 0 auto 0;z-index:1000;display:flex;align-items:center}
   .header-inner{width:100%;max-width:1200px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center}
-  .logo-img{height:26px}
+  .logo-img{height:40px}
   .site-header nav a{color:#fff;text-decoration:none;margin-left:28px;font-weight:600}
   .donate-btn{background:#fff;color:#BA594A;padding:7px 16px;border-radius:6px;transition:background .18s ease;font-weight:600;}
   .donate-btn:hover{background:var(--tc-lt);color:#BA594A;}
   .tc-text {color: #BA594A !important;}
+
+  /* ---------- header size increase ---------- */
+
   
   /* ---------- layout ---------- */
-  .page-wrap{min-height:calc(100vh - 60px);display:flex;justify-content:center;align-items:center;padding:40px 20px}
+  .page-wrap{min-height:calc(100vh - 70px);display:flex;justify-content:center;align-items:center;padding:40px 20px}
   .container{width:620px;max-width:90vw;background:var(--card);border-radius:12px;padding:26px 30px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:14px}
   .container.exercise{padding:24px 40px;gap:20px;border:1px solid var(--green-md);box-shadow:0 6px 20px rgba(0,0,0,.06)}
   .container:has(.container.exercise){border:none;box-shadow:none;padding:0;background:transparent}
@@ -67,6 +70,34 @@
   .btn:hover{background:var(--green-dk);color:#fff}
   .btn.sfx{background:var(--tc-dk);color:#fff}
   .btn.sfx:hover{background:var(--tc-lt);color:var(--text)}
+
+/* Menu button variations */
+  .btn.spoken {
+    background: var(--green-md);
+    color: var(--text);
+  }
+  .btn.spoken:hover {
+    background: var(--green-dk);
+    color: #fff;
+  }
+
+  .btn.written {
+    background: #B8D0E0; /* Light blue */
+    color: var(--text);
+  }
+  .btn.written:hover {
+    background: #5A8CA8; /* Darker blue */
+    color: #fff;
+  }
+
+  .btn.sfx {
+    background: var(--tc-dk);
+    color: #fff;
+  }
+  .btn.sfx:hover {
+    background: var(--tc-lt);
+    color: var(--text);
+  }
   
   /* ---------- back arrow link ---------- */
   .back-link{
@@ -102,7 +133,6 @@
   .choice.correct{background:var(--green-dk);color:#fff;border-color:var(--green-dk)}
   .choice.incorrect{background:var(--tc-dk);color:#fff;border-color:var(--tc-dk)}
   
-  /* ---------- next btn ---------- */
  /* ---------- next btn ---------- */
   #next-button {
     margin-top: 15px;
@@ -137,6 +167,32 @@
   #feedback + #next-button{margin-top:10px}
   
   #feedback{margin-top:18px;text-align:center;font-weight:600}
+
+  /* Feedback and next button container */
+  .feedback-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 520px; /* Same width as choice grid */
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .feedback-container #feedback {
+    position: static;
+    margin: 0;
+    text-align: left;
+    min-height: 24px;
+    flex: 1;
+  }
+
+  .feedback-container #next-button {
+    position: static;
+    margin: 0;
+    transform: none;
+  }
 
   /* ---------- Style for the small play buttons in Written modules ---------- */
   .audio-choice-pair .play-audio-button {
@@ -312,7 +368,7 @@
 }
 
 .page-wrap {
-  padding-top: 80px; /* Increased top padding to account for fixed header */
+  padding-top: 90px; /* Increased top padding to account for fixed header */
 }
 
 /* End game styling */
