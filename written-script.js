@@ -221,7 +221,6 @@ function loadRound() {
             choicesContainer.innerHTML = "";
             choicesContainer.classList.add("choice-grid");  
             choicesContainer.classList.add("written-exercise");
-            choicesContainer.classList.add("choice-grid");
             
             // Create audio-button pairs
             allOptions.forEach((option, index) => {
@@ -271,6 +270,7 @@ function checkAnswer(button, isCorrect, option) {
         score++;
     } else {
         button.classList.add("incorrect");
+        button.disabled = true;
         feedback.textContent = "Not quite - try again!";
         attempts++;
     }
@@ -286,6 +286,21 @@ document.getElementById("next-button").onclick = () => {
         endGame();
     }
 };
+
+/*  ----------  END GAME  ---------- */
+function endGame(){
+  const cont = document.getElementById("choices");
+  cont.innerHTML =
+    `<div class="end-game">
+       <h2>Complete!</h2>
+       <p>⭐ ${firstTryCorrect}/10 correct on the first try! ⭐</p>
+       <button onclick="window.location.reload()" class="choice">New Round</button>
+       <button onclick="location.href='index.html'" class="choice">Main Menu</button>
+     </div>`;
+  document.getElementById("next-button").style.display = "none";
+  document.getElementById("feedback").textContent = "";
+}
+
 
 loadCategoryData(category);
 

@@ -214,7 +214,18 @@ function loadNextRound() {
 document.getElementById("next-button").onclick = loadNextRound;
 
 /*  ----------  END GAME  ---------- */
-function endGame() { /* unchanged … */ }
+function endGame(){
+  const cont = document.getElementById("choices");
+  cont.innerHTML =
+    `<div class="end-game">
+       <h2>Complete!</h2>
+       <p>⭐ ${firstTryCorrect}/10 correct on the first try! ⭐</p>
+       <button onclick="window.location.reload()" class="choice">New Round</button>
+       <button onclick="location.href='index.html'" class="choice">Main Menu</button>
+     </div>`;
+  document.getElementById("next-button").style.display = "none";
+  document.getElementById("feedback").textContent = "";
+}
 
 /*  ----------  INIT  ---------- */
 function goHome() {
