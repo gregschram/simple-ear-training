@@ -109,7 +109,18 @@
   .back-link::before{content:"←";font-weight:700}
   .back-link:hover{color:var(--tc-lt)}
 
-  
+  /* About page styling */
+  .about-content {
+    margin-top: 20px;
+  }
+
+  .about-content p {
+    margin-bottom: 16px;
+  }
+
+  .about-content p:last-child {
+    margin-bottom: 0;
+  }
   /* ---------- top-of-exercise controls ---------- */
   .header-controls{display:flex;justify-content:space-between;margin-bottom:4px}
   #round-tracker{font-size:.85rem;font-weight:500;opacity:.75}
