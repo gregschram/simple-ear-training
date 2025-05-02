@@ -5,10 +5,8 @@ document.addEventListener('DOMContentLoaded', function() {
   // Determine if we're on mobile
   const isMobile = window.innerWidth <= 768;
   
-  // Choose appropriate logo based on screen size
-  const logoSrc = isMobile ? 
-    "/images/ep-logo-v1-white-small.png" : 
-    "/images/ep-logo-v1-white.png";
+  // Use the new SVG logo for all screen sizes
+  const logoSrc = "/images/ep-logo-knockout.svg";
   
   // Choose appropriate donation text based on screen size
   const donateText = isMobile ? "Donate" : "Donate to support";
