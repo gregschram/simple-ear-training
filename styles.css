@@ -36,8 +36,10 @@
   .container.exercise{padding:24px 40px;gap:20px;border:1px solid var(--green-md);box-shadow:0 6px 20px rgba(0,0,0,.06)}
   .container:has(.container.exercise){border:none;box-shadow:none;padding:0;background:transparent}
   
-  h1,h2{color:var(--green-dk);font-weight:700;text-align:center}
-  h1{font-size:1.9rem}h2{font-size:1.5rem}h3{font-size:1.1rem;font-weight:500;text-align:center}
+  @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap');
+
+  h1,h2,h3{font-family:'Outfit',sans-serif;color:var(--green-dk);font-weight:600;text-align:center}
+  h1{font-size:1.9rem}h2{font-size:1.5rem}h3{font-size:1.1rem}
   .subtitle {
     text-align: center;
     color: var(--text);
