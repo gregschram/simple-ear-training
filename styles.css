@@ -79,8 +79,8 @@
   .exercise-choices{display:flex;flex-direction:column;gap:14px;margin-top:18px}
   .btn{cursor:pointer;border:none;border-radius:6px;background:var(--green-md);color:var(--text);padding:14px 24px;font-size:1.05rem;width:100%;transition:.2s;box-shadow:var(--shadow)}
   .btn:hover{background:var(--green-dk);color:#fff}
-  .btn.sfx{background:var(--tc-dk);color:#fff}
-  .btn.sfx:hover{background:var(--tc-lt);color:var(--text)}
+  .btn.sfx{background:var(--tc-lt);color:var(--text)}
+  .btn.sfx:hover{background:var(--tc-dk);color: #fff}
 
 /* Menu button variations */
   .btn.spoken {
