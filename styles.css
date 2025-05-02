@@ -3,11 +3,11 @@
    ===================================================== */
    /* main #689B81    lt #DDEDE5 */
    :root{
-    --green-dk:#689B81;   /* "Green" header / hover */
+    --green-dk:#87C2CC;   /* "Green" header / hover */
     /* --OLD green-dk:#679C6C; */  /* "Green" header / hover */
-    --green-md:#CAE5D7;   /* "light sage" buttons / borders */
+    --green-md:#C3E9ED;   /* "light sage" buttons / borders */
     /*--OLD green-md:#B8E0C0; */  /* "light sage" buttons / borders */ 
-    --green-lt:#DDEDE5;   /* "lightest green" card tint        */
+    --green-lt:#E9F3F4;   /* "lightest green" card tint        */
     /* --OLD green-lt:#F2FCF5; */  /* "lightest green" card tint        */
     --tc-dk  :#BA594A;    /* "terra cotta" accent           */
     --tc-lt  :#FFCEC4;    /* "peach" accent           */
